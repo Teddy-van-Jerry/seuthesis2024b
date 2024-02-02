@@ -21,7 +21,7 @@ Compile with `latexmk -pdfxe seuthesis2024b.tex`.
 ### Fonts Preparation
 There are two options:
 1. Copy the required fonts to the `fonts` directory (or the directory where required fonts can be found). See [`fonts/README.md`](fonts/README.md) for details. Use `font dir = {{ /path/to/fonts }}` to specify the directory *(note the double brace)*.
-2. 
+2. Use `fontset = mac ms` if you have Microsoft Word installed on macOS.
 
 ## Recommended Readings
 - [LaTeX v.s. Typst: What is TeX Community's Future Plan?](https://tex.stackexchange.com/q/705199/234654) (yes, my question on TeX.SX)

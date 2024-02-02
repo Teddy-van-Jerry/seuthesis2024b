@@ -7,17 +7,12 @@ Or you can use the option `font dir` to specify the directory of the fonts.
 
 > [!NOTE]
 > - The file name should be exactly the same as required.
-> - You should also use the newer version of *Times New Roman*, otherwise the small capital shape (used by `\scfamily` or `\textsc{}` may not be available).
+> - You should also use the newer version of *Times New Roman*, otherwise the small capital shape (used by `\scshape` or `\textsc{}` may not be available).
 
 There is option `fontset = mac ms` if you have Microsoft Word installed on macOS.
 , so font will be found from `/Applications/Microsoft Word.app/Contents/Resources/DFonts/`.
 
 ## Required Fonts
-
-> [!TIP]
-> Why it is so troublesome to setup the fonts?
-> Because the school requires the use of those *proprietary* fonts!
-> We should have used open-source alternatives, for example the *TeX Gyre* fonts for English and *Source Han* for Chinese.
 
 | Font | File Name |
 | ---- | --------- |
@@ -28,6 +23,12 @@ There is option `fontset = mac ms` if you have Microsoft Word installed on macOS
 | SimSun 中易宋体 | `Simsun.ttc` |
 | SimHei 中易黑体 | `SimHei.ttf` |
 | Fangsong 仿宋 | `Fangsong.ttf` |
+
+> [!TIP]
+> Why is it so troublesome to set up the fonts?
+> Because the school requires the use of those *proprietary* fonts!
+> We could have used open-source alternatives, for example the *TeX Gyre* fonts for English and *Source Han* for Chinese.
+> You may use option `use tex font` if you want to use `TeX Gyre Terms` to replace `Times New Roman`.
 
 ## Fonts Provided by LaTeX
 
