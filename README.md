@@ -10,8 +10,13 @@ As an end-user, you do not need to know how to code in LaTeX3,
 but use the interface LaTeX2e only.
 Specifically, you will need to modify based on [`seuthesis2024b.tex`](seuthesis2024b.tex).
 
-Oh, should I use Chinese to explain it one more time? Er, let's skip that. **TL; DR**:
+Oh, should I use Chinese to explain it one more time? Er, let's skip that. **TL;DR**:
 使用此模板请直接修改 [`seuthesis2024b.tex`](seuthesis2024b.tex).
+
+## Usage
+### Engine Supported
+**XeLaTeX** only.
+Compile with `latexmk -pdfxe seuthesis2024b.tex`.
 
 ## Recommended Readings
 - [LaTeX v.s. Typst: What is TeX Community's Future Plan?](https://tex.stackexchange.com/q/705199/234654) (yes, my question on TeX.SX)
