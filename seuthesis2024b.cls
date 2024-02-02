@@ -30,12 +30,12 @@
     , use tex font .initial:n  = { false }
     , use~tex~font .bool_set:N = \l__seuthesis_use_tex_font_bool
     , use-tex-font .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , use times sc .bool_set:N = \l__seuthesis_use_times_sc_bool
-    , use times sc .initial:n  = { false }
-    , use~times~sc .bool_set:N = \l__seuthesis_use_times_sc_bool
-    , use-times-sc .bool_set:N = \l__seuthesis_use_times_sc_bool
+    , font dir     .tl_set:N   = \l__seuthesis_font_dir_tl
+    , font dir     .initial:n  = { fonts }
+    , font~dir     .meta:n     = { font dir = #1 }
+    , font-dir     .meta:n     = { font dir = #1 }
     % others
-    , unknown  .code:n     = { \PassOptionsToClass { \CurrentOption } { \c__seuthesis_base_class_str } }
+    , unknown      .code:n     = { \PassOptionsToClass { \CurrentOption } { \c__seuthesis_base_class_str } }
   }
 \ProcessKeysOptions { seuthesis2024b }
 \PassOptionsToClass { a4paper } { \c__seuthesis_base_class_str }
@@ -45,24 +45,8 @@
 %% Font Settings
 %% ==========================
 \RequirePackage [ fontset = none ] { ctex }
-% if fontset is system, use SimSun as main font
 
-\def \CJKFontOptions
-  { Path=\WordPath, AutoFakeBold, AutoFakeSlant }
-\def \CJKFontFamilyOptions
-  { Path=\WordPath, BoldFont=*, ItalicFont=*, BoldItalicFont=* }
-% sans serif font
-% there is no specification for the sans serif font, so we use the TeX Gyre Heros
-\setsansfont{texgyreheros}
-  [
-    , UprightFont = *-regular
-    , BoldFont = *-bold
-    , ItalicFont = *-italic
-    , BoldItalicFont = *-bolditalic
-    , Extension = .otf
-    , Scale = MatchLowercase
-  ]
-\str_if_eq:VnT { \l__seuthesis_fontset_tl } { files }
+\NewDocumentCommand \seuthesis@SetFont { m }
   {
     \bool_if:NTF \l__seuthesis_use_tex_font_bool
       {
@@ -76,33 +60,32 @@
           ]
       }
       {
-        % TODO: set fonts for files
+        \setmainfont{times}
+        [
+          , UprightFont = *
+          , BoldFont = *bd
+          , ItalicFont = *i
+          , BoldItalicFont = *bi
+          , Extension = .ttf
+          , Path = #1
+        ]
+        \def \CJKFontOptions
+          { Path=#1, AutoFakeBold, AutoFakeSlant }
+        \def \CJKFontFamilyOptions
+          { Path=#1, BoldFont=*, ItalicFont=*, BoldItalicFont=* }
       }
-    \setCJKmainfont { SimSun }
-    \setCJKsansfont { SimHei }
-  }
-\clist_if_in:nVT { mac ms, mac~ms, mac-ms } { \l__seuthesis_fontset_tl }
-  {
-    \def \WordPath
-      { /Applications/Microsoft~Word.app/Contents/Resources/DFonts/ }
-    \setmainfont{times}
+    % sans serif font
+    % there is no specification for the sans serif font, so we use the TeX Gyre Heros
+    \setsansfont{texgyreheros}
       [
-        , UprightFont = *
-        , BoldFont = *bd
-        , ItalicFont = *i
-        , BoldItalicFont = *bi
-        , Extension = .ttf
-        , Path = \WordPath
+        , UprightFont = *-regular
+        , BoldFont = *-bold
+        , ItalicFont = *-italic
+        , BoldItalicFont = *-bolditalic
+        , Extension = .otf
+        , Scale = MatchLowercase
       ]
-    \setmainfont{times}
-      [
-        , UprightFont = *
-        , BoldFont = *bd
-        , ItalicFont = *i
-        , BoldItalicFont = *bi
-        , Extension = .ttf
-        , Path = \WordPath
-      ]  
+    % Chinese fonts
     \setCJKmainfont { SimSun   } [ \CJKFontOptions ]
     \setCJKsansfont { SimHei   } [ \CJKFontOptions ]
     \setCJKmonofont { Fangsong } [ \CJKFontOptions ]
@@ -110,6 +93,17 @@
     \newCJKfontfamily [ zhhei  ] \heiti    { SimHei   } [ \CJKFontFamilyOptions ]
     \newCJKfontfamily [ zhkai  ] \kaishu   { Kaiti    } [ \CJKFontFamilyOptions ]
     \newCJKfontfamily [ zhfs   ] \fangsong { Fangsong } [ \CJKFontFamilyOptions ]
+  }
+\str_if_eq:VnT { \l__seuthesis_fontset_tl } { files }
+  {
+    \typeout { [\c__seuthesis_name_str]~Use~font~dir:~ \l__seuthesis_font_dir_tl }
+    \seuthesis@SetFont { \l__seuthesis_font_dir_tl }
+  }
+\clist_if_in:nVT { mac ms, mac~ms, mac-ms } { \l__seuthesis_fontset_tl }
+  {
+    \def \WordPath
+      { /Applications/Microsoft~Word.app/Contents/Resources/DFonts/ }
+    \seuthesis@SetFont { \WordPath }
   }
 
 %% ==========================

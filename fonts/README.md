@@ -1,0 +1,38 @@
+# Fonts Directory
+
+Due to copyright reasons,
+the fonts file are not directly included in this repository.
+You need to find the following required fonts, and copy to this directory.
+Or you can use the option `font dir` to specify the directory of the fonts.
+
+> [!NOTE]
+> - The file name should be exactly the same as required.
+> - You should also use the newer version of *Times New Roman*, otherwise the small capital shape (used by `\scfamily` or `\textsc{}` may not be available).
+
+There is option `fontset = mac ms` if you have Microsoft Word installed on macOS.
+, so font will be found from `/Applications/Microsoft Word.app/Contents/Resources/DFonts/`.
+
+## Required Fonts
+
+> [!TIP]
+> Why it is so troublesome to setup the fonts?
+> Because the school requires the use of those *proprietary* fonts!
+> We should have used open-source alternatives, for example the *TeX Gyre* fonts for English and *Source Han* for Chinese.
+
+| Font | File Name |
+| ---- | --------- |
+| Times New Roman (regular) | `times.ttf` |
+| **Times New Roman (bold)** | `timesbd.ttf` |
+| *Times New Roman (italic)* | `timesi.ttf` |
+| ***Times New Roman (bold italic)*** | `timesbi.ttf` |
+| SimSun 中易宋体 | `Simsun.ttc` |
+| SimHei 中易黑体 | `SimHei.ttf` |
+| Fangsong 仿宋 | `Fangsong.ttf` |
+
+## Fonts Provided by LaTeX
+
+The following fonts should be available with the TeX installation.
+
+| Font | Description |
+| ---- | ----------- |
+| `TeX Gyre Heros` | A Helvetica clone |
