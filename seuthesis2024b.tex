@@ -1,12 +1,23 @@
 \documentclass[fontset = mac ms]{seuthesis2024b}
 \usepackage{lipsum}
 
+\title{东南大学本科毕设 \LaTeX{} 模版}
+\author{泰迪熊}
+\date{2024年1月---2024年5月}
+
 \begin{document}
+  \maketitle
+
   泰迪熊 Apparently, I have not finished the setup of the class ...
   
   \textsf{sans serif}
 
-  \begin{center}
+  表~\ref{tab:font-effect}。
+
+  \begin{table}[htbp]
+    \centering
+    \caption{字体族、字体形状和字体系列的组合效果}
+    \label{tab:font-effect}
     \begin{tabular}{c|cccc}
       & & \verb|\itshape| & \verb|\bfseries| & \verb|\itshape\bfseries| \\
       \hline
@@ -14,7 +25,7 @@
       \verb|\sffamily| & \sffamily 无衬线 sans  & \sffamily\itshape 倾斜 italic & \sffamily\bfseries 加粗 bold & \sffamily\itshape\bfseries 粗斜 bold-italic \\
       \verb|\ttfamily| & \ttfamily 打字机 mono  & \ttfamily\itshape 倾斜 italic & \ttfamily\bfseries 加粗 bold & \ttfamily\itshape\bfseries 粗斜 bold-italic
     \end{tabular}
-  \end{center}
+  \end{table}
 
   \clearpage
 
@@ -82,14 +93,24 @@
       复杂的图考虑使用 standalone 的 Ti\textit{k}Z 完成，以提高图形表达质量。
 
       插图居中排列，与上文文本之间空一行。图序图名设置为五号宋体居中，图序与图名之间空一格。
+      可爱的图~\ref{fig:duck}。
 
       \begin{figure}[htbp]
         \centering
         \includegraphics{example-image-duck}
         \caption{经典 Ti\textit{k}Z 鸭子}
+        \label{fig:duck}
       \end{figure}
 
-      一些文字
+      一些文字，图~\ref{fig:subfigs} 包含两个子图：
+      图~\subref*{subfig:s1} 和 \subref*{subfig:s2}。
+
+      \begin{figure}[htbp]
+        \subfloat[子图一\label{subfig:s1}]{\includegraphics[width=.48\linewidth]{example-image-a}}\hfill
+        \subfloat[子图二\label{subfig:s2}]{\includegraphics[width=.48\linewidth]{example-image-b}}
+        \caption{两个子图}
+        \label{fig:subfigs}
+      \end{figure}
 
       \subsection{三级标题}
         三级标题内容
