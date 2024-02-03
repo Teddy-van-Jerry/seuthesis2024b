@@ -277,7 +277,74 @@
 %% ==========================
 %% Title Pages
 %% ==========================
-\RenewDocumentCommand \maketitle { }
+% --- hyperref settings ---
+\RequirePackage { hyperref }
+\hypersetup
+  {
+    , hidelinks
+    , pdfsubject = { \c__seuthesis_institute_str 本科毕业设计（论文）报告 }
+    , pdfcreator = { LaTeX~with~\c__seuthesis_name_str }
+  }
+% --- \title ---
+\bool_new:N \l__seuthesis_title_cont_bool
+\RenewDocumentCommand \title { m O{} }
+  {
+    \gdef \@title { #1 }
+    \tl_if_blank:nTF { #2 }
+      {
+        \bool_set_false:N \l__seuthesis_title_cont_bool
+        \hypersetup { pdftitle = { #1 } }
+      }
+      {
+        \bool_set_true:N \l__seuthesis_title_cont_bool
+        \gdef \@titleCont { #2 }
+        \hypersetup { pdftitle = { #1 #2 } }
+      }
+  }
+% --- \studentID ---
+\NewDocumentCommand \studentID { m }
+  {
+    \gdef \@studentID { #1 }
+  }
+\newcommand \@studentID
+  {
+    \@latex@warning@no@line { No~\noexpand\studentID~given }
+  }
+% --- \author ---
+\RenewDocumentCommand \author { m }
+  {
+    \gdef \@author { #1 }
+    \hypersetup { pdfauthor = { #1 } }
+  }
+% --- \department ---
+\NewDocumentCommand \department { m }
+  {
+    \gdef \@department { #1 }
+  }
+\newcommand \@department
+  {
+    \@latex@warning@no@line { No~\noexpand\department~given }
+  }
+% --- \major ---
+\NewDocumentCommand \major { m }
+  {
+    \gdef \@major { #1 }
+  }
+\newcommand \@major
+  {
+    \@latex@warning@no@line { No~\noexpand\major~given }
+  }
+% --- \supervisor ---
+\NewDocumentCommand \supervisor { m }
+  {
+    \gdef \@supervisor { #1 }
+  }
+\newcommand \@supervisor
+  {
+    \@latex@warning@no@line { No~\noexpand\supervisor~given }
+  }
+% --- \seuthesis@titlepage ---
+\newcommand \seuthesis@titlepage
   {
     \thispagestyle{empty}
 
@@ -297,10 +364,20 @@
         \renewcommand \tabcolsep { 18pt }
         \renewcommand \arraystretch { 1.1 }
         \LARGE\heiti
-        \begin{tabularx}{\linewidth-9pt}{cY}
-          题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule{2-2}
-          \\ \cmidrule{2-2}
-        \end{tabularx}
+        \bool_if:NTF { \l__seuthesis_title_cont_bool }
+          {
+            \begin{tabularx}{\linewidth-9pt}{cY}
+              题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule{2-2}
+              & \@titleCont \\[-4pt] \cmidrule{2-2}
+            \end{tabularx}
+          }
+          {
+            \begin{tabularx}{\linewidth-9pt}{cY}
+              题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule{2-2}
+              % the second line is then hidden
+              & \vphantom{泰迪熊} \\[\dimexpr-4pt+\cmidrulewidth+\cmidrulekern]
+            \end{tabularx}
+          }
       }
       \par
       \vspace{18mm}
@@ -309,29 +386,22 @@
         \renewcommand \tabcolsep { 18pt }
         \renewcommand \arraystretch { 1.3 }
         \begin{tabular}{c P{8cm}}
-          学\hspace{2\ccwd}号：&  \\[-6pt] \cmidrule{2-2}
-          姓\hspace{2\ccwd}名：& \@author \\[-6pt] \cmidrule{2-2}
-          学\hspace{2\ccwd}院：&  \\[-6pt] \cmidrule{2-2}
-          专\hspace{2\ccwd}业：&  \\[-6pt] \cmidrule{2-2}
-          指导教师：&  \\[-6pt] \cmidrule{2-2}
+          学\hspace{2\ccwd}号：& \@studentID  \\[-6pt] \cmidrule{2-2}
+          姓\hspace{2\ccwd}名：& \@author     \\[-6pt] \cmidrule{2-2}
+          学\hspace{2\ccwd}院：& \@department \\[-6pt] \cmidrule{2-2}
+          专\hspace{2\ccwd}业：& \@major      \\[-6pt] \cmidrule{2-2}
+          指导教师：& \@supervisor \\[-6pt] \cmidrule{2-2}
           起止日期：& \@date \\[-6pt] \cmidrule{2-2}
         \end{tabular}
       }
     \end{center}
-
     \ClearDoublePage
-    \setcounter { page } { 1 }
   }
-
-%% ==========================
-%% Hyperref
-%% ==========================
-\RequirePackage { hyperref }
-\hypersetup
+% --- \maketitle ---
+\RenewDocumentCommand \maketitle { }
   {
-    , hidelinks
-    , pdfsubject = { \c__seuthesis_institute_str 本科毕业设计（论文）报告 }
-    , pdfcreator = { LaTeX~with~\c__seuthesis_name_str }
+    \seuthesis@titlepage
+    \setcounter { page } { 1 }
   }
 
 \endinput
