@@ -43,6 +43,11 @@
     , font dir     .initial:n  = { fonts }
     , font~dir     .meta:n     = { font dir = #1 }
     , font-dir     .meta:n     = { font dir = #1 }
+    % maths options
+    , no maths     .bool_set:N = \l__seuthesis_no_maths_bool
+    , no maths     .initial:n  = { false }
+    , no~maths     .bool_set:N = \l__seuthesis_no_maths_bool
+    , no-maths     .bool_set:N = \l__seuthesis_no_maths_bool
     % others
     , unknown      .code:n     = { \PassOptionsToClass { \CurrentOption } { \c__seuthesis_base_class_str } }
   }
@@ -90,10 +95,6 @@
           , Extension = .ttf
           , Path = #1
         ]
-        \def \CJKFontOptions
-          { Path=#1, AutoFakeBold, AutoFakeSlant }
-        \def \CJKFontFamilyOptions
-          { Path=#1, BoldFont=*, ItalicFont=*, BoldItalicFont=* }
       }
     % sans serif font
     % there is no specification for the sans serif font, so we use the TeX Gyre Heros
@@ -122,6 +123,22 @@
         , StylisticSet = 3
       ]
     % Chinese fonts
+    \def \CJKFontOptions
+      {
+        , Path = #1
+        , AutoFakeBold
+        , AutoFakeSlant
+      }
+    \def \CJKFontFamilyOptions
+      {
+        , Path = #1
+        , BoldFont = *
+        , ItalicFont = *
+        , BoldItalicFont = *
+        , AutoFakeBold
+        , AutoFakeSlant
+        , BoldFeatures = { FakeBold = 4 }
+      }
     \setCJKmainfont { SimSun   } [ \CJKFontOptions ]
     \setCJKsansfont { SimHei   } [ \CJKFontOptions ]
     \setCJKmonofont { Fangsong } [ \CJKFontOptions ]
@@ -168,7 +185,10 @@
   }
 \RequirePackage { fancyhdr }
 \pagestyle { fancy }
-\chead { \zihao{-5} 东南大学本科毕业设计（论文） }
+\chead { \zihao{-5} 东南大学本科毕业设计（论文）\vspace{2pt} }
+\cfoot { \zihao{-5} \thepage }
+\lhead { }
+\rhead { }
 
 %% ==========================
 %% Hyperref
@@ -178,6 +198,57 @@
   {
     , hidelinks
     , pdfcreator = { LaTeX~with~\c__seuthesis_name_str }
+  }
+
+%% ==========================
+%% Heading & Sectioning
+%% ==========================
+% show the \subsubsection numbering
+\setcounter{secnumdepth}{3}
+% use Chinese numberings
+\RequirePackage { zhnumber }
+\renewcommand \thechapter { \zhnum{chapter} }
+\renewcommand \thesection { \arabic{chapter}. \arabic{section} }
+\RequirePackage { titlesec }
+% --- \chapter ---
+\titleformat { \chapter }
+  { \centering\zihao{3}\bfseries\heiti\thispagestyle{fancy} } { 第 \thechapter 章 } { .5\ccwd } { }
+\titlespacing* { \chapter } { 0pt } { -24pt } { 2pt }
+% --- \section ---
+\titleformat { \section }
+  { \zihao{4}\heiti } { \thesection } { \widthof{~} } { }
+\titlespacing* { \section } { 0pt } { 3.6pt } { 3.6pt }
+% --- \subsection ---
+\titleformat { \subsection }
+  { \zihao{-4}\heiti } { \thesubsection } { \widthof{~} } { }
+\titlespacing* { \subsection } { 0pt } { 0pt } { 0pt }
+% --- \subsubsection ---
+\titleformat { \subsubsection }
+  { \zihao{-4}\songti } { \thesubsubsection } { \widthof{~} } { }
+\titlespacing* { \subsubsection } { 0pt } { 0pt } { 0pt }
+% --- \paragraph ---
+\titleformat { \paragraph } [ runin ]
+  { \zihao{-4}\songti\bfseries } { } { \widthof{~} } { }
+\titlespacing* { \paragraph } { 2\ccwd } { 0pt } { .5\ccwd } % use default Chinese indent
+
+%% ==========================
+%% Graphics
+%% ==========================
+\RequirePackage { graphicx }
+\RequirePackage { subfig }
+\RequirePackage { tikz }
+\RequirePackage [ export ] { adjustbox }
+\RequirePackage [ dvipsnames, table ] { xcolor }
+
+%% ==========================
+%% Maths
+%% ==========================
+\bool_if:NF \l__seuthesis_no_maths_bool
+  {
+    \RequirePackage { mathtools }
+    \RequirePackage { amssymb }
+    \RequirePackage { amsthm }
+    \RequirePackage { bm }
   }
 
 \endinput

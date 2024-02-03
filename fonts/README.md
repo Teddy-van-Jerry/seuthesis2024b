@@ -22,6 +22,7 @@ There is option `fontset = mac ms` if you have Microsoft Word installed on macOS
 | ***Times New Roman (bold italic)*** | `timesbi.ttf` |
 | SimSun 中易宋体 | `Simsun.ttc` |
 | SimHei 中易黑体 | `SimHei.ttf` |
+| Kaiti 楷体 | `Kaiti.ttf` |
 | Fangsong 仿宋 | `Fangsong.ttf` |
 
 > [!TIP]
