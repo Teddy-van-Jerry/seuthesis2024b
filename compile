@@ -1,0 +1,2 @@
+#!/bin/sh
+latexmk -pdfxe seuthesis2024b.tex
