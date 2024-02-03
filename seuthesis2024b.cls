@@ -346,7 +346,8 @@
 % --- \seuthesis@titlepage ---
 \newcommand \seuthesis@titlepage
   {
-    \thispagestyle{empty}
+    \pagestyle{empty}
+    % \pagenumbering{gobble}
 
     \null\par % one empty line at top
 
@@ -391,16 +392,24 @@
           学\hspace{2\ccwd}院：& \@department \\[-6pt] \cmidrule{2-2}
           专\hspace{2\ccwd}业：& \@major      \\[-6pt] \cmidrule{2-2}
           指导教师：& \@supervisor \\[-6pt] \cmidrule{2-2}
-          起止日期：& \@date \\[-6pt] \cmidrule{2-2}
+          起止日期：& \@date       \\[-6pt] \cmidrule{2-2}
         \end{tabular}
       }
     \end{center}
+    \ClearDoublePage
+  }
+% --- \seuthesis@declaration ---
+\newcommand \seuthesis@declaration
+  {
+    \input { assets/declaration.tex }
     \ClearDoublePage
   }
 % --- \maketitle ---
 \RenewDocumentCommand \maketitle { }
   {
     \seuthesis@titlepage
+    \seuthesis@declaration
+    \pagestyle { fancy }
     \setcounter { page } { 1 }
   }
 
