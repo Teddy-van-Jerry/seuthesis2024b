@@ -20,37 +20,40 @@
 \keys_define:nn { seuthesis2024b }
   {
     % page setup
-    , two side     .bool_set:N = \l__seuthesis_twoside_bool
-    , two side     .initial:n  = { false }
-    , two~side     .bool_set:N = \l__seuthesis_twoside_bool
-    , two-side     .bool_set:N = \l__seuthesis_twoside_bool
-    , two sides    .bool_set:N = \l__seuthesis_twoside_bool
-    , two~sides    .bool_set:N = \l__seuthesis_twoside_bool
-    , two-sides    .bool_set:N = \l__seuthesis_twoside_bool
-    , one side     .meta:n     = { two side = false }
-    , one~side     .meta:n     = { two side = false }
-    , show frame   .bool_set:N = \l__seuthesis_show_frame_bool
-    , show frame   .initial:n  = { false }
-    , show~frame   .bool_set:N = \l__seuthesis_show_frame_bool
-    , show-frame   .bool_set:N = \l__seuthesis_show_frame_bool
+    , two side      .bool_set:N = \l__seuthesis_twoside_bool
+    , two side      .initial:n  = { false }
+    , two~side      .bool_set:N = \l__seuthesis_twoside_bool
+    , two-side      .bool_set:N = \l__seuthesis_twoside_bool
+    , two sides     .bool_set:N = \l__seuthesis_twoside_bool
+    , two~sides     .bool_set:N = \l__seuthesis_twoside_bool
+    , two-sides     .bool_set:N = \l__seuthesis_twoside_bool
+    , one side      .meta:n     = { two side = false }
+    , one~side      .meta:n     = { two side = false }
+    , show frame    .bool_set:N = \l__seuthesis_show_frame_bool
+    , show frame    .initial:n  = { false }
+    , show~frame    .bool_set:N = \l__seuthesis_show_frame_bool
+    , show-frame    .bool_set:N = \l__seuthesis_show_frame_bool
     % font options
-    , fontset      .tl_set:N   = \l__seuthesis_fontset_tl
-    , fontset      .initial:n  = { files }
-    , use tex font .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , use tex font .initial:n  = { false }
-    , use~tex~font .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , use-tex-font .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , font dir     .tl_set:N   = \l__seuthesis_font_dir_tl
-    , font dir     .initial:n  = { fonts }
-    , font~dir     .meta:n     = { font dir = #1 }
-    , font-dir     .meta:n     = { font dir = #1 }
+    , fontset       .tl_set:N   = \l__seuthesis_fontset_tl
+    , fontset       .initial:n  = { files }
+    , use tex font  .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , use tex font  .initial:n  = { false }
+    , use~tex~font  .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , use-tex-font  .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , font dir      .tl_set:N   = \l__seuthesis_font_dir_tl
+    , font dir      .initial:n  = { fonts }
+    , font~dir      .meta:n     = { font dir = #1 }
+    , font-dir      .meta:n     = { font dir = #1 }
     % maths options
-    , no maths     .bool_set:N = \l__seuthesis_no_maths_bool
-    , no maths     .initial:n  = { false }
-    , no~maths     .bool_set:N = \l__seuthesis_no_maths_bool
-    , no-maths     .bool_set:N = \l__seuthesis_no_maths_bool
+    , no maths      .bool_set:N = \l__seuthesis_no_maths_bool
+    , no maths      .initial:n  = { false }
+    , no~maths      .bool_set:N = \l__seuthesis_no_maths_bool
+    , no-maths      .bool_set:N = \l__seuthesis_no_maths_bool
+    % accessibility
+    , accessibility .bool_set:N = \l__seuthesis_accessibility_bool
+    , accessibility .initial:n  = { false }
     % others
-    , unknown      .code:n     =
+    , unknown       .code:n     =
       {
         \PassOptionsToClass { \CurrentOption } { \c__seuthesis_base_class_str }
       }
@@ -344,6 +347,10 @@
     \@latex@warning@no@line { No~\noexpand\supervisor~given }
   }
 % --- \seuthesis@titlepage ---
+\bool_if:NT \l__seuthesis_accessibility_bool
+  {
+    \RequirePackage { pdfcomment }
+  }
 \newcommand \seuthesis@titlepage
   {
     \pagestyle{empty}
@@ -352,7 +359,19 @@
     \null\par % one empty line at top
 
     \begin{center}
-      \includegraphics[width=85mm]{assets/logo.png}
+      \bool_if:NTF \l__seuthesis_accessibility_bool
+        {
+          \pdftooltip
+            {
+              \includegraphics[width=85mm]{assets/logo.png}
+            }
+            {
+              东南大学 % alt text for accessibility
+            }
+        }
+        {
+          \includegraphics[width=85mm]{assets/logo.png}
+        }
       \par
       \vspace{8mm}
       {
