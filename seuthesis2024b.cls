@@ -191,11 +191,21 @@
     \geometry { showframe = false }
   }
 \RequirePackage { fancyhdr }
-\pagestyle { fancy }
-\chead { \zihao{-5} \c__seuthesis_institute_str 本科毕业设计（论文）\vspace{2pt} }
-\cfoot { \zihao{-5} \thepage }
-\lhead { }
-\rhead { }
+\fancypagestyle { mainmatter }
+  {
+    \pagenumbering{ arabic }
+    \fancyhf { }
+    \fancyhead [ C ] { \zihao{-5} \c__seuthesis_institute_str 本科毕业设计（论文）\vspace{2pt} }
+    \fancyfoot [ C ] { \zihao{-5} \thepage }
+    \renewcommand { \headrulewidth } { 0.4pt }
+  }
+\fancypagestyle { frontmatter }
+  {
+    \pagenumbering{ Roman }
+    \fancyhf { }
+    \fancyfoot [ C ] { \zihao{-5} \thepage }
+    \renewcommand { \headrulewidth } { 0mm }
+  } 
 \NewDocumentCommand { \ClearDoublePage } { }
   {
     \bool_if:NTF \l__seuthesis_twoside_bool { \cleardoublepage } { \clearpage }
@@ -205,16 +215,20 @@
 %% Heading & Sectioning
 %% ==========================
 % show the \subsubsection numbering
-\setcounter{secnumdepth}{3}
+\setcounter { secnumdepth } { 3 }
 % use Chinese numberings
 \RequirePackage { zhnumber }
-\renewcommand \thechapter { \zhnum{chapter} }
-\renewcommand \thesection { \arabic{chapter}. \arabic{section} }
 \RequirePackage { titlesec }
 % --- \chapter ---
+\RequirePackage { xstring }
+\newcommand \seuthesis@chapter@name [ 1 ]
+  {
+    \IfInteger { #1 } { 第 \zhnumber { #1 } 章 } { 附录 #1 }
+  }
 \titleformat { \chapter }
-  { \centering\zihao{3}\bfseries\heiti\thispagestyle{fancy} } { 第 \thechapter 章 } { .5\ccwd } { }
-\titlespacing* { \chapter } { 0pt } { -24pt } { 2pt }
+  { \centering\zihao{3}\bfseries\heiti\thispagestyle{fancy} }
+  { \seuthesis@chapter@name { \thechapter } } { .5\ccwd } { }
+\titlespacing* { \chapter } { 0pt } { -24pt } { 3.6pt }
 % --- \section ---
 \titleformat { \section }
   { \zihao{4}\heiti } { \thesection } { \widthof{~} } { }
@@ -287,6 +301,7 @@
     , hidelinks
     , pdfsubject = { \c__seuthesis_institute_str 本科毕业设计（论文）报告 }
     , pdfcreator = { LaTeX~with~\c__seuthesis_name_str }
+    , bookmarksdepth = 2 % PDF bookmarks up to \subsection
   }
 % --- \title ---
 \bool_new:N \l__seuthesis_title_cont_bool
@@ -423,13 +438,94 @@
     \input { assets/declaration.tex }
     \ClearDoublePage
   }
+% --- \CNabstract ---
+\NewDocumentCommand \CNabstract { +m m }
+  {
+    \gdef \@CNabstract { #1 }
+    \gdef \@CNkeywords { #2 }
+  }
+\newcommand \@CNabstract
+  {
+    \@latex@warning@no@line { No~\noexpand\CNabstract~given }
+  }
+\newcommand \@CNkeywords { }
+\newcommand \seuthesis@CNabstract
+  {
+    \chapter* { 摘\hspace{2\ccwd}要 }
+    \addcontentsline { toc } { chapter }
+      {
+        \texorpdfstring { 摘\hspace{2\ccwd}要 } { 摘要 }
+      }
+    \@CNabstract \par
+    \null\par
+    \noindent 关键词：\@CNkeywords
+    \ClearDoublePage
+  }
+% --- \ENabstract ---
+\NewDocumentCommand \ENabstract { +m m }
+  {
+    \gdef \@ENabstract { #1 }
+    \gdef \@ENkeywords { #2 }
+  }
+\newcommand \@ENabstract
+  {
+    \@latex@warning@no@line { No~\noexpand\ENabstract~given }
+  }
+\newcommand \@ENkeywords { }
+\newcommand \seuthesis@ENabstract
+  {
+    \chapter* { ABSTRACT }
+    \addcontentsline { toc } { chapter } { ABSTRACT }
+    \@ENabstract \par
+    \null\par
+    KEY~WORDS:~ \@ENkeywords
+    \ClearDoublePage
+  }
+% --- \seuthesis@toc ---
+\RequirePackage { titletoc }
+\setcounter { tocdepth } { 1 }
+\renewcommand { \contentsname } { 目\hspace{2\ccwd}录 }
+\titlecontents { chapter } [ 0pt ]
+  { \filright }
+  { \contentspush { \seuthesis@chapter@name { \thecontentslabel } \hspace{.5\ccwd} } }
+  { } { \titlerule*[3pt]{.}\contentspage }
+\titlecontents { section } [ 2\ccwd ]
+  { }
+  { \contentspush { \thecontentslabel \hspace{.5\ccwd} } }
+  { } { \titlerule*[3pt]{.}\contentspage }
+\newcommand \seuthesis@toc
+  {
+    \tableofcontents
+    \addcontentsline { toc } { chapter }
+      {
+        \texorpdfstring { 目\hspace{2\ccwd}录 } { 目录 }
+      }
+    \ClearDoublePage
+  }
 % --- \maketitle ---
 \RenewDocumentCommand \maketitle { }
   {
     \seuthesis@titlepage
     \seuthesis@declaration
-    \pagestyle { fancy }
+    \pagestyle { frontmatter }
     \setcounter { page } { 1 }
+    \seuthesis@CNabstract
+    \seuthesis@ENabstract
+    \seuthesis@toc
+    \pagestyle { mainmatter }
+    \setcounter { page } { 1 }
+  }
+
+%% ==========================
+%% Special Chapters
+%% ==========================
+\NewDocumentCommand \chapterAck { }
+  {
+    \chapter* { 致\hspace{2\ccwd}谢 }
+    \addcontentsline { toc } { chapter }
+      {
+        \texorpdfstring { 致\hspace{2\ccwd}谢 } { 致谢 }
+      }
   }
 
 \endinput
