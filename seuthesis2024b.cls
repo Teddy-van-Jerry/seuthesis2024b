@@ -20,40 +20,47 @@
 \keys_define:nn { seuthesis2024b }
   {
     % page setup
-    , two side      .bool_set:N = \l__seuthesis_twoside_bool
-    , two side      .initial:n  = { false }
-    , two~side      .bool_set:N = \l__seuthesis_twoside_bool
-    , two-side      .bool_set:N = \l__seuthesis_twoside_bool
-    , two sides     .bool_set:N = \l__seuthesis_twoside_bool
-    , two~sides     .bool_set:N = \l__seuthesis_twoside_bool
-    , two-sides     .bool_set:N = \l__seuthesis_twoside_bool
-    , one side      .meta:n     = { two side = false }
-    , one~side      .meta:n     = { two side = false }
-    , show frame    .bool_set:N = \l__seuthesis_show_frame_bool
-    , show frame    .initial:n  = { false }
-    , show~frame    .bool_set:N = \l__seuthesis_show_frame_bool
-    , show-frame    .bool_set:N = \l__seuthesis_show_frame_bool
+    , two side       .bool_set:N = \l__seuthesis_twoside_bool
+    , two side       .initial:n  = { false }
+    , two~side       .bool_set:N = \l__seuthesis_twoside_bool
+    , two-side       .bool_set:N = \l__seuthesis_twoside_bool
+    , two sides      .bool_set:N = \l__seuthesis_twoside_bool
+    , two~sides      .bool_set:N = \l__seuthesis_twoside_bool
+    , two-sides      .bool_set:N = \l__seuthesis_twoside_bool
+    , one side       .meta:n     = { two side = false }
+    , one~side       .meta:n     = { two side = false }
+    , show frame     .bool_set:N = \l__seuthesis_show_frame_bool
+    , show frame     .initial:n  = { false }
+    , show~frame     .bool_set:N = \l__seuthesis_show_frame_bool
+    , show-frame     .bool_set:N = \l__seuthesis_show_frame_bool
     % font options
-    , fontset       .tl_set:N   = \l__seuthesis_fontset_tl
-    , fontset       .initial:n  = { files }
-    , use tex font  .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , use tex font  .initial:n  = { false }
-    , use~tex~font  .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , use-tex-font  .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , font dir      .tl_set:N   = \l__seuthesis_font_dir_tl
-    , font dir      .initial:n  = { fonts }
-    , font~dir      .meta:n     = { font dir = #1 }
-    , font-dir      .meta:n     = { font dir = #1 }
+    , fontset        .tl_set:N   = \l__seuthesis_fontset_tl
+    , fontset        .initial:n  = { files }
+    , use tex font   .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , use tex font   .initial:n  = { false }
+    , use~tex~font   .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , use-tex-font   .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , font dir       .tl_set:N   = \l__seuthesis_font_dir_tl
+    , font dir       .initial:n  = { fonts }
+    , font~dir       .meta:n     = { font dir = #1 }
+    , font-dir       .meta:n     = { font dir = #1 }
     % maths options
-    , no maths      .bool_set:N = \l__seuthesis_no_maths_bool
-    , no maths      .initial:n  = { false }
-    , no~maths      .bool_set:N = \l__seuthesis_no_maths_bool
-    , no-maths      .bool_set:N = \l__seuthesis_no_maths_bool
+    , no maths       .bool_set:N = \l__seuthesis_no_maths_bool
+    , no maths       .initial:n  = { false }
+    , no~maths       .bool_set:N = \l__seuthesis_no_maths_bool
+    , no-maths       .bool_set:N = \l__seuthesis_no_maths_bool
+    % bibliography
+    , bib title case .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib title case .initial:n  = { false }
+    , bib~title case .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib-title case .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib~title~case .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib-title-case .bool_set:N = \l__seuthesis_bib_title_case_bool
     % accessibility
-    , accessibility .bool_set:N = \l__seuthesis_accessibility_bool
-    , accessibility .initial:n  = { false }
+    , accessibility  .bool_set:N = \l__seuthesis_accessibility_bool
+    , accessibility  .initial:n  = { false }
     % others
-    , unknown       .code:n     =
+    , unknown        .code:n     =
       {
         \PassOptionsToClass { \CurrentOption } { \c__seuthesis_base_class_str }
       }
@@ -329,6 +336,40 @@
 %% ==========================
 %% Bibliography
 %% ==========================
+\RequirePackage
+  [
+    , backend = biber
+    , style = gb7714-2015
+  ] { biblatex }
+\AtBeginBibliography { \zihao{5} }
+% In this class, the default is to use sentence case for titles.
+\bool_if:NF \l__seuthesis_bib_title_case_bool
+  {
+    \DeclareFieldFormat { sentencecase } { \MakeSentenceCase { #1 } }
+    % Modified based on
+    % https://github.com/hushidong/biblatex-gb7714-2015/blob/15db5aaf6834b2359c605227726c67d1350bc660/gb7714-2015.bbx#L3373-L3406
+    \renewbibmacro*{title}{%
+      \ifboolexpr{%
+        test{\iffieldundef{title}}%
+        and
+        test{\iffieldundef{subtitle}}}%
+        {}%
+        {\printtext[title]{\bibtitlefont%增加字体控制命令
+          \printfield[sentencecase]{title}%
+          \ifboolexpr{test {\iffieldundef{subtitle}}}%增加了对子标题的判断
+                {}{\setunit{\subtitlepunct}\printfield[sentencecase]{subtitle}}%
+          \iffieldundef{titleaddon}{}{\setunit{\subtitlepunct}\printfield{titleaddon}}%判断一下titleaddon
+          \ifboolexpr{test{\ifentrytype{book}} and (not test{\iffieldundef{volume}})}%判断一下book类有没有volume
+                {\setunit{\subtitlepunct}\printfield{volume}}{}%
+          \iftoggle{bbx:gbtype}%
+                {\iffieldundef{entrysubtype}{\printfield[gbtypeflag]{usera}}%在标题后直接给出文献标识字母，判断一下，是否是报纸和标准
+                {\iffieldequalstr{entrysubtype}{standard}{\printfield[gbtypeflags]{usera}}%判断是否为标准
+                      {\iffieldequalstr{entrysubtype}{news}{\printfield[gbtypeflagn]{usera}}%判断是否为报纸
+                      {\printfield[gbtypeflag]{usera}}}}}{}%%其它
+          }%
+        }%
+      }
+  }
 
 %% ==========================
 %% Title Pages

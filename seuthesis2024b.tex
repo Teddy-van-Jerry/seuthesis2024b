@@ -10,6 +10,9 @@
 \supervisor{Ted Roosevelt}
 \date{2023年12月 至 2024年5月}
 
+\addbibresource{ref/IEEEfull.bib}
+\addbibresource{ref/ref.bib}
+
 \CNabstract{%
   摘要内容独立于正文而存在，是论文内容高度概括的简要陈述，
   应准确、具体、完整地概括论文的主要信息，内容包括研究目的、方法、过程、成果、结论及主要创新之处等，
@@ -174,7 +177,18 @@
       引文序号，以页为单位，且注释只限于写在注释符号出现的同页，不得隔页。
     
       注释采用小五号宋体，英文及数字为小五号Times New Roman字体，利用 \texttt{\string\footnote} 插入。
+
+    \section{参考文献}
+
+      算法方面的研究包括：
+      OMPL-SBL 算法\cite{zhao2023ompl}，
+      RIS 的波束设计方法\cite{you2023beam}；
+      硬件设计方面的研究包括：
+      高层级综合工具 FLAMES 库设计\cite{zhao2023flexible}，
+      自动生成语言 AHDW\cite{zhao2023automatic}
     
+  \printbibliography[heading=bibintoc]
+
   \appendix
   \chapter{附录名称}
     对于一些不宜放入正文中、但作为毕业设计（论文）又不可残缺的组成部分或具有重要参考价值的内容，
