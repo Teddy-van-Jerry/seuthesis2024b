@@ -78,6 +78,16 @@
     , linespread = 1.5
   ]
   { ctex }
+% Use Chinese fonts for circled numbers
+\xeCJKDeclareCharClass { CJK }
+  {
+    , "24EA        % ⓪
+    , "2460->"2473 % ①–⑳
+    , "3251->"32BF % ㉑–㊿
+    , "24FF        % ⓿
+    , "2776->"277F % ❶–❿
+    , "24EB->"24F4  % ⓫–⓴
+  }
 
 \NewDocumentCommand \seuthesis@SetFont { m }
   {
@@ -290,6 +300,35 @@
     \RequirePackage { amsthm }
     \RequirePackage { bm }
   }
+
+%% ==========================
+%% Footnote
+%% ==========================
+\NewDocumentCommand \seuthesis@footnote { m }
+  {
+    \ifcase #1 \relax
+      \or ① \or ② \or ③ \or ④ \or ⑤
+      \or ⑥ \or ⑦ \or ⑧ \or ⑨ \or ⑩
+      \or ⑪ \or ⑫ \or ⑬ \or ⑭ \or ⑮
+      \or ⑯ \or ⑰ \or ⑱ \or ⑲ \or ⑳
+      \or ㉑ \or ㉒ \or ㉓ \or ㉔ \or ㉕
+      \or ㉖ \or ㉗ \or ㉘ \or ㉙ \or ㉚
+      \or ㉛ \or ㉜ \or ㉝ \or ㉞ \or ㉟
+      \or ㊱ \or ㊲ \or ㊳ \or ㊴ \or ㊵
+      \or ㊶ \or ㊷ \or ㊸ \or ㊹ \or ㊺
+      \or ㊻ \or ㊼ \or ㊽ \or ㊾ \or ㊿
+    \else
+      \@ctrerr
+    \fi
+  }
+\RenewDocumentCommand \thefootnote { }
+  {
+    \seuthesis@footnote { \value { footnote } }
+  }
+
+%% ==========================
+%% Bibliography
+%% ==========================
 
 %% ==========================
 %% Title Pages
