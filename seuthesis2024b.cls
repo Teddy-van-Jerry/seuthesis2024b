@@ -76,6 +76,11 @@
 \LoadClass { \c__seuthesis_base_class_str }
 
 %% ==========================
+%% Utility Packages
+%% ==========================
+% \RequirePackage { etoolbox }
+
+%% ==========================
 %% Font Settings
 %% ==========================
 \RequirePackage
@@ -282,6 +287,17 @@
 \newcolumntype{Y}   {>{\centering\arraybackslash}X}     % centered X
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % centered p
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}} % centered m
+% set rule widths in tables (provided by booktabs)
+\lightrulewidth = 1pt
+\cmidrulewidth  = 1pt
+
+%% ==========================
+%% Floats
+%% ==========================
+\RequirePackage { floatrow }
+% set font size as \zihao{5} as well as center contents
+\floatsetup [ figure ] { font = small }
+\floatsetup [ table  ] { font = small }
 
 %% ==========================
 %% Captions
@@ -461,7 +477,7 @@
               \includegraphics[width=85mm]{assets/logo.png}
             }
             {
-              东南大学 % alt text for accessibility
+              \c__seuthesis_institute_str % alt text for accessibility
             }
         }
         {
@@ -599,6 +615,11 @@
 %% ==========================
 %% Special Chapters
 %% ==========================
+\NewDocumentCommand \chapterBib { }
+  {
+    \printbibliography [ heading = bibintoc ]
+  }
+
 \NewDocumentCommand \chapterAck { }
   {
     \chapter* { 致\hspace{2\ccwd}谢 }

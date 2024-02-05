@@ -1,5 +1,4 @@
 \documentclass[fontset = mac ms]{seuthesis2024b}
-\usepackage{lipsum}
 
 \title{东南大学本科毕设 \LaTeX{} 模版}
 % \title{东南大学本科毕设 \LaTeX{} 模版}[第二行内容]
@@ -14,6 +13,8 @@
 \addbibresource{ref/ref.bib}
 
 \CNabstract{%
+  此 \LaTeX{} 模板基于东南大学教务处 2024 年 1 月最新 MS Word 版本制作。
+
   摘要内容独立于正文而存在，是论文内容高度概括的简要陈述，
   应准确、具体、完整地概括论文的主要信息，内容包括研究目的、方法、过程、成果、结论及主要创新之处等，
   不含图表，不加注释，具有独立性和完整性，一般为400字左右。
@@ -41,62 +42,7 @@
 \begin{document}
   \maketitle
 
-  \chapter{泰迪}
-
-  泰迪熊 Apparently, I have not finished the setup of the class ...
-  
-  \textsf{sans serif}
-
-  表~\ref{tab:font-effect}。
-
-  \begin{table}[htbp]
-    \centering
-    \caption{字体族、字体形状和字体系列的组合效果}
-    \label{tab:font-effect}
-    \begin{tabular}{c|cccc}
-      & & \verb|\itshape| & \verb|\bfseries| & \verb|\itshape\bfseries| \\
-      \hline
-      \verb|\rmfamily| & \rmfamily 罗马体 roman & \rmfamily\itshape 倾斜 italic & \rmfamily\bfseries 加粗 bold & \rmfamily\itshape\bfseries 粗斜 bold-italic \\
-      \verb|\sffamily| & \sffamily 无衬线 sans  & \sffamily\itshape 倾斜 italic & \sffamily\bfseries 加粗 bold & \sffamily\itshape\bfseries 粗斜 bold-italic \\
-      \verb|\ttfamily| & \ttfamily 打字机 mono  & \ttfamily\itshape 倾斜 italic & \ttfamily\bfseries 加粗 bold & \ttfamily\itshape\bfseries 粗斜 bold-italic
-    \end{tabular}
-  \end{table}
-
-  \clearpage
-
-  \noindent
-  数字运算符、化学元素符号及分子式、单位符号、产品代号、人名地名的外文字母等用正体。
-
-  ~
-
-  \clearpage
-
-  摘要内容独立于正文而存在，是论文内容高度概括的简要陈述，应准确、具体、完整地概括论文的主要信息，
-  内容包括研究目的、方法、过程、成果、结论及主要创新之处等，不含图表，不加注释，具有独立性和完整性，一般为400字左右。
-
-  “摘要”用三号黑体加粗居中，“摘”与“要”之间空4个半角空格。摘要正文内容用小四号宋体，固定1.5倍行距。
-  
-  论文的关键词是反映毕业设计（论文）主题内容的名词，一般为3-5个，排在摘要正文部分下方。关键词与摘要之间空一行。
-  关键词之间用逗号分开，最后一个关键词后不加标点符号。
-
   \chapter{绪论}
-    这是一段文字
-    这是一段文字
-    这是一段文字
-    这是一段文字
-    这是一段文字
-    这是一段文字
-    这是一段文字。
-
-
-    % 自动空格
-
-    % \noindent
-    % \hspace{2\ccwd}手动空格
-
-    % {\zihao{3}\heiti\bfseries 黑体加粗 English}
-    % {\heiti\bfseries 黑体加粗 English}
-
     \section{课题背景和意义}
       绪论部分主要论述选题的意义、国内外研究现状以及本文主要研究的内容、研究思路以及内容安排等。
 
@@ -105,12 +51,10 @@
       正文部分为小四号宋体，行间距1.5倍行距，首行缩进2个字符。正文一般不少于15000字。
 
     \section{研究现状}
+      ……
 
     \section{本文研究内容}
-
-      Cool \LaTeX{}!
-
-      \lipsum
+      ……
 
     \chapter{正文}
 
@@ -129,31 +73,46 @@
 
       插图居中排列，与上文文本之间空一行。图序图名设置为五号宋体居中，图序与图名之间空一格。
       可爱的图~\ref{fig:duck}。
-
       \begin{figure}[htbp]
-        \centering
         \includegraphics{example-image-duck}
         \caption{经典 \LaTeX{} 鸭子}
         \label{fig:duck}
       \end{figure}
 
-      一些文字，图~\ref{fig:subfigs} 包含两个子图：
+      图~\ref{fig:subfigs} 包含两个子图：
       图~\subref*{subfig:s1} 和 \subref*{subfig:s2}。
-
       \begin{figure}[htbp]
-        \subfloat[子图一\label{subfig:s1}]{\includegraphics[width=.48\linewidth]{example-image-a}}\hfill
-        \subfloat[子图二\label{subfig:s2}]{\includegraphics[width=.48\linewidth]{example-image-b}}
+        \subfloat[子图一\label{subfig:s1}]{\includegraphics[width=.3\linewidth]{example-image-a}}\quad
+        \subfloat[子图二\label{subfig:s2}]{\includegraphics[width=.3\linewidth]{example-image-b}}
         \caption{两个子图}
         \label{fig:subfigs}
       \end{figure}
 
-      \subsection{三级标题}
-        三级标题内容
-        \subsubsection{四级标题}
-        四级标题内容
-        \paragraph{段落。}内容。
-
     \section{表格格式要求}
+
+      表格的结构应简洁，一律采用三线表，应有表序和表名，且表序和表名位于表格上方。
+      表格可以逐章单独编序（如：表2.1），也可以统一编序（如：表10），采用哪种方式应和插图及公式的编序方式统一。表序必须连续，不得重复或跳跃。
+
+      表格无法在同一页排版时，可以用续表的形式另页书写，续表需在表格右上角表序前加“续”字，如“续表2.1”，并重复表头。
+
+      表格居中，边框为黑色直线1磅，中文为五号宋体，英文及数字为五号Times New Roman字体，表序与表名之间空一格，表格与下文之间空一行。
+    
+      表格例子如表~\ref{tab:font-effect} 所示。
+      表格内字号默认为五号（10.5pt），即 \texttt{\string\small} 或 \texttt{\string\zihao\{5\}}。
+
+      \begin{table}[htbp]
+        \caption{字体族、字体形状和字体系列的组合效果}
+        \label{tab:font-effect}
+        \begin{tabular}{ccccc}
+          \toprule
+          & & \verb|\itshape| & \verb|\bfseries| & \verb|\itshape\bfseries| \\
+          \midrule
+          \verb|\rmfamily| & \rmfamily 罗马体 roman & \rmfamily\itshape 倾斜 italic & \rmfamily\bfseries 加粗 bold & \rmfamily\itshape\bfseries 粗斜 bold-italic \\
+          \verb|\sffamily| & \sffamily 无衬线 sans  & \sffamily\itshape 倾斜 italic & \sffamily\bfseries 加粗 bold & \sffamily\itshape\bfseries 粗斜 bold-italic \\
+          \verb|\ttfamily| & \ttfamily 打字机 mono  & \ttfamily\itshape 倾斜 italic & \ttfamily\bfseries 加粗 bold & \ttfamily\itshape\bfseries 粗斜 bold-italic \\
+          \bottomrule
+        \end{tabular}
+      \end{table}
 
     \section{表达式}
 
@@ -185,9 +144,29 @@
       RIS 的波束设计方法\cite{you2023beam}；
       硬件设计方面的研究包括：
       高层级综合工具 FLAMES 库设计\cite{zhao2023flexible}，
-      自动生成语言 AHDW\cite{zhao2023automatic}
+      自动生成语言 AHDW\cite{zhao2023automatic}。
+
+      泰迪熊的所有工作有\cite{zhao2023ompl,you2023beam,zhao2023flexible,zhao2023automatic}。
+
+    \section{章节}
+
+      在 \LaTeX{} 中，
+      章（一级标题）使用 \texttt{\string\chapter}，
+      节（二级标题）使用 \texttt{\string\section}，
+      小节（三级标题）使用 \texttt{\string\subsection}，
+      子小节（四级标题）使用 \texttt{\string\subsubsection}，
+      段落使用 \texttt{\string\paragraph}。
+      官方 MS Word 模板仅提供第一、二级格式规范。
+      二级标题及以上会出现在目录中，
+      三级标题及以上会出现在 PDF 的 bookmarks 中。
+
+      \subsection{三级标题}
+        三级标题内容
+        \subsubsection{四级标题}
+        四级标题内容
+          \paragraph{段落。}内容。
     
-  \printbibliography[heading=bibintoc]
+  \chapterBib
 
   \appendix
   \chapter{附录名称}
