@@ -41,7 +41,7 @@
     , use~tex~font   .bool_set:N = \l__seuthesis_use_tex_font_bool
     , use-tex-font   .bool_set:N = \l__seuthesis_use_tex_font_bool
     , font dir       .tl_set:N   = \l__seuthesis_font_dir_tl
-    , font dir       .initial:n  = { fonts }
+    , font dir       .initial:n  = { fonts/ }
     , font~dir       .meta:n     = { font dir = #1 }
     , font-dir       .meta:n     = { font dir = #1 }
     % maths options
