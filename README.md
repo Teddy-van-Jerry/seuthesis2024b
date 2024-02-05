@@ -1,4 +1,5 @@
-# seuthesis2024b
+![seuthesis2024b](https://teddy-van-jerry.github.io/seuthesis2024b-cfp/seuthesis2024b-banner-thin.png)
+
 LaTeX Template of Southeast University Thesis for Class of 2024 Bachelors (东南大学 2024 届本科毕设 LaTeX 模板)
 
 > [!IMPORTANT]
@@ -15,12 +16,12 @@ Oh, should I use Chinese to explain it one more time? Er, let's skip that. **TL;
 
 ## Usage
 ### Engine Supported
-**XeLaTeX** only.
+**XeLaTeX** only (TeX Live 2022 or later).
 Compile with `latexmk -pdfxe seuthesis2024b.tex`.
 
 ### Fonts Preparation
 There are two options:
-1. Copy the required fonts to the `fonts` directory (or the directory where required fonts can be found). See [`fonts/README.md`](fonts/README.md) for details. Use `font dir = {{/path/to/fonts/}}` to specify the directory *(note the double brace and trailing slash)*.
+1. Copy the required fonts to the `fonts` directory (or the directory where required fonts can be found). See [`fonts/README.md`](fonts/README.md) for details. Use `font dir = {{/path/to/fonts/}}` to specify the directory *(note the double brace and trailing slash)*. Meanwhile, delete `fontset = ...` or use `fontset = files`.
 2. Use `fontset = mac ms` if you have Microsoft Word installed on macOS.
 
 > [!TIP]
