@@ -31,10 +31,12 @@ There is option `fontset = mac ms` if you have Microsoft Word installed on macOS
 > We could have used open-source alternatives, for example the *TeX Gyre* fonts for English and *Source Han* for Chinese.
 > You may use option `use tex font` if you want to use `TeX Gyre Terms` to replace `Times New Roman`.
 
+因东大已有 Microsoft Word 正版授权，SEUer 可以在[东大云盘](https://pan.seu.edu.cn:443/link/687E9269EFC00E2E6FCE197A311D7F03)下载字体压缩包。
+
 ## Fonts Provided by LaTeX
 
 The following fonts should be available with the TeX installation.
 
 | Font | Description |
 | ---- | ----------- |
-| `TeX Gyre Heros` | A Helvetica clone |
+| `TeX Gyre Heros` | A Helvetica clone (sans serif) |

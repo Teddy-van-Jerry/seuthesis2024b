@@ -23,6 +23,9 @@ There are two options:
 1. Copy the required fonts to the `fonts` directory (or the directory where required fonts can be found). See [`fonts/README.md`](fonts/README.md) for details. Use `font dir = {{/path/to/fonts/}}` to specify the directory *(note the double brace and trailing slash)*.
 2. Use `fontset = mac ms` if you have Microsoft Word installed on macOS.
 
+> [!TIP]
+> 因东大已有 Microsoft Word 正版授权，SEUer 可以在[东大云盘](https://pan.seu.edu.cn:443/link/687E9269EFC00E2E6FCE197A311D7F03)下载字体压缩包。
+
 ## Recommended Readings
 - [LaTeX v.s. Typst: What is TeX Community's Future Plan?](https://tex.stackexchange.com/q/705199/234654) (yes, my question on TeX.SX)
 - [在 LaTeX 中使用 OpenType 字体（二）](https://stone-zeng.site/2019-07-06-use-opentype-fonts-ii)

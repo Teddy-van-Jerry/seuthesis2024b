@@ -273,9 +273,9 @@
 %% ==========================
 \RequirePackage { graphicx }
 \RequirePackage [ caption = false, font = small, subrefformat = parens ] { subfig }
+\RequirePackage [ dvipsnames ] { xcolor }
 \RequirePackage { tikz }
 \RequirePackage [ export ] { adjustbox }
-\RequirePackage [ dvipsnames, table ] { xcolor }
 
 %% ==========================
 %% Tables
