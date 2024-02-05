@@ -297,7 +297,7 @@
 \RequirePackage { floatrow }
 % set font size as \zihao{5} as well as center contents
 \floatsetup [ figure ] { font = small }
-\floatsetup [ table  ] { font = small }
+\floatsetup [ table  ] { font = small, capposition = top }
 
 %% ==========================
 %% Captions
