@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/02/03} {0.1.0}
+\ProvidesExplClass {seuthesis2024b} {2024/02/06} {0.2.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -56,6 +56,17 @@
     , bib-title case .bool_set:N = \l__seuthesis_bib_title_case_bool
     , bib~title~case .bool_set:N = \l__seuthesis_bib_title_case_bool
     , bib-title-case .bool_set:N = \l__seuthesis_bib_title_case_bool
+    % counters
+    , continuous cnt .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , continuous cnt .initial:n  = { false }
+    , continuous~cnt .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , continuous-cnt .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , cnt in doc     .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , cnt~in~doc     .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , cnt-in-doc     .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , cnt in chapter .meta:n     = { continuous cnt = false }
+    , cnt~in~chapter .meta:n     = { continuous cnt = false }
+    , cnt-in-chapter .meta:n     = { continuous cnt = false }
     % accessibility
     , accessibility  .bool_set:N = \l__seuthesis_accessibility_bool
     , accessibility  .initial:n  = { false }
@@ -292,20 +303,26 @@
 \cmidrulewidth  = 1pt
 
 %% ==========================
-%% Floats
+%% Captions
 %% ==========================
 \RequirePackage { floatrow }
 % set font size as \zihao{5} as well as center contents
 \floatsetup [ figure ] { font = small }
 \floatsetup [ table  ] { font = small, capposition = top }
-
-%% ==========================
-%% Captions
-%% ==========================
 \RequirePackage { caption }
 \DeclareCaptionLabelFormat { seuthesislabel } { #1 #2 \hspace{.5\ccwd} }
-\renewcommand \thefigure { \arabic{chapter}-\arabic{figure} }
-\renewcommand \thetable  { \arabic{chapter}.\arabic{table } }
+\bool_if:NTF \l__seuthesis_continuous_cnt_bool
+  {
+    \counterwithout { figure   } { chapter }
+    \counterwithout { table    } { chapter }
+    \counterwithout { equation } { chapter }
+    \renewcommand \thefigure { \arabic{figure} }
+    \renewcommand \thetable  { \arabic{table } }
+  }
+  {
+    \renewcommand \thefigure { \arabic{chapter}-\arabic{figure} }
+    \renewcommand \thetable  { \arabic{chapter}.\arabic{table } }
+  }
 \captionsetup
   {
     , font = small % = \zihao{5}
