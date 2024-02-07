@@ -116,6 +116,28 @@
         \end{tabular}
       \end{table}
 
+      跨页表格可以使用 \texttt{longtable} 环境。
+      但是为了更好的表格居中效果，推荐使用 \texttt{xltabular} 环境，
+      将 \texttt{longtable} 与 \texttt{tabularx} 结合。
+      效果如表~\ref{tab:arabic_roman}。
+
+      \begin{xltabular}{\linewidth}{YYYY} % <-- centered X columns
+        \caption{阿拉伯数字与罗马数字转换表} \label{tab:arabic_roman} \\
+        \longTableHdr{阿拉伯数字 & 罗马数字 & 阿拉伯数字 & 罗马数字 \\}
+        1 & \RN{1} & 2 & \RN{2} \\
+        3 & \RN{3} & 4 & \RN{4} \\
+        5 & \RN{5} & 6 & \RN{6} \\
+        7 & \RN{7} & 8 & \RN{8} \\
+        9 & \RN{9} & 10 & \RN{10} \\
+        11 & \RN{11} & 12 & \RN{12} \\
+        13 & \RN{13} & 14 & \RN{14} \\
+        15 & \RN{15} & 16 & \RN{16} \\
+        17 & \RN{17} & 18 & \RN{18} \\
+        19 & \RN{19} & 20 & \RN{20} \\
+        50 & \RN{50} & 100 & \RN{100} \\
+        500 & \RN{500} & 2024 & \RN{2024} \\
+      \end{xltabular}
+
     \section{表达式}
 
       论文中的公式应注序号并加圆括号，序号一律用阿拉伯数字连续编序（如 (28) ）或逐章编序（如 (3.6) ），

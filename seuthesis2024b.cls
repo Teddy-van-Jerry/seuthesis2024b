@@ -89,6 +89,7 @@
 %% ==========================
 %% Utility Packages
 %% ==========================
+\RequirePackage { xpatch }
 % \RequirePackage { etoolbox }
 
 %% ==========================
@@ -294,13 +295,48 @@
 \RequirePackage { tabularx }
 \RequirePackage { booktabs }
 \RequirePackage { multirow }
-\RequirePackage { multicol }
+\RequirePackage { longtable }
+\RequirePackage { xltabular }
+\RequirePackage { threeparttable }
 \newcolumntype{Y}   {>{\centering\arraybackslash}X}     % centered X
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % centered p
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}} % centered m
 % set rule widths in tables (provided by booktabs)
 \lightrulewidth = 1pt
 \cmidrulewidth  = 1pt
+\xpatchcmd { \@addamp } { \if@firstamp }
+  {
+    \@ifundefined { c@colcntr }
+      { \if@firstamp }
+      { \stepcounter{colcntr} \if@firstamp }
+  } { } { }
+% macro for all columns in a row
+\newcommand \allcolumns [2]
+  {
+    \multicolumn { \number\value{colcntr} } { #1 } { #2 }
+  }
+% macro for continued caption (typically used in the longtable)
+\newcommand \continueTab
+  {
+    \allcolumns { r @{} } { { \songti\rmfamily \zihao{5} 续表~\thetable } } \\
+  }
+\newcommand \longTableHdr [1]
+  {
+    \toprule
+    #1
+    \midrule
+    \endfirsthead
+    \continueTab
+    \toprule
+    #1
+    \midrule
+    \endhead
+    \bottomrule
+    \endfoot
+  }
+\newcounter { colcntr }
+\AtBeginEnvironment { longtable } { \setcounter { colcntr } { 1 } }
+\AtBeginEnvironment { xltabular } { \setcounter { colcntr } { 1 } }
 
 %% ==========================
 %% Captions
@@ -339,6 +375,7 @@
     \RequirePackage { amssymb }
     \RequirePackage { amsthm }
     \RequirePackage { bm }
+    \RequirePackage { siunitx }
   }
 
 %% ==========================
