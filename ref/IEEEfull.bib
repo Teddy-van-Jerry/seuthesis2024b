@@ -1,99 +1,103 @@
 
-IEEEfull.bib
-V1.14 (2015/08/28)
-Copyright (c) 2002-2015 by Michael Shell
-See: http://www.michaelshell.org/
-for current contact information.
+% IEEEfull.bib
+% V1.14 (2015/08/28) -> V1.14a (2024/02/07)
+% Copyright (c) 2002-2015 by Michael Shell
+%                    2024 by Wuqiong Zhao
+% See: http://www.michaelshell.org/
+% for current contact information.
 
-BibTeX bibliography string definitions of the FULL titles of
-IEEE journals and magazines and online publications.
+% BibTeX bibliography string definitions of the FULL titles of
+% IEEE journals and magazines and online publications.
 
-This file is designed for bibliography styles that require 
-full-length titles and is not for use in bibliographies that
-abbreviate titles.
+% This file is designed for bibliography styles that require 
+% full-length titles and is not for use in bibliographies that
+% abbreviate titles.
 
-Support sites:
-http://www.michaelshell.org/tex/ieeetran/
-http://www.ctan.org/pkg/ieeetran
-and/or
-http://www.ieee.org/
+% Support sites:
+% http://www.michaelshell.org/tex/ieeetran/
+% http://www.ctan.org/pkg/ieeetran
+% and/or
+% http://www.ieee.org/
 
-Special thanks to Laura Hyslop, Ken Rawson, Kevin Lisankie and
-Mona Mittra of the IEEE for their help in obtaining the information needed
-to compile this file. Also, Volker Kuhlmann, Moritz Borgmann,
-Yannick Berker, Nicolás Barabino, Chuanren Wu and Santiago Cogollos Borras
-kindly provided some corrections and additions.
+% Special thanks to Laura Hyslop, Ken Rawson, Kevin Lisankie and
+% Mona Mittra of the IEEE for their help in obtaining the information needed
+% to compile this file. Also, Volker Kuhlmann, Moritz Borgmann,
+% Yannick Berker, Nicolás Barabino, Chuanren Wu and Santiago Cogollos Borras
+% kindly provided some corrections and additions.
 
-
-*************************************************************************
-Legal Notice:
-This code is offered as-is without any warranty either expressed or
-implied; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE! 
-User assumes all risk.
-In no event shall the IEEE or any contributor to this code be liable for
-any damages or losses, including, but not limited to, incidental,
-consequential, or any other damages, resulting from the use or misuse
-of any information contained here.
-
-All comments are the opinions of their respective authors and are not
-necessarily endorsed by the IEEE.
-
-This work is distributed under the LaTeX Project Public License (LPPL)
-( http://www.latex-project.org/ ) version 1.3, and may be freely used,
-distributed and modified. A copy of the LPPL, version 1.3, is included
-in the base LaTeX documentation of all distributions of LaTeX released
-2003/12/01 or later.
-Retain all contribution notices and credits.
-** Modified files should be clearly indicated as such, including  **
-** renaming them and changing author support contact information. **
-*************************************************************************
+% Modified by Wuqiong Zhao
+% - Add '%' at beginning of comment lines to suppress the biber warnings.
 
 
-USAGE:
+% *************************************************************************
+% Legal Notice:
+% This code is offered as-is without any warranty either expressed or
+% implied; without even the implied warranty of MERCHANTABILITY or
+% FITNESS FOR A PARTICULAR PURPOSE! 
+% User assumes all risk.
+% In no event shall the IEEE or any contributor to this code be liable for
+% any damages or losses, including, but not limited to, incidental,
+% consequential, or any other damages, resulting from the use or misuse
+% of any information contained here.
 
-\bibliographystyle{mybstfile}
-\bibliography{IEEEfull,mybibfile}
+% All comments are the opinions of their respective authors and are not
+% necessarily endorsed by the IEEE.
 
-where the IEEE titles in the .bib database entries use the strings
-defined here. e.g.,
-
-
-   journal = IEEE_J_AC,
-
-
-to yield "{IEEE} Transactions on Automatic Control"
-
-
-WARNING: The IEEE uses abbreviated journal titles in their bibliographies!
-Because this file provides the full titles, you should NOT use this file
-for work that is to be submitted to the IEEE.
-
-For IEEE work, you should use the abbreviated titles provided in the
-companion file, IEEEabrv.bib.
-
-
-** NOTES **
-
- 1. Journals have been grouped according to subject in order to make it
-    easier to locate and extract the definitions for related journals - 
-    as most works use references that are confined to a single topic.
-    Magazines are listed in straight alphabetical order.
-
- 2. String names are closely based on IEEE's own internal acronyms.
-
- 3. Older, out-of-print IEEE titles are included (but not including titles
-    dating prior to the IEEE's formation from the IRE and AIEE in 1963).
+% This work is distributed under the LaTeX Project Public License (LPPL)
+% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+% distributed and modified. A copy of the LPPL, version 1.3, is included
+% in the base LaTeX documentation of all distributions of LaTeX released
+% 2003/12/01 or later.
+% Retain all contribution notices and credits.
+% ** Modified files should be clearly indicated as such, including  **
+% ** renaming them and changing author support contact information. **
+% *************************************************************************
 
 
+% USAGE:
+
+% \bibliographystyle{mybstfile}
+% \bibliography{IEEEfull,mybibfile}
+
+% where the IEEE titles in the .bib database entries use the strings
+% defined here. e.g.,
+
+
+%    journal = IEEE_J_AC,
+
+
+% to yield "{IEEE} Transactions on Automatic Control"
+
+
+% WARNING: The IEEE uses abbreviated journal titles in their bibliographies!
+% Because this file provides the full titles, you should NOT use this file
+% for work that is to be submitted to the IEEE.
+
+% For IEEE work, you should use the abbreviated titles provided in the
+% companion file, IEEEabrv.bib.
+
+
+% ** NOTES **
+
+%  1. Journals have been grouped according to subject in order to make it
+%     easier to locate and extract the definitions for related journals - 
+%     as most works use references that are confined to a single topic.
+%     Magazines are listed in straight alphabetical order.
+
+%  2. String names are closely based on IEEE's own internal acronyms.
+
+%  3. Older, out-of-print IEEE titles are included (but not including titles
+%     dating prior to the IEEE's formation from the IRE and AIEE in 1963).
 
 
 
 
-IEEE Journals 
 
 
-aerospace and military
+% IEEE Journals 
+
+
+% aerospace and military
 @STRING{IEEE_J_ANNE       = "{IEEE} Transactions on Aeronautical and Navigational Electronics"}
 @STRING{IEEE_J_AES        = "{IEEE} Transactions on Aerospace and Electronic Systems"}
 @STRING{IEEE_J_ANE        = "{IEEE} Transactions on Aerospace and Navigational Electronics"}
@@ -103,7 +107,7 @@ aerospace and military
 
 
 
-autos, transportation and vehicles (non-aerospace)
+% autos, transportation and vehicles (non-aerospace)
 @STRING{IEEE_J_ITS        = "{IEEE} Transactions on Intelligent Transportation Systems"}
 @STRING{IEEE_J_IV         = "{IEEE} Transactions on Intelligent Vehicles"}
 @STRING{IEEE_J_TTE        = "{IEEE} Transactions on Transportation Electrification"}
@@ -112,14 +116,14 @@ autos, transportation and vehicles (non-aerospace)
 
 
 
-circuits, signals, systems, audio and controls
+% circuits, signals, systems, audio and controls
 @STRING{IEEE_J_STSP       = "{IEEE} Journal of Selected Topics in Signal Processing"}
 @STRING{IEEE_J_SPL        = "{IEEE} Signal Processing Letters"}
 @STRING{IEEE_J_SYST       = "{IEEE} Systems Journal"}
 @STRING{IEEE_J_ASSP       = "{IEEE} Transactions on Acoustics, Speech, and Signal Processing"}
 @STRING{IEEE_J_AU         = "{IEEE} Transactions on Audio"}
 @STRING{IEEE_J_AUEA       = "{IEEE} Transactions on Audio and Electroacoustics"}
-in 2014 ASL became ASLP
+% in 2014 ASL became ASLP
 @STRING{IEEE_J_ASLP       = "{IEEE/ACM} Transactions on Audio, Speech, and Language Processing"}
 @STRING{IEEE_J_ASL        = "{IEEE} Transactions on Audio, Speech, and Language Processing"}
 @STRING{IEEE_J_AC         = "{IEEE} Transactions on Automatic Control"}
@@ -127,7 +131,7 @@ in 2014 ASL became ASLP
 @STRING{IEEE_J_CASVT      = "{IEEE} Transactions on Circuits and Systems for Video Technology"}
 @STRING{IEEE_J_CASI       = "{IEEE} Transactions on Circuits and Systems---Part {I}: Fundamental Theory and Applications"}
 @STRING{IEEE_J_CASII      = "{IEEE} Transactions on Circuits and Systems---Part {II}: Analog and Digital Signal Processing"}
-in 2004 CASI and CASII renamed part title to CASI_RP and CASII_EB, respectively
+% in 2004 CASI and CASII renamed part title to CASI_RP and CASII_EB, respectively
 @STRING{IEEE_J_CASI_RP    = "{IEEE} Transactions on Circuits and Systems---Part {I}: Regular Papers"}
 @STRING{IEEE_J_CASII_EB   = "{IEEE} Transactions on Circuits and Systems---Part {II}: Express Briefs"}
 @STRING{IEEE_J_CT         = "{IEEE} Transactions on Circuit Theory"}
@@ -141,7 +145,7 @@ in 2004 CASI and CASII renamed part title to CASI_RP and CASII_EB, respectively
 
 
 
-communications
+% communications
 @STRING{IEEE_J_COML       = "{IEEE} Communications Letters"}
 @STRING{IEEE_J_JSAC       = "{IEEE} Journal on Selected Areas in Communications"}
 @STRING{IEEE_J_COM        = "{IEEE} Transactions on Communications"}
@@ -151,10 +155,10 @@ communications
 
 
 
-components, packaging and manufacturing
+% components, packaging and manufacturing
 @STRING{IEEE_J_ADVP       = "{IEEE} Transactions on Advanced Packaging"}
 @STRING{IEEE_J_CHMT       = "{IEEE} Transactions on Components, Hybrids and Manufacturing Technology"}
-in 2011 CAPT became CPMT
+% in 2011 CAPT became CPMT
 @STRING{IEEE_J_CPMT       = "{IEEE} Transactions on Components, Packaging and Manufacturing Technology"}
 @STRING{IEEE_J_CPMTA      = "{IEEE} Transactions on Components, Packaging and Manufacturing Technology---Part {A}"}
 @STRING{IEEE_J_CPMTB      = "{IEEE} Transactions on Components, Packaging and Manufacturing Technology---Part {B}: Advanced Packaging"}
@@ -169,13 +173,13 @@ in 2011 CAPT became CPMT
 
 
 
-CAD
+% CAD
 @STRING{IEEE_J_TCAD       = "{IEEE} Journal on Technology in Computer Aided Design"}
 @STRING{IEEE_J_CAD        = "{IEEE} Transactions on Computer-Aided Design of Integrated Circuits and Systems"}
 
 
 
-coding, data, information, knowledge
+% coding, data, information, knowledge
 @STRING{IEEE_J_BD         = "{IEEE} Transactions on Big Data"}
 @STRING{IEEE_J_IFS        = "{IEEE} Transactions on Information Forensics and Security"}
 @STRING{IEEE_J_IT         = "{IEEE} Transactions on Information Theory"}
@@ -183,7 +187,7 @@ coding, data, information, knowledge
 
 
 
-computers, computation, networking and software
+% computers, computation, networking and software
 @STRING{IEEE_J_CAL        = "{IEEE} Computer Architecture Letters"}
 @STRING{IEEE_J_ES         = "{IEEE} Embedded Systems Letters"}
 @STRING{IEEE_J_IOT        = "{IEEE} Internet of Things Journal"}
@@ -205,7 +209,7 @@ computers, computation, networking and software
 @STRING{IEEE_J_NSE        = "{IEEE} Transactions on Network Science and Engineering"}
 @STRING{IEEE_J_NSM        = "{IEEE} Transactions on Network and Service Management"}
 @STRING{IEEE_J_NN         = "{IEEE} Transactions on Neural Networks"}
-in 2012 NN became NNLS
+% in 2012 NN became NNLS
 @STRING{IEEE_J_NNLS       = "{IEEE} Transactions on Neural Networks and Learning Systems"}
 @STRING{IEEE_J_PDS        = "{IEEE} Transactions on Parallel and Distributed Systems"}
 @STRING{IEEE_J_SC         = "{IEEE} Transactions on Services Computing"}
@@ -214,7 +218,7 @@ in 2012 NN became NNLS
 
 
 
-computer graphics, imaging, and multimedia
+% computer graphics, imaging, and multimedia
 @STRING{IEEE_J_JDT        = "{IEEE/OSA} Journal of Display Technology"}
 @STRING{IEEE_J_IP         = "{IEEE} Transactions on Image Processing"}
 @STRING{IEEE_J_MM         = "{IEEE} Transactions on Multimedia"}
@@ -222,26 +226,26 @@ computer graphics, imaging, and multimedia
 
 
 
-cybernetics, ergonomics, robots, man-machine, artificial intelligence and automation
+% cybernetics, ergonomics, robots, man-machine, artificial intelligence and automation
 @STRING{IEEE_J_JAS        = "{IEEE/CAA} Journal of Automatica Sinica"}
 @STRING{IEEE_J_JRA        = "{IEEE} Journal of Robotics and Automation"}
 @STRING{IEEE_J_AFFC       = "{IEEE} Transactions on Affective Computing"}
 @STRING{IEEE_J_ASE        = "{IEEE} Transactions on Automation Science and Engineering"}
 @STRING{IEEE_J_AMD        = "{IEEE} Transactions on Autonomous Mental Development"}
 @STRING{IEEE_J_CCN        = "{IEEE} Transactions on Cognitive Communications and Networking"}
-in 2015 AMD became CDS
+% in 2015 AMD became CDS
 @STRING{IEEE_J_CDS        = "{IEEE} Transactions on Cognitive and Developmental Systems"}
 @STRING{IEEE_J_CIAIG      = "{IEEE} Transactions on Computational Intelligence and {AI} in Games"}
-in 2013 SMCB became CYB
+% in 2013 SMCB became CYB
 @STRING{IEEE_J_CYB        = "{IEEE} Transactions on Cybernetics"}
 @STRING{IEEE_J_H          = "{IEEE} Transactions on Haptics"}
 @STRING{IEEE_J_HFE        = "{IEEE} Transactions on Human Factors in Electronics"}
-in 2013 SMCC became HMS
+% in 2013 SMCC became HMS
 @STRING{IEEE_J_HMS        = "{IEEE} Transactions on Human-Machine Systems"}
 @STRING{IEEE_J_MMS        = "{IEEE} Transactions on Man-Machine Systems"}
 @STRING{IEEE_J_PAMI       = "{IEEE} Transactions on Pattern Analysis and Machine Intelligence"}
-in 1989 JRA became RA
-in August 2004, RA split into ASE and RO
+% in 1989 JRA became RA
+% in August 2004, RA split into ASE and RO
 @STRING{IEEE_J_RA         = "{IEEE} Transactions on Robotics and Automation"}
 @STRING{IEEE_J_RAL        = "{IEEE} Robotics and Automation Letters"}
 @STRING{IEEE_J_RO         = "{IEEE} Transactions on Robotics"}
@@ -249,13 +253,13 @@ in August 2004, RA split into ASE and RO
 @STRING{IEEE_J_SMCA       = "{IEEE} Transactions on Systems, Man, and Cybernetics---Part {A}: Systems and Humans"}
 @STRING{IEEE_J_SMCB       = "{IEEE} Transactions on Systems, Man, and Cybernetics---Part {B}: Cybernetics"}
 @STRING{IEEE_J_SMCC       = "{IEEE} Transactions on Systems, Man, and Cybernetics---Part {C}: Applications and Reviews"}
-in 2012 SMCA became SMCS
+% in 2012 SMCA became SMCS
 @STRING{IEEE_J_SMCS       = "{IEEE} Transactions on Systems, Man, and Cybernetics: Systems"}
 @STRING{IEEE_J_SSC        = "{IEEE} Transactions on Systems Science and Cybernetics"}
 
 
 
-earth, wind, fire and water
+% earth, wind, fire and water
 @STRING{IEEE_J_GRSL       = "{IEEE} Geoscience and Remote Sensing Letters"}
 @STRING{IEEE_J_GE         = "{IEEE} Transactions on Geoscience Electronics"}
 @STRING{IEEE_J_GRS        = "{IEEE} Transactions on Geoscience and Remote Sensing"}
@@ -264,7 +268,7 @@ earth, wind, fire and water
 
 
 
-education, engineering, history, IEEE, professional
+% education, engineering, history, IEEE, professional
 @STRING{IEEE_J_CJECE      = "Canadian Journal of Electrical and Computer Engineering"}
 @STRING{IEEE_J_PROC       = "Proceedings of the {IEEE}"}
 @STRING{IEEE_J_RITA       = "{IEEE} Revista Iberoamericana de Technolog{\'{i}}as del Aprendizaje"}
@@ -276,7 +280,7 @@ education, engineering, history, IEEE, professional
 
 
 
-electromagnetics, antennas, EMI, magnetics and microwave
+% electromagnetics, antennas, EMI, magnetics and microwave
 @STRING{IEEE_J_AWPL       = "{IEEE} Antennas and Wireless Propagation Letters"}
 @STRING{IEEE_J_MAGL       = "{IEEE} Magnetics Letters"}
 @STRING{IEEE_J_MGWL       = "{IEEE} Microwave and Guided Wave Letters"}
@@ -293,7 +297,7 @@ electromagnetics, antennas, EMI, magnetics and microwave
 
 
 
-energy, power and conversion
+% energy, power and conversion
 @STRING{IEEE_J_PHOT       = "{IEEE} Journal of Photovoltaics"}
 @STRING{IEEE_J_PEL        = "{IEEE} Power Electronics Letters"}
 @STRING{IEEE_J_PETS       = "{IEEE} Power and Energy Technology Systems Journal"}
@@ -308,7 +312,7 @@ energy, power and conversion
 
 
 
-industrial, commercial and consumer
+% industrial, commercial and consumer
 @STRING{IEEE_J_PSE        = "{IEEE} Journal of Product Safety Engineering"}
 @STRING{IEEE_J_APPIND     = "{IEEE} Transactions on Applications and Industry"}
 @STRING{IEEE_J_BC         = "{IEEE} Transactions on Broadcasting"}
@@ -322,34 +326,34 @@ industrial, commercial and consumer
 
 
 
-instrumentation and measurement
+% instrumentation and measurement
 @STRING{IEEE_J_IM         = "{IEEE} Transactions on Instrumentation and Measurement"}
 
 
 
-insulation and materials
+% insulation and materials
 @STRING{IEEE_J_JEM        = "{IEEE/TMS} Journal of Electronic Materials"}
 @STRING{IEEE_J_DEI        = "{IEEE} Transactions on Dielectrics and Electrical Insulation"}
 @STRING{IEEE_J_EI         = "{IEEE} Transactions on Electrical Insulation"}
 
 
 
-mechanical
+% mechanical
 @STRING{IEEE_J_MEMS       = "{IEEE/ASME} Journal of Microelectromechanical Systems"}
-in 2014 MEMS became MEMSI
+% in 2014 MEMS became MEMSI
 @STRING{IEEE_J_MEMSI      = "{IEEE} Journal of Microelectromechanical Systems"}
 @STRING{IEEE_J_MECH       = "{IEEE/ASME} Transactions on Mechatronics"}
 
 
 
-medical and biological
+% medical and biological
 @STRING{IEEE_J_BHI        = "{IEEE} Journal of Biomedical and Health Informatics"}
 @STRING{IEEE_J_TEHM       = "{IEEE} Journal of Translational Engineering in Health and Medicine"}
 @STRING{IEEE_J_LS         = "{IEEE} Life Sciences Letters"}
 @STRING{IEEE_J_RBME       = "{IEEE} Reviews in Biomedical Engineering"}
 @STRING{IEEE_J_BCAS       = "{IEEE} Transactions on Biomedical Circuits and Systems"}
 @STRING{IEEE_J_BMELC      = "{IEEE} Transactions on Bio-Medical Electronics"}
-B-ME later dropped the hyphen and became the BME
+% B-ME later dropped the hyphen and became the BME
 @STRING{IEEE_J_BME        = "{IEEE} Transactions on Biomedical Engineering"}
 @STRING{IEEE_J_B-ME       = "{IEEE} Transactions on Bio-Medical Engineering"}
 @STRING{IEEE_J_CBB        = "{IEEE/ACM} Transactions on Computational Biology and Bioinformatics"}
@@ -363,7 +367,7 @@ B-ME later dropped the hyphen and became the BME
 
 
 
-optics, lightwave and photonics
+% optics, lightwave and photonics
 @STRING{IEEE_J_JLT        = "{IEEE/OSA} Journal of Lightwave Technology"}
 @STRING{IEEE_J_OCN        = "{IEEE} Journal of Optical Communications and Networking"}
 @STRING{IEEE_J_PJ         = "{IEEE} Photonics Journal"}
@@ -371,7 +375,7 @@ optics, lightwave and photonics
 
 
 
-physics, electrons, nanotechnology, nuclear and quantum electronics
+% physics, electrons, nanotechnology, nuclear and quantum electronics
 @STRING{IEEE_J_EDL        = "{IEEE} Electron Device Letters"}
 @STRING{IEEE_J_EDS        = "{IEEE} Journal of Electron Devices Society"}
 @STRING{IEEE_J_JQE        = "{IEEE} Journal of Quantum Electronics"}
@@ -384,13 +388,13 @@ physics, electrons, nanotechnology, nuclear and quantum electronics
 
 
 
-reliability
+% reliability
 @STRING{IEEE_J_DMR        = "{IEEE} Transactions on Device and Materials Reliability"}
 @STRING{IEEE_J_R          = "{IEEE} Transactions on Reliability"}
 
 
 
-semiconductors, superconductors, electrochemical and solid state
+% semiconductors, superconductors, electrochemical and solid state
 @STRING{IEEE_J_ESSL       = "{IEEE/ECS} Electrochemical and Solid-State Letters"}
 @STRING{IEEE_J_JSSC       = "{IEEE} Journal of Solid-State Circuits"}
 @STRING{IEEE_J_ASC        = "{IEEE} Transactions on Applied Superconductivity"}
@@ -398,12 +402,12 @@ semiconductors, superconductors, electrochemical and solid state
 
 
 
-sensors
+% sensors
 @STRING{IEEE_J_SENSOR     = "{IEEE} Sensors Journal"}
 
 
 
-VLSI
+% VLSI
 @STRING{IEEE_J_VLSI       = "{IEEE} Transactions on Very Large Scale Integration ({VLSI}) Systems"}
 
 
@@ -411,7 +415,7 @@ VLSI
 
 
 
-IEEE Magazines and Online Publications
+% IEEE Magazines and Online Publications
 
 
 @STRING{IEEE_O_ACC        = "{IEEE} Access"}
@@ -426,7 +430,7 @@ IEEE Magazines and Online Publications
 @STRING{IEEE_M_COMSOC     = "{IEEE} Communications Society Magazine"}
 @STRING{IEEE_O_CSTO       = "{IEEE} Communications Surveys and Tutorials"}
 @STRING{IEEE_M_CIM        = "{IEEE} Computational Intelligence Magazine"}
-CSEM changed to CSE in 1999
+% CSEM changed to CSE in 1999
 @STRING{IEEE_M_CSE        = "{IEEE} Computing in Science and Engineering"}
 @STRING{IEEE_M_CSEM       = "{IEEE} Computational Science and Engineering Magazine"}
 @STRING{IEEE_M_C          = "Computer"}
@@ -434,7 +438,7 @@ CSEM changed to CSE in 1999
 @STRING{IEEE_M_CGA        = "{IEEE} Computer Graphics and Applications"}
 @STRING{IEEE_M_CONC       = "{IEEE} Concurrency"}
 @STRING{IEEE_M_CS         = "{IEEE} Control Systems Magazine"}
-in 2012 DTC became DT
+% in 2012 DTC became DT
 @STRING{IEEE_M_DT         = "{IEEE} Design \&\ Test"}
 @STRING{IEEE_M_DTC        = "{IEEE} Design and Test of Computers"}
 @STRING{IEEE_O_DSO        = "{IEEE} Distributed Systems Online"}
@@ -462,7 +466,7 @@ in 2012 DTC became DT
 @STRING{IEEE_M_PVC        = "{IEEE} Pervasive Computing"}
 @STRING{IEEE_M_POT        = "{IEEE} Potentials"}
 @STRING{IEEE_M_PEL        = "{IEEE} Power Electronics Magazine"}
-CAP and PER merged to form PE in 2003
+% CAP and PER merged to form PE in 2003
 @STRING{IEEE_M_PE         = "{IEEE} Power and Energy Magazine"}
 @STRING{IEEE_M_PER        = "{IEEE} Power Engineering Review"}
 @STRING{IEEE_M_PULSE      = "{IEEE} Pulse"}
@@ -482,5 +486,5 @@ CAP and PER merged to form PE in 2003
 
 
 
---
-EOF
+% --
+% EOF

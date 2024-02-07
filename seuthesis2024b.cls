@@ -1,14 +1,14 @@
 %% seuthesis2024b.cls
 %% ------------------
 %% LaTeX Template of Southeast University Thesis for Class of 2024 Bachelors
-%% GitHub Repo: https://github.com/Teddy-van-Jerry/seuthesis2024b.cls
+%% GitHub Repo: https://github.com/Teddy-van-Jerry/seuthesis2024b
 %%
 %% Author: Teddy van Jerry (Wuqiong Zhao)
 %% License: MIT
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/02/06} {0.2.0}
+\ProvidesExplClass {seuthesis2024b} {2024/02/07} {0.2.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -373,7 +373,8 @@
   [
     , backend = biber
     , style = gb7714-2015
-  ] { biblatex }
+  ]
+  { biblatex }
 \AtBeginBibliography { \zihao{5} }
 % In this class, the default is to use sentence case for titles.
 \bool_if:NF \l__seuthesis_bib_title_case_bool
@@ -632,11 +633,12 @@
 %% ==========================
 %% Special Chapters
 %% ==========================
+% --- bibliography ---
 \NewDocumentCommand \chapterBib { }
   {
     \printbibliography [ heading = bibintoc ]
   }
-
+% --- acknowledgments ---
 \NewDocumentCommand \chapterAck { }
   {
     \chapter* { 致\hspace{2\ccwd}谢 }

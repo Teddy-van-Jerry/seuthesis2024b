@@ -5,7 +5,7 @@ LaTeX Template of Southeast University Thesis for Class of 2024 Bachelors (东�
 > [!IMPORTANT]
 > This project is under active development.
 >
-> 此**非官方**（unofficial）模版基于《东南大学本科毕业设计（论文）参考模板 (2024年1月修订)》。毕设论文具体格式要求请使用者自行确认。
+> 此**非官方**（unofficial）模版基于《东南大学本科毕业设计（论文）参考模板 (2024年1月修订)》设计。毕设论文具体格式要求请使用者自行确认。
 
 ## Template Summary
 This project provides a class file based on **LaTeX3** for typesetting thesis of Southeast University [`seuthesis2024b.cls`](seuthesis2024b.cls).
