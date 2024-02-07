@@ -516,15 +516,15 @@
         \bool_if:NTF { \l__seuthesis_title_cont_bool }
           {
             \begin{tabularx}{\linewidth-9pt}{cY}
-              题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule{2-2}
-              & \@titleCont \\[-4pt] \cmidrule{2-2}
+              题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule[.5pt]{2-2}
+              & \@titleCont \\[-4pt] \cmidrule[.5pt]{2-2}
             \end{tabularx}
           }
           {
             \begin{tabularx}{\linewidth-9pt}{cY}
-              题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule{2-2}
+              题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule[.5pt]{2-2}
               % the second line is then hidden
-              & \vphantom{泰迪熊} \\[\dimexpr-4pt+\cmidrulewidth+\cmidrulekern]
+              & \vphantom{泰迪熊} \\[\dimexpr-4pt+0.5pt+\cmidrulekern]
             \end{tabularx}
           }
       }
@@ -535,12 +535,12 @@
         \renewcommand \tabcolsep { 18pt }
         \renewcommand \arraystretch { 1.3 }
         \begin{tabular}{c P{8cm}}
-          学\hspace{2\ccwd}号：& \@studentID  \\[-6pt] \cmidrule{2-2}
-          姓\hspace{2\ccwd}名：& \@author     \\[-6pt] \cmidrule{2-2}
-          学\hspace{2\ccwd}院：& \@department \\[-6pt] \cmidrule{2-2}
-          专\hspace{2\ccwd}业：& \@major      \\[-6pt] \cmidrule{2-2}
-          指导教师：& \@supervisor \\[-6pt] \cmidrule{2-2}
-          起止日期：& \@date       \\[-6pt] \cmidrule{2-2}
+          学\hspace{2\ccwd}号：& \@studentID  \\[-6pt] \cmidrule[.5pt]{2-2}
+          姓\hspace{2\ccwd}名：& \@author     \\[-6pt] \cmidrule[.5pt]{2-2}
+          学\hspace{2\ccwd}院：& \@department \\[-6pt] \cmidrule[.5pt]{2-2}
+          专\hspace{2\ccwd}业：& \@major      \\[-6pt] \cmidrule[.5pt]{2-2}
+          指导教师：& \@supervisor \\[-6pt] \cmidrule[.5pt]{2-2}
+          起止日期：& \@date       \\[-6pt] \cmidrule[.5pt]{2-2}
         \end{tabular}
       }
     \end{center}
