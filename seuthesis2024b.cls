@@ -410,6 +410,7 @@
   [
     , backend = biber
     , style = gb7714-2015
+    , gbalign = left
   ]
   { biblatex }
 \AtBeginBibliography { \zihao{5} }
