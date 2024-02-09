@@ -597,6 +597,10 @@
   {
     \gdef \@CNabstract { #1 }
     \gdef \@CNkeywords { #2 }
+    \tl_new:N \l__seuthesis_keywords_tl
+    \tl_set:Nn \l__seuthesis_keywords_tl { #2 }
+    \tl_replace_all:Nnn \l__seuthesis_keywords_tl { ， } { ,~ }
+    \hypersetup { pdfkeywords = { \l__seuthesis_keywords_tl } }
   }
 \newcommand \@CNabstract
   {
