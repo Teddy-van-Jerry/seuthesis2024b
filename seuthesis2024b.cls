@@ -522,7 +522,7 @@
 \newcommand \seuthesis@titlepage
   {
     \pagestyle{empty}
-    % \pagenumbering{gobble}
+    \renewcommand \thepage { 封面 }
 
     \null\par % one empty line at top
 
@@ -588,6 +588,7 @@
 % --- \seuthesis@declaration ---
 \newcommand \seuthesis@declaration
   {
+    \renewcommand \thepage { 声明 }
     \input { assets/declaration.tex }
     \ClearDoublePage
   }

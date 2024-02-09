@@ -1,4 +1,8 @@
-\documentclass[fontset = mac ms]{seuthesis2024b}
+\documentclass[fontset = mac ms]{seuthesis2024b} % 使用 macOS 上的 MS Word 字体
+% \documentclass{seuthesis2024b} % 使用 fonts 文件夹字体
+% \documentclass[twoside]{seuthesis2024b} % 使用双页模式
+% 更多自定义选项见 seuthesis2024b.cls 文件的定义
+% 注意选项可以合并使用
 
 \title{东南大学本科毕设 \LaTeX{} 模版}
 % \title{东南大学本科毕设 \LaTeX{} 模版}[第二行内容]
@@ -9,9 +13,11 @@
 \supervisor{Ted Roosevelt}
 \date{2023年12月 至 2024年5月}
 
+% 添加参考文献 bib 文件，注意使用符合 BibLaTeX（配合 Biber）的格式
 \addbibresource{ref/IEEEfull.bib}
 \addbibresource{ref/ref.bib}
 
+% 中文摘要和关键词
 \CNabstract{%
   此 \LaTeX{} 模板基于东南大学教务处 2024 年 1 月最新 MS Word 版本制作。
 
@@ -25,6 +31,7 @@
   关键词之间用逗号分开，最后一个关键词后不加标点符号。
 } {关键词1，关键词2，关键词3，关键词4}
 
+% 英文摘要和关键词
 \ENabstract{%
   English abstract should correspond to the contents in the Chinese abstract.
   It should describe the thesis contents as a third-person perspective.
