@@ -1,0 +1,163 @@
+具体研究内容每一章应另起页书写书写，层次要清楚，内容要有逻辑性，每一章标题需要按论文实际研究内容进行填写，不可直接写成第二章 正文。研究内容因学科、选题特点可有差异，但必须言之成理，论据可靠，严格遵循本学科国际通行的学术规范。
+
+中文为小四号宋体，英文及数字为小四号Times New Roman，首行缩进2个字符，行间距为1.5倍。
+
+\section{插图格式要求}
+
+  插图力求精炼，且每个插图均应有图序和图名。图序与图名位于插图下方，图序一般按章节编排，如图1-1（第一章第1个图），在插图较少时可以全文连续编序，如图10。
+  
+  如一个插图由两个及以上的分图组成，分图用(a)、(b)、(c)等标出，并标出分图名。
+
+  简单文字图可用 \LaTeX{} 自带宏包 Ti\textit{k}Z 直接绘制，
+  复杂的图考虑使用 standalone 的 Ti\textit{k}Z 完成，以提高图形表达质量。
+
+  插图居中排列，与上文文本之间空一行。图序图名设置为五号宋体居中，图序与图名之间空一格。
+  可爱的图~\ref{fig:duck}。
+  \begin{figure}[htbp]
+    \includegraphics{example-image-duck}
+    \caption{经典 \LaTeX{} 鸭子}
+    \label{fig:duck}
+  \end{figure}
+
+  图~\ref{fig:subfigs} 包含两个子图：
+  图~\subref*{subfig:s1} 和 \subref*{subfig:s2}。
+  \begin{figure}[htbp]
+    \subfloat[子图一\label{subfig:s1}]{\includegraphics[width=.3\linewidth]{example-image-a}}\quad
+    \subfloat[子图二\label{subfig:s2}]{\includegraphics[width=.3\linewidth]{example-image-b}}
+    \caption{两个子图}
+    \label{fig:subfigs}
+  \end{figure}
+
+  图序章节编排为默认，全文连续编排需设置文档选项 \texttt{cnt in doc}。此设置同时作用于表格和公式。
+
+\section{表格格式要求}
+
+  表格的结构应简洁，一律采用三线表，应有表序和表名，且表序和表名位于表格上方。
+  表格可以逐章单独编序（如：表2.1），也可以统一编序（如：表10），采用哪种方式应和插图及公式的编序方式统一。表序必须连续，不得重复或跳跃。
+
+  表格无法在同一页排版时，可以用续表的形式另页书写，续表需在表格右上角表序前加“续”字，如“续表2.1”，并重复表头。
+
+  表格居中，边框为黑色直线1磅，中文为五号宋体，英文及数字为五号Times New Roman字体，表序与表名之间空一格，表格与下文之间空一行。
+
+  表格例子如表~\ref{tab:font-effect} 所示。
+  表格内字号默认为五号（10.5pt），即 \texttt{\string\small} 或 \texttt{\string\zihao\{5\}}。
+
+  \begin{table}[htbp]
+    \caption{字体族、字体形状和字体系列的组合效果}
+    \label{tab:font-effect}
+    \begin{tabular}{ccccc}
+      \toprule
+      & & \verb|\itshape| & \verb|\bfseries| & \verb|\itshape\bfseries| \\
+      \midrule
+      \verb|\rmfamily| & \rmfamily 罗马体 roman & \rmfamily\itshape 倾斜 italic & \rmfamily\bfseries 加粗 bold & \rmfamily\itshape\bfseries 粗斜 bold-italic \\
+      \verb|\sffamily| & \sffamily 无衬线 sans  & \sffamily\itshape 倾斜 italic & \sffamily\bfseries 加粗 bold & \sffamily\itshape\bfseries 粗斜 bold-italic \\
+      \verb|\ttfamily| & \ttfamily 打字机 mono  & \ttfamily\itshape 倾斜 italic & \ttfamily\bfseries 加粗 bold & \ttfamily\itshape\bfseries 粗斜 bold-italic \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+
+  跨页表格可以使用 \texttt{longtable} 环境。
+  但是为了更好的表格居中效果，推荐使用 \texttt{xltabular} 环境，
+  将 \texttt{longtable} 与 \texttt{tabularx} 结合。
+  效果如表~\ref{tab:arabic_roman}。
+
+  \begin{xltabular}{\linewidth}{YYYY} % <-- centered X columns
+    \caption{阿拉伯数字与罗马数字转换表} \label{tab:arabic_roman} \\
+    \longTableHdr{阿拉伯数字 & 罗马数字 & 阿拉伯数字 & 罗马数字 \\}
+    1 & \RN{1} & 2 & \RN{2} \\
+    3 & \RN{3} & 4 & \RN{4} \\
+    5 & \RN{5} & 6 & \RN{6} \\
+    7 & \RN{7} & 8 & \RN{8} \\
+    9 & \RN{9} & 10 & \RN{10} \\
+    11 & \RN{11} & 12 & \RN{12} \\
+    13 & \RN{13} & 14 & \RN{14} \\
+    15 & \RN{15} & 16 & \RN{16} \\
+    17 & \RN{17} & 18 & \RN{18} \\
+    19 & \RN{19} & 20 & \RN{20} \\
+    50 & \RN{50} & 100 & \RN{100} \\
+    500 & \RN{500} & 2024 & \RN{2024} \\
+  \end{xltabular}
+
+\section{表达式}
+
+  论文中的公式应注序号并加圆括号，序号一律用阿拉伯数字连续编序（如 (28) ）或逐章编序（如 (3.6) ），
+  编号方式应与插图、表格方式一致。序号排在版面右侧，且距右边距离相等。公式与序号之间不加虚线。
+
+  长公式在一行无法写完的情况下，原则上应在等号（或数学符号，如“$+$”、“$-$”号）处换行，数学符号在换行的行首。
+
+  公式及文字中的一般变量（或一般函数）（如坐标$X$、$Y$，电压$V$，频率$f$）宜用斜体，矢量用粗斜体如$\bm{S}$或白斜体上加单箭头，
+  常用函数（如三角函数$\cos$、对数函数$\log$等）、数字运算符、化学元素符号及分子式、单位符号、产品代号、人名地名的外文字母等用正体。
+
+  公式排版直接使用 \texttt{equation} 环境，如公式~\eqref{eq:einstein}。
+  \begin{equation}\label{eq:einstein}
+    E=mc^2.
+  \end{equation}
+
+\section{注释}
+
+  正文中有个别名词或情况需要解释时，可加注说明，注释采用页末注（将注文放在加注页的下端）。
+  在引文的右上角标注序号①、②、……，如“马尔可夫链\footnote{马尔可夫链表示……}”。若在同一页中有两个以上的注时，按各注出现的先后，顺序编号。
+  引文序号，以页为单位，且注释只限于写在注释符号出现的同页，不得隔页。
+
+  注释采用小五号宋体，英文及数字为小五号Times New Roman字体，利用 \texttt{\string\footnote} 插入。
+
+\section{参考文献}
+
+  \subsection{引用格式}
+    列出作者直接阅读过或在正文中引用过的文献资料。撰写论文时，需注意引用权威和最新的文献。
+
+    参考文献需在引文右上角用方括号“[]”标明序号，如“基本机构\textsuperscript{[1]}”，并在参考文献中列出。
+    每一条参考文献著录均以“.”结束。参考文献要另起一页，一律放在正文之后，不得放在各章节之后。
+
+    参考文献采用顺序编码制，需符合《信息与文献 参考文献著录规则》（GB/T 7714-2015）规范要求，文献类型和标识代码为：
+    普通图书[M]、会议录[C]、汇编[G]、报纸[N]、期刊[J]、学位论文[D]、报告[R]、标准[S]、专利[P]、数据库[DB]、
+    计算机程序[CP]、电子公告[EB]、档案[A]、舆图[CM]、数据集[DS]、其他[Z]。
+
+    参考文献中主要责任者的个人作者采用姓在前名在后的著录形式，当作者不超过3个时，全部照录。
+    超过3个，著录的前3个作者其后加“,等”（, et al）。
+    欧美著者的名可用缩写字母，缩写名后省略缩写点，姓和缩写名全大写。
+    用汉语拼音书写的人名，姓全大写，名可缩写，取每个汉字拼音的首字母。
+
+    参考文献为五号宋体，英文及数字为五号Times New Roman字体，两端对齐。
+    参考文献中的标点符号均为英文标点，常用的参考文献著录项目和格式见\hyperref[chap:bib]{参考文献}%
+    和第~\ref{subsec:bib_types} 节。
+
+  \subsection{使用示例}
+    算法方面的研究包括：
+    OMPL-SBL 算法\cite{zhao2023ompl}，
+    RIS 的波束设计方法\cite{you2023beam}；
+    硬件设计方面的研究包括：
+    高层级综合工具 FLAMES 库设计\cite{zhao2023flexible}，
+    自动生成语言 AHDW\cite{zhao2023automatic}。
+
+    泰迪熊的所有工作有\cite{zhao2023ompl,you2023beam,zhao2023flexible,zhao2023automatic}。
+
+    使用 \texttt{\string\cite} 的引用均为上标；
+    如果需要非上标，可以使用 \texttt{\string\parencite}，例如 \parencite{zhao2023ompl}。
+
+  \subsection{分类别示例}\label{subsec:bib_types}
+    \textbf{期刊论文 [J]}：\parencite{zhao2023ompl,you2023beam,zhao2023flexible,尤肖虎20145g}；
+    \textbf{会议论文 [C]}：\parencite{zhao2023automatic}；
+    \textbf{计算机程序 [CP]}：\parencite{zhao2024mmcesim,zhao2024dg}；
+    \textbf{标准 [S]}：\parencite{IEEE802.11ad}；
+    \textbf{电子公告 [EB]}：\parencite{amd2023zcu111}；
+    \textbf{普通图书 [M]}：\parencite{wong2017key}；
+    \textbf{学位论文 [D]}：\parencite{wipf2006bayesian}。
+
+\section{章节}
+
+  在 \LaTeX{} 中，
+  章（一级标题）使用 \texttt{\string\chapter}，
+  节（二级标题）使用 \texttt{\string\section}，
+  小节（三级标题）使用 \texttt{\string\subsection}，
+  子小节（四级标题）使用 \texttt{\string\subsubsection}，
+  段落使用 \texttt{\string\paragraph}。
+  官方 MS Word 模板仅提供第一、二级格式规范。
+  二级标题及以上会出现在目录中，
+  三级标题及以上会出现在 PDF 的 bookmarks 中。
+
+  \subsection{三级标题}
+    三级标题内容
+    \subsubsection{四级标题}
+    四级标题内容
+      \paragraph{段落。}内容。

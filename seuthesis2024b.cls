@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/02/07} {0.2.0}
+\ProvidesExplClass {seuthesis2024b} {2024/02/09} {0.3.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -426,18 +426,19 @@
         and
         test{\iffieldundef{subtitle}}}%
         {}%
-        {\printtext[title]{\bibtitlefont%增加字体控制命令
+        {
+          \printtext[title]{\bibtitlefont%增加字体控制命令
           \printfield[sentencecase]{title}%
           \ifboolexpr{test {\iffieldundef{subtitle}}}%增加了对子标题的判断
-                {}{\setunit{\subtitlepunct}\printfield[sentencecase]{subtitle}}%
+            {}{\setunit{\subtitlepunct}\printfield[sentencecase]{subtitle}}%
           \iffieldundef{titleaddon}{}{\setunit{\subtitlepunct}\printfield{titleaddon}}%判断一下titleaddon
           \ifboolexpr{test{\ifentrytype{book}} and (not test{\iffieldundef{volume}})}%判断一下book类有没有volume
-                {\setunit{\subtitlepunct}\printfield{volume}}{}%
+            {\setunit{\subtitlepunct}\printfield{volume}}{}%
           \iftoggle{bbx:gbtype}%
-                {\iffieldundef{entrysubtype}{\printfield[gbtypeflag]{usera}}%在标题后直接给出文献标识字母，判断一下，是否是报纸和标准
-                {\iffieldequalstr{entrysubtype}{standard}{\printfield[gbtypeflags]{usera}}%判断是否为标准
-                      {\iffieldequalstr{entrysubtype}{news}{\printfield[gbtypeflagn]{usera}}%判断是否为报纸
-                      {\printfield[gbtypeflag]{usera}}}}}{}%%其它
+            {\iffieldundef{entrysubtype}{\printfield[gbtypeflag]{usera}}%在标题后直接给出文献标识字母，判断一下，是否是报纸和标准
+            {\iffieldequalstr{entrysubtype}{standard}{\printfield[gbtypeflags]{usera}}%判断是否为标准
+              {\iffieldequalstr{entrysubtype}{news}{\printfield[gbtypeflagn]{usera}}%判断是否为报纸
+              {\printfield[gbtypeflag]{usera}}}}}{}%%其它
           }%
         }%
       }
