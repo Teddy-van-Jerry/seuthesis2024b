@@ -70,6 +70,10 @@
     % accessibility
     , accessibility  .bool_set:N = \l__seuthesis_accessibility_bool
     , accessibility  .initial:n  = { false }
+    % anonymous option
+    , anonymous      .bool_set:N = \l__seuthesis_anonymous_bool
+    , anonymous      .initial:n  = { false }
+    , anony          .bool_set:N = \l__seuthesis_anonymous_bool
     % others
     , unknown        .code:n     =
       {
@@ -690,6 +694,20 @@
       {
         \texorpdfstring { 致\hspace{2\ccwd}谢 } { 致谢 }
       }
+  }
+
+%% ==========================
+%% Other Macros
+%% ==========================
+\NewDocumentCommand \anany { +m +m }
+  {
+    \bool_if:NTF \l__seuthesis_anonymous_bool
+      { #2 } % content for non-anonymous
+      { #1 } % content for anonymous
+  }
+\NewDocumentCommand \name { }
+  {
+    \anany { \@author } { XXX }
   }
 
 \endinput
