@@ -9,8 +9,8 @@ Or you can use the option `font dir` to specify the directory of the fonts.
 > - The file name should be exactly the same as required.
 > - You should also use the newer version of *Times New Roman*, otherwise the small capital shape (used by `\scshape` or `\textsc{}` may not be available).
 
-There is option `fontset = mac ms` if you have Microsoft Word installed on macOS.
-, so font will be found from `/Applications/Microsoft Word.app/Contents/Resources/DFonts/`.
+There is option `fontset = mac ms` if you have Microsoft Word installed on macOS,
+so font will be found from `/Applications/Microsoft Word.app/Contents/Resources/DFonts/`.
 
 ## Required Fonts
 
