@@ -631,7 +631,7 @@
   }
 % --- \title ---
 \bool_new:N \l__seuthesis_title_cont_bool
-\RenewDocumentCommand \title { m O{} }
+\RenewDocumentCommand \title { m O{} O{2} }
   {
     \gdef \@title { #1 }
     \tl_if_blank:nTF { #2 }
@@ -644,6 +644,7 @@
         \gdef \@titleCont { #2 }
         \hypersetup { pdftitle = { #1 #2 } }
       }
+    \gdef \seuthesis@title@fontsize { #3 } % default title size is \zihao{2}
   }
 % --- \studentID ---
 \NewDocumentCommand \studentID { m }
@@ -728,15 +729,21 @@
         \bool_if:NTF { \l__seuthesis_title_cont_bool }
           {
             \begin{tabularx}{\linewidth-9pt}{cY}
-              题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule[.5pt]{2-2}
-              & \@titleCont \\[-4pt] \cmidrule[.5pt]{2-2}
+              题\hspace{.5\ccwd}目： &
+                { \zihao { \seuthesis@title@fontsize } \@title }
+                \\[-4pt] \cmidrule[.5pt]{2-2}
+              \vphantom{泰迪熊} &
+                { \zihao { \seuthesis@title@fontsize } \@titleCont }
+                \\[-4pt] \cmidrule[.5pt]{2-2}
             \end{tabularx}
           }
           {
             \begin{tabularx}{\linewidth-9pt}{cY}
-              题\hspace{.5\ccwd}目： & \@title \\[-4pt] \cmidrule[.5pt]{2-2}
+              题\hspace{.5\ccwd}目： &
+                { \zihao { \seuthesis@title@fontsize } \@title }
+                \\[-4pt] \cmidrule[.5pt]{2-2}
               % the second line is then hidden
-              & \vphantom{泰迪熊} \\[\dimexpr-4pt+0.5pt+\cmidrulekern]
+              \vphantom{泰迪熊} & \\[\dimexpr-4pt+0.5pt+\cmidrulekern]
             \end{tabularx}
           }
       }
@@ -868,7 +875,7 @@
 %% ==========================
 %% Other Macros
 %% ==========================
-\NewDocumentCommand \anany { +m +m }
+\NewDocumentCommand \anony { +m +m }
   {
     \bool_if:NTF \l__seuthesis_anonymous_bool
       { #2 } % content for non-anonymous
@@ -876,7 +883,7 @@
   }
 \NewDocumentCommand \name { }
   {
-    \anany { \@author } { XXX }
+    \anony { \@author } { XXX }
   }
 
 \endinput
