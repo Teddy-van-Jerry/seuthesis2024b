@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/02/20} {0.5.0}
+\ProvidesExplClass {seuthesis2024b} {2024/02/20} {0.6.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -99,6 +99,7 @@
 %% ==========================
 %% Font Settings
 %% ==========================
+\RequirePackage [ no-math ] { fontspec }
 \RequirePackage
   [
     , fontset = none
@@ -150,7 +151,7 @@
         , ItalicFont = *-italic
         , BoldItalicFont = *-bolditalic
         , Extension = .otf
-        , Scale = MatchLowercase
+        % , Scale = MatchLowercase
       ]
     \setmonofont { Inconsolatazi4 }
       [
@@ -396,6 +397,32 @@
     \RequirePackage { amsthm }
     \RequirePackage { bm }
     \RequirePackage { siunitx }
+    % theorem environments
+    \newtheoremstyle { seuthesis } % name
+      { .5\baselineskip }          % Space above
+      { .5\baselineskip }          % Space below
+      { \kaishu }                  % Body font
+      { }                          % Indent amount
+      { \heiti  }                  % Theorem head font
+      { . }                        % Punctuation after theorem head
+      { \ccwd   }                  % Space after theorem head
+      { }  % Theorem head spec (can be left empty, meaning `normal')
+    \theoremstyle { seuthesis }
+    % proof environment
+    \providecommand { \proofNameStyle } { \kaishu } % <-- change style from amsthm
+    \renewenvironment { proof } [1] [\proofname]
+      {
+        \par
+        \pushQED{\qed}%
+        \normalfont \topsep6\p@\@plus6\p@\relax
+        \trivlist
+        \item[\hskip\labelsep
+              \proofNameStyle
+          #1\@addpunct{.}]\ignorespaces
+      }
+      {
+        \popQED\endtrivlist\@endpefalse
+      }
   }
 
 %% ==========================
@@ -483,6 +510,15 @@
   }
 
 %% ==========================
+%% Enumitem
+%% ==========================
+\RequirePackage { enumitem }
+\setlist
+  {
+    , nosep % no vertical space
+  }
+
+%% ==========================
 %% Bibliography
 %% ==========================
 \RequirePackage
@@ -526,16 +562,25 @@
 %% ==========================
 %% Code Listings
 %% ==========================
+\newcommand \seuthesis@lst@linespread { 1.2 }
+\newcommand \seuthesis@lst@fontsize   { \small }
+\newcommand \seuthesis@lst@aboveskip  { .5\baselineskip }
+\newcommand \seuthesis@lst@belowskip  { .2\baselineskip }
+\newcommand \seuthesis@lst@numcolor   { gray }
+\newcommand \seuthesis@lst@keycolor   { Blue }
+\newcommand \seuthesis@lst@bgcolor    { gray!3 }
 \RequirePackage { listings }
 \lstset
   {
     , frame           = lines
-    , basicstyle      = \linespread{1}\small\ttfamily
-    , numberstyle     = \scriptsize\sffamily\color{gray}
-    , keywordstyle    = \bfseries\color{Blue}
-    , backgroundcolor = \color{gray!3}
-    , aboveskip       = .5\baselineskip
-    , belowskip       = .5\baselineskip
+    , basicstyle      =
+      \linespread{\seuthesis@lst@linespread}
+      \seuthesis@lst@fontsize\ttfamily
+    , numberstyle     = \scriptsize\sffamily\color{\seuthesis@lst@numcolor}
+    , keywordstyle    = \bfseries\color{\seuthesis@lst@keycolor}
+    , backgroundcolor = \color{\seuthesis@lst@bgcolor}
+    , aboveskip       = \seuthesis@lst@aboveskip
+    , belowskip       = \seuthesis@lst@belowskip
     , breaklines      = true
     , upquote         = true
     , columns         = fixed

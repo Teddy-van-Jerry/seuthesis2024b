@@ -21,7 +21,8 @@ latexmk -pdfxe seuthesis2024b.tex
     这是默认设置，图表公式序号包括章节号，例如图~2-1，表~3.2，公式 (1.3)。
     相当于 \texttt{cnt in doc = false}。 \\
   cnt in doc & bool & false & \textbf{全文连续编排设置}。
-    当论文较短，可以设置为 \texttt{true}，图表公式的序号将按照全文连续编排。 \\
+    当论文较短，可以设置为 \texttt{true}，图表公式的序号将按照全文连续编排，
+    例如图~1，表~2，公式 (3)。 \\
   font dir & string & fonts/ & \textbf{字体文件夹}。
     设置字体文件夹路径，用于 \texttt{fontset = files} 时加载字体。
     （注意最后的斜杠 \texttt{/} 不可省略） \\
@@ -41,7 +42,7 @@ latexmk -pdfxe seuthesis2024b.tex
       当论文页数很多需要使用双页打印时，此模式可以正确设置装订线位置和章开始页始终在正面。 \\
   showframe & bool & false
     & \textbf{显示页面框架}。
-      用于调试页面布局，即使用 \texttt{geometry} 包的 \texttt{showframe} 选项。 \\
+      用于调试页面布局，即使用 \texttt{geometry} 宏包的 \texttt{showframe} 选项。 \\
   use tex font & bool & false
     & \textbf{使用 \TeX{} 字体}。
       此选项将使用 Times New Roman 的克隆 TeX Gyre Terms 字体。 \\
@@ -49,7 +50,7 @@ latexmk -pdfxe seuthesis2024b.tex
     & \texttt{seuthesis2024b.cls} 未定义的选项将自动作用于 \texttt{report} 基类。 \\
 \end{xltabular}
 
-\section{文档字体设置}
+\section{字体设置}
 除了表~\ref{tab:font_effect} 中展示的组合外，
 还有 \texttt{\string\songti}、\texttt{\string\heiti}、\texttt{\string\kaishu}、\texttt{\string\fangsong} 作为中文字体命令。
 对于英文单词，还有 Small Capital 样式，使用 \texttt{\string\scshape} 切换，或者使用 \texttt{\string\textsc} 命令。
@@ -72,7 +73,7 @@ latexmk -pdfxe seuthesis2024b.tex
 理论来说，可以使用 \texttt{\string\circNo} 生成从 0 到 50 到数字，但是只有 1 到 10 的数字有对应的中易宋体 Unicode 字符，
 因此，其他任何输入均使用 \href{https://ctan.org/pkg/circledsteps}{\texttt{circledsteps}} 宏包的 \texttt{\string\CircleText} 基础上调整大小位置，效果不统一，
 例如 \circNo{0}、\circNo{11}。
-如果使用带星版本（\texttt{\string\circNo*}）可以获得实心带圈数字，
+如果使用带星版本（\texttt{\string\circNo*}）可以获得反白（实心带圈）数字，
 例如 \verb|\circNo*{3}| 可以获得 \circNo*{3}，
 此时所有数字均使用 \href{https://ctan.org/pkg/circledsteps}{\texttt{circledsteps}} 宏包的 \texttt{\string\Circle} 生成。
 当然，你也可以直接复制 Unicode 符号\ ①\ 等。
@@ -84,4 +85,207 @@ latexmk -pdfxe seuthesis2024b.tex
 
 一些数字的功能性测试：
 带颜色 \textcolor{red}{\circNo{0} \circNo{1} \circNo{10} \circNo*{2} \circNo{11} \circNo*{99}}；
-上下标 1\textsuperscript{\circNo{0}}\ 2\textsuperscript{\circNo{1}}\ 3\textsubscript{\circNo*{11}}\ 4\textsubscript{\circNo{8}}。
+上下标 1\textsuperscript{\circNo{0}}\ 2\textsuperscript{\circNo{1}}\ 3\textsubscript{\circNo*{11}}\ 4\textsubscript{\circNo{8}}；
+字体变化 \textsf{\circNo{0} \circNo{3} \circNo*{4}}（\texttt{\string\ttfamily}）、
+\textit{\circNo{0} \circNo{5} \circNo*{6}}（\texttt{\string\itshape}，太糟糕了，不要这么干）、
+\textbf{\circNo{0} \circNo{7} \circNo*{8}}（\texttt{\string\bfseries}，也不太行）、
+\texttt{\circNo{0} \circNo*{9} \circNo{10}}（\texttt{\string\ttfamily}，还是不行）。
+
+\section{杂项测试}
+这一节不仅是一个测试，
+也提供了一些你可以使用的环境例子。
+
+\subsection{列表}
+\texttt{itemize} （无序列表）环境测试：
+\begin{itemize}
+  \item 项目一
+  \item Item 2
+  \item 一个包含子项目的 item
+  \begin{itemize}
+    \item one
+    \begin{enumerate}
+      \item OMPL-SBL\cite{zhao2023ompl}
+      \item Other works \dots
+    \end{enumerate}
+    \item two
+    \item three
+    \begin{itemize}
+      \item A very very very very very very very very very very very very long sentence that spans multiple lines.
+    \end{itemize}
+  \end{itemize}
+  \item Item 4
+  \begin{enumerate}
+    \item Teddy Bear
+    \item Panda
+  \end{enumerate}
+\end{itemize}
+
+\texttt{enumerate} （有序列表）环境测试：
+\begin{enumerate}
+  \item 另一个项目
+  \item 再来一个
+  \begin{enumerate}
+    \item 二级项目
+    \begin{enumerate}
+      \item That is so boring.
+    \end{enumerate}
+    \item 另一个
+    \item What about this?
+    \begin{itemize}
+      \item Hi! Visit \url{https://mmcesim.org} for more information.
+      \item 太炫酷啦
+    \end{itemize}
+  \end{enumerate}
+  \item 再来一个
+\end{enumerate}
+
+\subsection{数学公式}
+
+带编号数学公式使用 \texttt{equation} 环境：
+\begin{equation}\label{eq:demo:sum}
+  x=\sum_{i=1}^{n}a_i.
+\end{equation}
+
+再来一个矩阵运算公式：
+\begin{equation}
+  \begin{bmatrix}
+    U_{L1}\\I_{L1}
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0&jZ_{c1}\\jY_{c1}&0
+  \end{bmatrix}
+  \begin{bmatrix}
+    0&jZ_{c2}\\jY_{c2}&0
+  \end{bmatrix}
+  \begin{bmatrix}
+    U_{L2}\\I_{L2}
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    -Z_{c1}Y_{c2}&0\\0&-Z_{c2}Y_{c1}
+  \end{bmatrix}
+  \begin{bmatrix}
+    U_{L2}\\I_{L2}
+  \end{bmatrix}.
+\end{equation}
+
+无编号数学环境使用 \texttt{equation*} 环境，或者 \texttt{\string\[ ... \string\]}：
+\begin{equation*}
+  \frac{U_2^2}{U_1^2}=\frac{Z_2}{\widetilde{Z}_2}=\left(\frac{Z_{c2}}{Z_{c1}}\right)^2
+  \implies
+  \frac{U_2}{U_1}=\left|\frac{U_{L2}}{U_{L1}}\right|=\frac{Z_{c2}}{Z_{c1}}.
+\end{equation*}
+
+子公式使用 \texttt{subequations} 环境：
+\begin{subequations}\label{eq:demo:subeqs}
+\begin{equation}\label{eq:demo:subeq1}
+  A=B,
+\end{equation}
+\begin{equation}\label{eq:demo:subeq2}
+  B=C,
+\end{equation}
+\end{subequations}
+其中 $A$、$B$ 和 $C$ 是一些变量。
+当然，你可以用 \texttt{aligned} 环境来改写公式 \eqref{eq:demo:subeqs}：
+\begin{equation}
+  \left\{
+    \begin{aligned}
+      A&=B,\\
+      B&=C.
+    \end{aligned}
+  \right.
+\end{equation}
+
+使用 \texttt{\string\eqref} 引用公式，例如
+公式 \eqref{eq:demo:sum}，还有子公式 \eqref{eq:demo:subeq1} 和 \eqref{eq:demo:subeq2}。
+
+\subsection{定理和证明}
+定理设置使用了 \href{https://ctan.org/pkg/amsthm}{\texttt{amsthm}} 宏包，
+可以自行定义定理环境。例如此文档导言区已设置：
+\begin{lstlisting}[alsoletter={\\}, morekeywords={\\newtheorem}]
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{definition}{定义}[chapter]
+\newtheorem{lemma}{引理}[chapter]
+\newtheorem{corollary}{推论}[chapter]
+\end{lstlisting}
+其中，最后的选项 \texttt{[chapter]} 使得标号按章节编排。
+
+一个定理的效果如下，同样可以使用 \texttt{\string\ref} 引用定理编号，
+例如定理~\ref{thm:pythagorean}。
+\begin{theorem}[勾股定理]\label{thm:pythagorean}
+  直角三角形斜边的平方等于两直角边的平方和。
+  The area of the square whose side is the hypotenuse (the side opposite the right angle)
+  is equal to the sum of the areas of the squares on the other two sides.
+\end{theorem}
+证明使用 \texttt{proof} 环境。
+\begin{proof}
+  因为
+  \begin{equation}
+    1+1=2,
+  \end{equation}
+  所以 $1+1=2$。% 废话文学
+\end{proof}
+
+\begin{proof}[证明 Teddy 是一种熊]
+  Proof 的名字也可以修改。
+\end{proof}
+
+\subsection{Ti\textit{k}Z 绘图}
+一个 Ti\textit{k}Z 绘图如图~\ref{fig:tikz_wave} 所示。
+\begin{figure}[htbp]
+  \usetikzlibrary{positioning}
+  \begin{tikzpicture}[
+    , c node/.style = {
+      , draw
+      , circle
+      , thick
+      , inner sep = 0
+      , outer sep = 0
+      , line width = 0.5mm
+      , minimum width = 1.5mm
+    }
+    , wire/.style = {
+      line width = 1mm
+    }
+    , r node/.style = {
+      , draw
+      , very thick
+      , fill = white
+      , inner sep = 0.5mm
+      , minimum height = 6mm
+      , midway
+    }
+  ]
+    \node (n-0) [c node] {};
+    \node (n-1) [c node, left = 15mm of n-0.center] {};
+    \node (n-2) [c node, left = 15mm of n-1.center] {};
+    \node (n-3) [c node, left = 25mm of n-2.center] {};
+    \foreach \x in {0, 1, 2, 3} {
+      \node (m-\x) [c node, below = 16mm of n-\x.center] {};
+    }
+    \foreach \x in {0, 1, 2} {
+      \node (a-\x) [c node, minimum width = 0.5mm, below = 6mm of m-\x.center] {};
+    }
+    \node [above = 1mm of n-2] {A};
+    \draw [wire] (n-0) -- (n-1) -- (n-2) -- (n-3);
+    \draw [wire] (m-0) -- (m-1) -- (m-2) -- (m-3);
+    \draw (n-2) -- (m-2) node (Z1) [r node] {$Z_1$};
+    \draw (n-0) -- ++ (4mm, 0) -- ++ (0, -16.75mm) node (Z2) [r node] {$Z_2$} -- (m-0);
+    \node [right = 4mm of Z1] {$Z_{c1}$};
+    \node [left = 6mm of Z1] {$Z_{c1}$};
+    \node [left = 4mm of Z2] {$Z_{c2}$};
+    \draw [-latex, thick] ([xshift = -25mm]a-2.center) -- (a-2) -- (a-0) -- ++ (7mm, 0) node [right] {$z$};
+    \node [below = 1mm of a-0, font = \small] {$0$};
+    \node [below = 1mm of a-1, font = \small] {$-\frac\lambda4$};
+    \node [below = 1mm of a-2, font = \small] {$-\frac\lambda2$};
+    \draw [->, red, thick] ([xshift = 2mm, yshift = -1mm]n-2.center) |- ++ (6mm, 3mm) node [above] {$\widetilde{Z}_2$};
+    \draw [->, blue, thick] ([xshift = 1mm, yshift = -3mm]n-2.center) -- ++ (6mm, 0) node [right] {$\widetilde{I}_2$};
+    \draw [->, blue, thick] ([xshift = 4mm, yshift = -5mm]n-2.center) -- ++ (0, -6mm) node [below] {$I_1$};
+    \draw [->, blue, thick] ([xshift = 8mm, yshift = -5mm]n-0.center) -- ++ (0, -6mm) node [below] {$I_2$};
+  \end{tikzpicture}%
+  \caption{一个传输线 Ti\textit{k}Z 图}
+  \label{fig:tikz_wave}
+\end{figure}
+
+
