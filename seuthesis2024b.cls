@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/02/09} {0.3.0}
+\ProvidesExplClass {seuthesis2024b} {2024/02/20} {0.4.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -85,7 +85,7 @@
   {
     , \c__seuthesis_pagesize_str
     , \c__seuthesis_font_pt_str
-    , \bool_if:NTF \l__seuthesis_twoside_bool { twoside } { oneside }
+    , \bool_if:NTF \l__seuthesis_twoside_bool { twoside, openright } { oneside }
   }
   { \c__seuthesis_base_class_str }
 \LoadClass { \c__seuthesis_base_class_str }
@@ -266,23 +266,23 @@
 \titleformat { \chapter }
   { \centering\zihao{3}\bfseries\heiti\thispagestyle{fancy} }
   { \seuthesis@chapter@name { \thechapter } } { .5\ccwd } { }
-\titlespacing* { \chapter } { 0pt } { -24pt } { 3.6pt }
+\titlespacing* { \chapter } { \z@ } { -24pt } { 3.6pt }
 % --- \section ---
 \titleformat { \section }
   { \zihao{4}\heiti } { \thesection } { \widthof{~} } { }
-\titlespacing* { \section } { 0pt } { 3.6pt } { 3.6pt }
+\titlespacing* { \section } { \z@ } { 3.6pt } { 3.6pt }
 % --- \subsection ---
 \titleformat { \subsection }
   { \zihao{-4}\heiti } { \thesubsection } { \widthof{~} } { }
-\titlespacing* { \subsection } { 0pt } { 0pt } { 0pt }
+\titlespacing* { \subsection } { \z@ } { \z@ } { \z@ }
 % --- \subsubsection ---
 \titleformat { \subsubsection }
   { \zihao{-4}\songti } { \thesubsubsection } { \widthof{~} } { }
-\titlespacing* { \subsubsection } { 0pt } { 0pt } { 0pt }
+\titlespacing* { \subsubsection } { \z@ } { \z@ } { \z@ }
 % --- \paragraph ---
 \titleformat { \paragraph } [ runin ]
   { \zihao{-4}\songti\bfseries } { } { \widthof{~} } { }
-\titlespacing* { \paragraph } { 2\ccwd } { 0pt } { .5\ccwd } % use default Chinese indent
+\titlespacing* { \paragraph } { 2\ccwd } { \z@ } { .5\ccwd } % use default Chinese indent
 
 %% ==========================
 %% Figures
@@ -296,7 +296,7 @@
 %% ==========================
 %% Tables
 %% ==========================
-\RequirePackage { tabularx }
+\RequirePackage { floatrow } % <-- has to be loaded before xltabular
 \RequirePackage { booktabs }
 \RequirePackage { multirow }
 \RequirePackage { longtable }
@@ -305,6 +305,23 @@
 \newcolumntype{Y}   {>{\centering\arraybackslash}X}     % centered X
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % centered p
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}} % centered m
+% set font size for environment xltabular
+\renewenvironment{xltabular}[1][x]
+  {
+    \zihao{5}
+    \par
+    \if l#1
+      \LTleft\z@ \LTright\fill
+    \else\if r#1
+      \LTleft\fill \LTright\z@
+    \else\if c#1
+      \LTleft\fill \LTright\fill
+    \fi\fi\fi
+    \let\TX@endtabularx=\XLT@ii@TX@endtabularx
+    \let\endtabularx\endxltabular
+    \XLT@ii@tabularx
+  }
+{\def\@currenvir{tabularx}}
 % set rule widths in tables (provided by booktabs)
 \lightrulewidth = 1pt
 \cmidrulewidth  = 1pt
@@ -345,7 +362,6 @@
 %% ==========================
 %% Captions
 %% ==========================
-\RequirePackage { floatrow }
 % set font size as \zihao{5} as well as center contents
 \floatsetup [ figure ] { font = small }
 \floatsetup [ table  ] { font = small, capposition = top }
@@ -647,7 +663,7 @@
 \RequirePackage { titletoc }
 \setcounter { tocdepth } { 1 }
 \renewcommand { \contentsname } { 目\hspace{2\ccwd}录 }
-\titlecontents { chapter } [ 0pt ]
+\titlecontents { chapter } [ \z@ ]
   { \filright }
   { \contentspush { \seuthesis@chapter@name { \thecontentslabel } \hspace{.5\ccwd} } }
   { } { \titlerule*[3pt]{.}\contentspage }
