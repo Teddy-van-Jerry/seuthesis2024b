@@ -39,12 +39,12 @@
 
   表格居中，边框为黑色直线1磅，中文为五号宋体，英文及数字为五号Times New Roman字体，表序与表名之间空一格，表格与下文之间空一行。
 
-  表格例子如表~\ref{tab:font-effect} 所示。
+  表格例子如表~\ref{tab:font_effect} 所示。
   表格内字号默认为五号（10.5pt），即 \texttt{\string\small} 或 \texttt{\string\zihao\{5\}}。
 
   \begin{table}[htbp]
     \caption{字体族、字体形状和字体系列的组合效果}
-    \label{tab:font-effect}
+    \label{tab:font_effect}
     \begin{tabular}{ccccc}
       \toprule
       & & \verb|\itshape| & \verb|\bfseries| & \verb|\itshape\bfseries| \\
@@ -96,7 +96,7 @@
 \section{注释}
 
   正文中有个别名词或情况需要解释时，可加注说明，注释采用页末注（将注文放在加注页的下端）。
-  在引文的右上角标注序号①、②、……，如“马尔可夫链\footnote{马尔可夫链表示……}”。若在同一页中有两个以上的注时，按各注出现的先后，顺序编号。
+  在引文的右上角标注序号 \circNo{1}、\circNo{2}、……，如“马尔可夫链\footnote{马尔可夫链表示……}”。若在同一页中有两个以上的注时，按各注出现的先后，顺序编号。
   引文序号，以页为单位，且注释只限于写在注释符号出现的同页，不得隔页。
 
   注释采用小五号宋体，英文及数字为小五号Times New Roman字体，利用 \texttt{\string\footnote} 插入。

@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/02/20} {0.4.0}
+\ProvidesExplClass {seuthesis2024b} {2024/02/20} {0.5.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -401,22 +401,81 @@
 %% ==========================
 %% Footnote
 %% ==========================
+\RequirePackage { circledsteps }
+\bool_new:N \c__seuthesis_circled_text_limited_bool
+\bool_set_true:N \c__seuthesis_circled_text_limited_bool
+\NewDocumentCommand \seuthesis@Circled { s m }
+  {
+    \bool_if:nTF #1
+      {
+        \pgfkeys{/csteps/inner~color = white }
+        \pgfkeys{/csteps/outer~color = .     }
+        \pgfkeys{/csteps/fill~color  = .     }
+        \raisebox { .05em }
+          {
+            \scalebox { 0.9 } { \Circled { #2 } }
+          }
+      }
+      {
+        \pgfkeys{/csteps/inner~color = none  }
+        \pgfkeys{/csteps/outer~color = none  }
+        \pgfkeys{/csteps/fill~color  = none  }
+        \raisebox { .05em }
+          {
+            \scalebox { 0.9 } { \CircledText { #2 } }
+          }
+      }
+  }
+\NewDocumentCommand \circNo { s m }
+  {
+    \bool_if:NTF \c__seuthesis_circled_text_limited_bool
+      {
+        \bool_if:nTF #1
+        {
+          \seuthesis@Circled* { #2 }
+        }
+        {
+          \ifcase #2 \relax \seuthesis@Circled{0}
+          \or ① \or ② \or ③ \or ④ \or ⑤
+          \or ⑥ \or ⑦ \or ⑧ \or ⑨ \or ⑩
+          \else
+            \seuthesis@Circled { #2 }
+          \fi
+        }
+      }
+      {
+        \bool_if:nTF #1
+        {
+          \ifcase #2 \relax ⓿
+          \or ❶ \or ❷ \or ❸ \or ❹ \or ❺
+          \or ❻ \or ❼ \or ❽ \or ❾ \or ❿
+          \or ⓫ \or ⓬ \or ⓭ \or ⓮ \or ⓯
+          \or ⓰ \or ⓱ \or ⓲ \or ⓳ \or ⓴
+          \else
+            \seuthesis@Circled* { #2 }
+          \fi
+        }
+        {
+          \ifcase #2 \relax ⓪
+            \or ① \or ② \or ③ \or ④ \or ⑤
+            \or ⑥ \or ⑦ \or ⑧ \or ⑨ \or ⑩
+            \or ⑪ \or ⑫ \or ⑬ \or ⑭ \or ⑮
+            \or ⑯ \or ⑰ \or ⑱ \or ⑲ \or ⑳
+            \or ㉑ \or ㉒ \or ㉓ \or ㉔ \or ㉕
+            \or ㉖ \or ㉗ \or ㉘ \or ㉙ \or ㉚
+            \or ㉛ \or ㉜ \or ㉝ \or ㉞ \or ㉟
+            \or ㊱ \or ㊲ \or ㊳ \or ㊴ \or ㊵
+            \or ㊶ \or ㊷ \or ㊸ \or ㊹ \or ㊺
+            \or ㊻ \or ㊼ \or ㊽ \or ㊾ \or ㊿
+          \else
+            \seuthesis@Circled { #2 }
+          \fi
+        }
+      }
+  }
 \NewDocumentCommand \seuthesis@footnote { m }
   {
-    \ifcase #1 \relax
-      \or ① \or ② \or ③ \or ④ \or ⑤
-      \or ⑥ \or ⑦ \or ⑧ \or ⑨ \or ⑩
-      \or ⑪ \or ⑫ \or ⑬ \or ⑭ \or ⑮
-      \or ⑯ \or ⑰ \or ⑱ \or ⑲ \or ⑳
-      \or ㉑ \or ㉒ \or ㉓ \or ㉔ \or ㉕
-      \or ㉖ \or ㉗ \or ㉘ \or ㉙ \or ㉚
-      \or ㉛ \or ㉜ \or ㉝ \or ㉞ \or ㉟
-      \or ㊱ \or ㊲ \or ㊳ \or ㊴ \or ㊵
-      \or ㊶ \or ㊷ \or ㊸ \or ㊹ \or ㊺
-      \or ㊻ \or ㊼ \or ㊽ \or ㊾ \or ㊿
-    \else
-      \@ctrerr
-    \fi
+    \circNo { #1 }
   }
 \RenewDocumentCommand \thefootnote { }
   {
@@ -462,6 +521,25 @@
           }%
         }%
       }
+  }
+
+%% ==========================
+%% Code Listings
+%% ==========================
+\RequirePackage { listings }
+\lstset
+  {
+    , frame           = lines
+    , basicstyle      = \linespread{1}\small\ttfamily
+    , numberstyle     = \scriptsize\sffamily\color{gray}
+    , keywordstyle    = \bfseries\color{Blue}
+    , backgroundcolor = \color{gray!3}
+    , aboveskip       = .5\baselineskip
+    , belowskip       = .5\baselineskip
+    , breaklines      = true
+    , upquote         = true
+    , columns         = fixed
+    , numbers         = left
   }
 
 %% ==========================

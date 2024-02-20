@@ -1,0 +1,87 @@
+\section{文档编译}
+模板编译需使用 XeLaTeX 引擎，其中参考文献需要使用 Biber 后端（\texttt{biblatex} 包）。
+推荐使用 \texttt{latexmk} 工具编译，编译命令如下：
+\begin{lstlisting}[morekeywords={latexmk}]
+latexmk -pdfxe seuthesis2024b.tex
+\end{lstlisting}
+
+\section{文档选项}
+文档选项设置详见表~\ref{tab:document_options}。
+
+\begin{xltabular}{\linewidth}{ >{\ttfamily} l l >{\ttfamily} l X }
+  \caption{\texttt{seuthesis2024b} 文档选项设置} \label{tab:document_options} \\
+  \longTableHdr{\songti 文档选项 & \songti 类型 & \songti 默认值 & 介绍 \\}
+  anonymous & bool & false & \textbf{匿名设置}。
+    当论文需要匿名评审时，此选项设置为 \texttt{true}。
+    相关命令包括 \texttt{\string\anony}。 \\
+  bib titlecase & bool & false & \textbf{参考文献标题大小写设置}。
+    与教务处提供的模板示例一致，默认使用 sentence case 而不是 title case。
+    使用 title case 可将此选项设置为 \texttt{true}。 \\
+  cnt in chapter & meta & \textrm{---} & \textbf{章节内编排设置}。
+    这是默认设置，图表公式序号包括章节号，例如图~2-1，表~3.2，公式 (1.3)。
+    相当于 \texttt{cnt in doc = false}。 \\
+  cnt in doc & bool & false & \textbf{全文连续编排设置}。
+    当论文较短，可以设置为 \texttt{true}，图表公式的序号将按照全文连续编排。 \\
+  font dir & string & fonts/ & \textbf{字体文件夹}。
+    设置字体文件夹路径，用于 \texttt{fontset = files} 时加载字体。
+    （注意最后的斜杠 \texttt{/} 不可省略） \\
+  fontset & string & files
+    & \textbf{字体源设置}。
+      可选值为 \texttt{files}（默认）、\texttt{mac~ms} 。
+      \texttt{files} 使用 \texttt{font~dir} 选项设置的文件夹中字体，
+      \texttt{mac~ms} 使用 macOS 上的 MS Word 字体。 \\
+  no math & bool & false
+    & \textbf{不使用数学设置}。
+      不导入默认的数学设置，包括 \texttt{mathtools} 等宏包。 \\
+  oneside & meta & \textrm{---}
+    & \textbf{使用单页模式}。
+      这是文档默认设置，等价于 \texttt{twoside = false}。 \\
+  twoside & bool & false
+    & \textbf{使用双页模式}。
+      当论文页数很多需要使用双页打印时，此模式可以正确设置装订线位置和章开始页始终在正面。 \\
+  showframe & bool & false
+    & \textbf{显示页面框架}。
+      用于调试页面布局，即使用 \texttt{geometry} 包的 \texttt{showframe} 选项。 \\
+  use tex font & bool & false
+    & \textbf{使用 \TeX{} 字体}。
+      此选项将使用 Times New Roman 的克隆 TeX Gyre Terms 字体。 \\
+  其他选项 & \textrm{---} & \textrm{---}
+    & \texttt{seuthesis2024b.cls} 未定义的选项将自动作用于 \texttt{report} 基类。 \\
+\end{xltabular}
+
+\section{文档字体设置}
+除了表~\ref{tab:font_effect} 中展示的组合外，
+还有 \texttt{\string\songti}、\texttt{\string\heiti}、\texttt{\string\kaishu}、\texttt{\string\fangsong} 作为中文字体命令。
+对于英文单词，还有 Small Capital 样式，使用 \texttt{\string\scshape} 切换，或者使用 \texttt{\string\textsc} 命令。
+例如 \texttt{\string\textsc\{Matlab\}} 或 \texttt{\{\string\scshape\ Matlab\}} 会得到 \textsc{Matlab}。
+注意 Times New Roman 需要新版字体，否则不包括 Small Capital 样式（例如 macOS 系统的 Times New Roman 就不是新版）。
+
+字号设置可以使用 \href{https://ctan.org/pkg/ctex}{\texttt{ctex}} 宏包提供的 \texttt{\string\zihao} 命令，
+例如 \texttt{\string\zihao\{5\}} 和 \texttt{\string\zihao\{-4\}} 分别表示五号和小四号字体。
+
+\section{其他命令}
+\subsection{数字相关}
+\subsubsection{罗马数字}
+使用 \texttt{\string\Rn} 可以获得小写罗马数字，例如 \verb|\Rn{123}| 可以得到 \Rn{123}。
+类似地，有 \texttt{\string\RN} 用于大写罗马数字，例如 \verb|\RN{1324}| 可以得到 \RN{1324}。
+不过如果 I、II、III、IV 这类简单的可以直接字母输入。
+
+\subsubsection{带圈数字}
+使用 \texttt{\string\circNo} 可以获得带圈数字（从 \circNo{1}\ 到 \circNo{10}），
+例如 \verb|\circNo{2}| 可以获得 \circNo{2}。
+理论来说，可以使用 \texttt{\string\circNo} 生成从 0 到 50 到数字，但是只有 1 到 10 的数字有对应的中易宋体 Unicode 字符，
+因此，其他任何输入均使用 \href{https://ctan.org/pkg/circledsteps}{\texttt{circledsteps}} 宏包的 \texttt{\string\CircleText} 基础上调整大小位置，效果不统一，
+例如 \circNo{0}、\circNo{11}。
+如果使用带星版本（\texttt{\string\circNo*}）可以获得实心带圈数字，
+例如 \verb|\circNo*{3}| 可以获得 \circNo*{3}，
+此时所有数字均使用 \href{https://ctan.org/pkg/circledsteps}{\texttt{circledsteps}} 宏包的 \texttt{\string\Circle} 生成。
+当然，你也可以直接复制 Unicode 符号\ ①\ 等。
+
+值得注意的是，\circNo{1}\ 到 \circNo{10}\ 被认为是中文字符，
+因此与之后的中文字没有空格（如果你直接使用 Unicode 输入前后均没有空格），因此如果需要需要手动添加空格。
+例如 {\color{Blue}\ \verb|第 \circNo{1} 名|} 可以得到第 \circNo{1} 名，
+而 {\color{Blue}\ \verb|第 \circNo{1}\ 名|} 可以得到第 \circNo{1}\ 名。
+
+一些数字的功能性测试：
+带颜色 \textcolor{red}{\circNo{0} \circNo{1} \circNo{10} \circNo*{2} \circNo{11} \circNo*{99}}；
+上下标 1\textsuperscript{\circNo{0}}\ 2\textsuperscript{\circNo{1}}\ 3\textsubscript{\circNo*{11}}\ 4\textsubscript{\circNo{8}}。
