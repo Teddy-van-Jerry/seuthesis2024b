@@ -31,6 +31,9 @@ latexmk -pdfxe seuthesis2024b.tex
       可选值为 \texttt{files}（默认）、\texttt{mac~ms} 。
       \texttt{files} 使用 \texttt{font~dir} 选项设置的文件夹中字体，
       \texttt{mac~ms} 使用 macOS 上的 MS Word 字体。 \\
+  my colors & bool & true
+    & \textbf{导入一些 my 开头的颜色}。
+      文档作者喜欢用的颜色组合，详见 \S\ref{sec:draw_color}。 \\
   no math & bool & false
     & \textbf{不使用数学设置}。
       不导入默认的数学设置，包括 \texttt{mathtools} 等宏包。 \\
@@ -59,6 +62,54 @@ latexmk -pdfxe seuthesis2024b.tex
 
 字号设置可以使用 \href{https://ctan.org/pkg/ctex}{\texttt{ctex}} 宏包提供的 \texttt{\string\zihao} 命令，
 例如 \texttt{\string\zihao\{5\}} 和 \texttt{\string\zihao\{-4\}} 分别表示五号和小四号字体。
+
+\section{绘图与颜色}\label{sec:draw_color}
+文档已自动导入 \href{https://ctan.org/pkg/tikz}{\texttt{tikz}}、\href{https://ctan.org/pkg/pgfplots}{\texttt{pgfplots}} 等宏包支持绘图。
+
+文档导入 \href{https://ctan.org/pkg/xcolor}{\texttt{xcolor}} 宏包，并使用 \texttt{dvipsnames} 选项。
+文档选项默认使用 \texttt{my colors} 选项，另外导入了一些作者喜欢的颜色，如图~\ref{fig:my_colors} 所示。
+\begin{figure}[htbp]
+  \caption{My Colors 中定义的颜色（RGB 为屏幕显示颜色、cmyk 为印刷颜色）}
+  \label{fig:my_colors}
+  \sffamily\footnotesize
+  \begin{testcolors}[RGB,cmyk,hsb,gray]
+    \testcolor{myblued}
+    \testcolor{myred}
+    \testcolor{mygreen}
+    \testcolor{myyellow}
+    \testcolor{mypurple}
+    \testcolor{myblues}
+    \testcolor{mypink}
+  \end{testcolors}
+\end{figure}
+
+此外，\texttt{my colors} 选项也提供了 \texttt{sim} 的 \texttt{pgfplots} 曲线系列，
+如图~\ref{fig:pgf_wave} 所示。
+\begin{figure}[htbp]
+  \caption{提供的 \texttt{sim} 曲线系列（供 pgfplots 使用）}
+  \label{fig:pgf_wave}
+  \begin{tikzpicture}
+    \begin{axis}[
+      , hide axis
+      , xmin = 0
+      , xmax = 10
+      , ymin = 0
+      , ymax = 10
+      , legend entries = {序列1, 序列2, 序列3, 序列4, 序列5, 序列6, 序列7}
+      , legend columns = -1
+      , legend style = {/tikz/every even column/.append style = {column sep = 0.5cm, font = \sffamily}}
+      , thick
+    ]
+      \addlegendimage{ myblued , thick, mark = o       , mark size = 2   }
+      \addlegendimage{ myred   , thick, mark = diamond , mark size = 2.8 }
+      \addlegendimage{ mygreen , thick, mark = square  , mark size = 2   }
+      \addlegendimage{ myyellow, thick, mark = triangle, mark size = 3   }
+      \addlegendimage{ mypurple, thick, mark = asterisk, mark size = 3   }
+      \addlegendimage{ myblues , thick, mark = pentagon, mark size = 3   }
+      \addlegendimage{ gray    , thick, mark = +       , mark size = 3   }
+    \end{axis}
+  \end{tikzpicture}  
+\end{figure}
 
 \section{其他命令}
 \subsection{数字相关}

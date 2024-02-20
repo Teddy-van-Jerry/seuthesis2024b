@@ -67,6 +67,14 @@
     , cnt in chapter .meta:n     = { continuous cnt = false }
     , cnt~in~chapter .meta:n     = { continuous cnt = false }
     , cnt-in-chapter .meta:n     = { continuous cnt = false }
+    % my colors
+    , my colors      .bool_set:N = \l__seuthesis_my_colors_bool
+    , my colors      .initial:n  = { true }
+    , my~colors      .bool_set:N = \l__seuthesis_my_colors_bool
+    , my-colors      .bool_set:N = \l__seuthesis_my_colors_bool
+    , my color       .bool_set:N = \l__seuthesis_my_colors_bool
+    , my~color       .bool_set:N = \l__seuthesis_my_colors_bool
+    , my-color       .bool_set:N = \l__seuthesis_my_colors_bool
     % accessibility
     , accessibility  .bool_set:N = \l__seuthesis_accessibility_bool
     , accessibility  .initial:n  = { false }
@@ -292,7 +300,29 @@
 \RequirePackage [ caption = false, font = small, subrefformat = parens ] { subfig }
 \RequirePackage [ dvipsnames ] { xcolor }
 \RequirePackage { tikz }
+\RequirePackage { pgfplots }
 \RequirePackage [ export ] { adjustbox }
+\pgfplotsset { compat = newest }
+\bool_if:nT \l__seuthesis_my_colors_bool
+  {
+    \definecolor { myblued  } { RGB } {   0, 114, 189 }
+    \definecolor { myred    } { RGB } { 217,  83,  25 }
+    \definecolor { mygreen  } { RGB } {  32, 134,  48 }
+    \definecolor { myyellow } { RGB } { 237, 137,  32 }
+    \definecolor { mypurple } { RGB } { 126,  47, 142 }
+    \definecolor { myblues  } { RGB } {  77, 190, 238 }
+    \definecolor { mypink   } { RGB } { 255, 20 , 147 }
+    \pgfplotscreateplotcyclelist { sim }
+      {
+        , { myblued , thick, mark = o       , mark~size = 2   }
+        , { myred   , thick, mark = diamond , mark~size = 2.8 }
+        , { mygreen , thick, mark = square  , mark~size = 2   }
+        , { myyellow, thick, mark = triangle, mark~size = 3   }
+        , { mypurple, thick, mark = asterisk, mark~size = 3   }
+        , { myblues , thick, mark = pentagon, mark~size = 3   }
+        , { gray    , thick, mark = +       , mark~size = 3   }
+      }
+  }
 
 %% ==========================
 %% Tables
@@ -405,7 +435,7 @@
       { }                          % Indent amount
       { \heiti  }                  % Theorem head font
       { . }                        % Punctuation after theorem head
-      { \ccwd   }                  % Space after theorem head
+      { .5\ccwd }                  % Space after theorem head
       { }  % Theorem head spec (can be left empty, meaning `normal')
     \theoremstyle { seuthesis }
     % proof environment
