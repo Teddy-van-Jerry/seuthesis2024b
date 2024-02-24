@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/02/20} {0.6.0}
+\ProvidesExplClass {seuthesis2024b} {2024/02/24} {0.7.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -407,8 +407,8 @@
     \renewcommand \thetable  { \arabic{table } }
   }
   {
-    \renewcommand \thefigure { \arabic{chapter}-\arabic{figure} }
-    \renewcommand \thetable  { \arabic{chapter}.\arabic{table } }
+    \renewcommand \thefigure { \thechapter-\arabic{figure} }
+    \renewcommand \thetable  { \thechapter.\arabic{table } }
   }
 \captionsetup
   {
@@ -559,34 +559,55 @@
   ]
   { biblatex }
 \AtBeginBibliography { \zihao{5} }
-% In this class, the default is to use sentence case for titles.
-\bool_if:NF \l__seuthesis_bib_title_case_bool
+\input { assets/bib_custom } % a bunch of settings here
+
+\DeclareNameFormat { CNauthor }
   {
-    \DeclareFieldFormat { sentencecase } { \MakeSentenceCase { #1 } }
-    % Modified based on
-    % https://github.com/hushidong/biblatex-gb7714-2015/blob/15db5aaf6834b2359c605227726c67d1350bc660/gb7714-2015.bbx#L3373-L3406
-    \renewbibmacro*{title}{%
-      \ifboolexpr{%
-        test{\iffieldundef{title}}%
-        and
-        test{\iffieldundef{subtitle}}}%
-        {}%
-        {
-          \printtext[title]{\bibtitlefont%增加字体控制命令
-          \printfield[sentencecase]{title}%
-          \ifboolexpr{test {\iffieldundef{subtitle}}}%增加了对子标题的判断
-            {}{\setunit{\subtitlepunct}\printfield[sentencecase]{subtitle}}%
-          \iffieldundef{titleaddon}{}{\setunit{\subtitlepunct}\printfield{titleaddon}}%判断一下titleaddon
-          \ifboolexpr{test{\ifentrytype{book}} and (not test{\iffieldundef{volume}})}%判断一下book类有没有volume
-            {\setunit{\subtitlepunct}\printfield{volume}}{}%
-          \iftoggle{bbx:gbtype}%
-            {\iffieldundef{entrysubtype}{\printfield[gbtypeflag]{usera}}%在标题后直接给出文献标识字母，判断一下，是否是报纸和标准
-            {\iffieldequalstr{entrysubtype}{standard}{\printfield[gbtypeflags]{usera}}%判断是否为标准
-              {\iffieldequalstr{entrysubtype}{news}{\printfield[gbtypeflagn]{usera}}%判断是否为报纸
-              {\printfield[gbtypeflag]{usera}}}}}{}%%其它
-          }%
-        }%
+    \namepartfamily
+  }
+\DeclareNameFormat { CNauthorEtAl }
+  {
+    \ifthenelse { \value{liststop} = 1 } { } { 等 }
+  }
+\DeclareCiteCommand* { \CNciteauthor }
+  {
+    \boolfalse{citetracker}
+    \boolfalse{pagetracker}
+    \usebibmacro{prenote}}
+  {
+    \ifciteindex
+     {\indexnames{labelname}}
+     {}
+      \printnames[CNauthor    ][1-1]{labelname}
+      \printnames[CNauthorEtAl][2-2]{labelname}
+    }
+  { \multicitedelim }
+  { \usebibmacro{postnote} }
+
+\NewDocumentCommand \seuthesis@LciteSingle { O{文献} m }
+  {
+    \CNciteauthor* { #2 } 在 #1 \cite { #2 }
+  }
+\NewDocumentCommand \Lcite { O{文献} m O{中} }
+  {
+    \Lcite_expressed_in:nn { #1 } { #2 } #3
+  }
+\clist_new:N \l__seuthesis_Lcite_clist
+\cs_new_protected:Npn \Lcite_expressed_in:nn #1 #2
+  {
+    \clist_clear:N \l__seuthesis_Lcite_clist
+    \clist_map_inline:nn { #2 }
+      {
+        \clist_put_right:Nx \l__seuthesis_Lcite_clist
+          {
+            \seuthesis@LciteSingle [ #1 ] { ##1 }
+          }
       }
+  \clist_use:Nnnn { \l__seuthesis_Lcite_clist } { 和 } { 、 } { 和 }
+}
+\NewDocumentCommand \YLcite { O{文献} m O{中} }
+  {
+    \citeyear { #2 } 年 \Lcite [ #1 ] { #2 } [ #3 ]
   }
 
 %% ==========================
@@ -598,23 +619,28 @@
 \newcommand \seuthesis@lst@belowskip  { .2\baselineskip }
 \newcommand \seuthesis@lst@numcolor   { gray }
 \newcommand \seuthesis@lst@keycolor   { Blue }
+\newcommand \seuthesis@lst@strcolor   { Purple }
+\newcommand \seuthesos@lst@comcolor   { gray }
 \newcommand \seuthesis@lst@bgcolor    { gray!3 }
 \RequirePackage { listings }
 \lstset
   {
-    , frame           = lines
-    , basicstyle      =
+    , frame            = lines
+    , basicstyle       =
       \linespread{\seuthesis@lst@linespread}
       \seuthesis@lst@fontsize\ttfamily
-    , numberstyle     = \scriptsize\sffamily\color{\seuthesis@lst@numcolor}
-    , keywordstyle    = \bfseries\color{\seuthesis@lst@keycolor}
-    , backgroundcolor = \color{\seuthesis@lst@bgcolor}
-    , aboveskip       = \seuthesis@lst@aboveskip
-    , belowskip       = \seuthesis@lst@belowskip
-    , breaklines      = true
-    , upquote         = true
-    , columns         = fixed
-    , numbers         = left
+    , numberstyle      = \scriptsize\sffamily\color{\seuthesis@lst@numcolor}
+    , keywordstyle     = \bfseries\color{\seuthesis@lst@keycolor}
+    , commentstyle     = \color{\seuthesos@lst@comcolor}
+    , stringstyle      = \color{\seuthesis@lst@strcolor}
+    , backgroundcolor  = \color{\seuthesis@lst@bgcolor}
+    , aboveskip        = \seuthesis@lst@aboveskip
+    , belowskip        = \seuthesis@lst@belowskip
+    , breaklines       = true
+    , upquote          = true
+    , columns          = fixed
+    , numbers          = left
+    , showstringspaces = false
   }
 
 %% ==========================
@@ -628,6 +654,7 @@
     , pdfsubject = { \c__seuthesis_institute_str 本科毕业设计（论文）报告 }
     , pdfcreator = { LaTeX~with~\c__seuthesis_name_str }
     , bookmarksdepth = 2 % PDF bookmarks up to \subsection
+    , bookmarksnumbered = true
   }
 % --- \title ---
 \bool_new:N \l__seuthesis_title_cont_bool

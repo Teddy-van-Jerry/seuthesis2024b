@@ -1,0 +1,101 @@
+% In this class, the default is to use sentence case for titles.
+\bool_if:NF \l__seuthesis_bib_title_case_bool
+  {
+    \DeclareFieldFormat { sentencecase } { \MakeSentenceCase { #1 } }
+    % Modified based on
+    % https://github.com/hushidong/biblatex-gb7714-2015/blob/15db5aaf6834b2359c605227726c67d1350bc660/gb7714-2015.bbx#L3373-L3406
+    \renewbibmacro*{title}{%
+      \ifboolexpr{%
+        test{\iffieldundef{title}}%
+        and
+        test{\iffieldundef{subtitle}}}%
+        {}%
+        {
+          \printtext[title]{\bibtitlefont%增加字体控制命令
+          \printfield[sentencecase]{title}%
+          \ifboolexpr{test {\iffieldundef{subtitle}}}%增加了对子标题的判断
+            {}{\setunit{\subtitlepunct}\printfield[sentencecase]{subtitle}}%
+          \iffieldundef{titleaddon}{}{\setunit{\subtitlepunct}\printfield{titleaddon}}%判断一下titleaddon
+          \ifboolexpr{test{\ifentrytype{book}} and (not test{\iffieldundef{volume}})}%判断一下book类有没有volume
+            {\setunit{\subtitlepunct}\printfield{volume}}{}%
+          \iftoggle{bbx:gbtype}%
+            {\iffieldundef{entrysubtype}{\printfield[gbtypeflag]{usera}}%在标题后直接给出文献标识字母，判断一下，是否是报纸和标准
+            {\iffieldequalstr{entrysubtype}{standard}{\printfield[gbtypeflags]{usera}}%判断是否为标准
+              {\iffieldequalstr{entrysubtype}{news}{\printfield[gbtypeflagn]{usera}}%判断是否为报纸
+              {\printfield[gbtypeflag]{usera}}}}}{}%%其它
+          }%
+        }%
+      }
+  }
+% arXiv settings (you need to export from arxiv.org instead of Google Scholar)
+% Reference: https://github.com/hushidong/biblatex-gb7714-2015/blob/76f594bac2fa8c0c0e3582143bd1eedc1b17cc89/biblatex-gb7714-2015.tex#L2063-L2126
+%自动添加一些信息
+\newcommand \seuthesis@arxiv@urldate { 2024-03-01 } % default date
+\AtEndPreamble
+  {
+    \DeclareStyleSourcemap{
+      \maps [ datatype = bibtex ]
+        {
+          \map [ overwrite ]
+            {
+              \pertype{misc}
+              \step[fieldsource=archivePrefix,match=arXiv,final]
+              \step[fieldset=usera,fieldvalue={EB}]
+              \step[fieldset=primaryClass,fieldvalue={}]
+              \step[fieldset=url,fieldvalue={https://arxiv.org/abs/}]
+              \step[fieldsource=eprint]
+              \step[fieldset=url,origfieldval, append]
+              \step[fieldset=urldate,fieldvalue={\seuthesis@arxiv@urldate}]
+          }
+        }
+    }
+
+    %添加更新日期
+    \renewbibmacro*{doi+eprint+url}{%
+      \iftoggle{bbx:eprint}
+        {\iffieldundef{eprint}{}{\newunit\usebibmacro{eprint}}}
+        {}%
+      \iffieldundef{eprinttype}{}%%注意：archivePrefix映射成了eprinttype
+      {\iffieldequalstr{eprinttype}{arXiv}%
+        {\mkbibparens{\usebibmacro{newsdate}}}{}}%
+      \iftoggle{bbx:url}
+        {\usebibmacro{url+urldate}}
+        {}
+      \newunit\newblock
+      \iftoggle{bbx:doi}
+        {\printfield{doi}}
+        {}}
+
+    %
+    %   备选类型驱动
+    %
+    %   利用biblatex的misc驱动
+    \DeclareBibliographyDriver{misc}{%
+      \usebibmacro{bibindex}%
+      \usebibmacro{begentry}%
+      \usebibmacro{author/editor+others/translator+others}%
+      \ifnameundef{namea}{}{\setunit{\labelnamepunct}\newblock}%
+      \usebibmacro{title}%
+      \newunit\newblock
+      \printfield{howpublished}%
+      \newunit\newblock
+      \printfield{type}%
+      \newunit
+      \printfield{version}%
+      \newunit
+      \printfield{note}%
+      \newunit\newblock
+      \iffieldundef{eprinttype}{\usebibmacro{institution+location+date}}%
+      {}%注意：archivePrefix映射成了eprinttype
+      \usebibmacro{doi+eprint+url}%
+      \newunit\newblock
+      \usebibmacro{addendum+pubstate}%
+      \setunit{\bibpagerefpunct}\newblock
+      \usebibmacro{pageref}%
+      \newunit\newblock
+      \iftoggle{bbx:related}
+        {\usebibmacro{related:init}%
+        \usebibmacro{related}}
+        {}%
+      \usebibmacro{annotation}\usebibmacro{finentry}}
+  }
