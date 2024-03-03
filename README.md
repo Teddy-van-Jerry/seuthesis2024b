@@ -4,6 +4,8 @@ LaTeX Template of Southeast University Thesis for Class of 2024 Bachelors (ä¸œå
 
 **Check out [Call for Papers](https://teddy-van-jerry.github.io/seuthesis2024b-cfp/seuthesis2024b-cfp.pdf)!** ([CFP TeX Source](https://github.com/Teddy-van-Jerry/seuthesis2024b-cfp))
 
+[[**Demo PDF**](https://teddy-van-jerry.github.io/seuthesis2024b/seuthesis2024b.pdf)] [[Demo TeX Source](seuthesis.tex)]
+
 > [!IMPORTANT]
 > This project is under active development.
 >
