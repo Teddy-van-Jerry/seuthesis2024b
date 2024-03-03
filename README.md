@@ -4,7 +4,7 @@ LaTeX Template of Southeast University Thesis for Class of 2024 Bachelors (东�
 
 **Check out [Call for Papers](https://teddy-van-jerry.github.io/seuthesis2024b-cfp/seuthesis2024b-cfp.pdf)!** ([CFP TeX Source](https://github.com/Teddy-van-Jerry/seuthesis2024b-cfp))
 
-[[**Demo PDF**](https://teddy-van-jerry.github.io/seuthesis2024b/seuthesis2024b.pdf)] [[Demo TeX Source](seuthesis.tex)]
+[[**Demo PDF**](https://teddy-van-jerry.github.io/seuthesis2024b/seuthesis2024b.pdf)] [[Demo TeX Source](seuthesis2024b.tex)]
 
 > [!IMPORTANT]
 > This project is under active development.
@@ -19,6 +19,9 @@ Specifically, you will need to modify based on [`seuthesis2024b.tex`](seuthesis2
 
 Oh, should I use Chinese to explain it one more time? Er, let's skip that. **TL;DR**:
 使用此模板请直接修改 [`seuthesis2024b.tex`](seuthesis2024b.tex).
+
+You need to *adjust class options* to suit your need.
+For examples, Windows users should set the font correctly and delete `fontset = mac ms`.
 
 ## Usage
 ### Engine Supported
