@@ -1,0 +1,98 @@
+\ExplSyntaxOff
+
+\usetikzlibrary{positioning, backgrounds}
+
+\pgfmathsetmacro{\jumpswap}{1}
+\tikzset{
+  % set up keys for radius, position, swap
+  jump radius/.estore in=\jumpradius,
+  jump pos/.estore in=\jumppos,
+  jump swap/.code={\pgfmathsetmacro{\jumpswap}{\jumpswap*-1}},
+  jump radius=0.8mm,
+  jump pos=0.5,
+  % set up styles for the various to-paths
+  -u-/.style={% straight line
+    to path={
+      let \p1=(\tikztostart),\p2=(\tikztotarget),\n1={atan2(\y2-\y1,\x2-\x1)} in
+      (\p1) -- ($($(\p1)!\jumppos!(\p2)$)!\jumpradius!(\p1)$)
+      arc[start angle=\n1+180,delta angle=-180*\jumpswap,radius=\jumpradius] -- (\p2)}
+  },
+  -u|/.style={% -| path with jump on horizontal leg
+    to path={
+      let \p1=(\tikztostart),\p2=(\tikztostart-|\tikztotarget), \n1={atan2(\y2-\y1,\x2-\x1)} in
+      (\p1) -- ($($(\p1)!\jumppos!(\p2)$)!\jumpradius!(\p1)$)
+      arc[start angle=\n1+180,delta angle=-180*\jumpswap,radius=\jumpradius] --(\p2) -- (\tikztotarget)}
+  },
+  |u-/.style={% |- path with jump on vertical leg
+    to path={
+      let \p1=(\tikztostart),\p2=(\tikztostart|-\tikztotarget), \n1={atan2(\y2-\y1,\x2-\x1)} in
+      (\p1) -- ($($(\p1)!\jumppos!(\p2)$)!\jumpradius!(\p1)$)
+      arc[start angle=\n1+180,delta angle=-180*\jumpswap,radius=\jumpradius] -- (\p2) -- (\tikztotarget)}
+  },
+  -|u/.style={% -| path with jump on vertical leg
+    to path={
+      let \p1=(\tikztostart-|\tikztotarget),\p2=(\tikztotarget), \n1={atan2(\y2-\y1,\x2-\x1)} in
+      (\tikztostart) -- (\p1) -- ($($(\p1)!\jumppos!(\p2)$)!\jumpradius!(\p1)$)
+      arc[start angle=\n1+180,delta angle=-180*\jumpswap,radius=\jumpradius] -- (\p2)}
+  },
+  |-u/.style={% |- path with jump on horizontal leg
+    to path={
+      let \p1=(\tikztostart|-\tikztotarget),\p2=(\tikztotarget), \n1={atan2(\y2-\y1,\x2-\x1)} in
+      (\tikztostart) -- (\p1) -- ($($(\p1)!\jumppos!(\p2)$)!\jumpradius!(\p1)$)
+      arc[start angle=\n1+180,delta angle=-180*\jumpswap,radius=\jumpradius] -- (\p2)}
+  },
+  % define the jump style, set it to use straight line by default
+  jump/.style={-u-,#1},
+  jump/.default={}
+}
+
+% similar to env "pgfonlayer", but the latest contents are typeset on
+% lowest bottom (on reversed order)
+
+\let\pgfonlayerreversed\pgfonlayer
+\let\endpgfonlayerreversed\endpgfonlayer
+
+\RequirePackage{xpatch}
+\xpatchcmd\pgfonlayerreversed
+  {\expandafter\box\csname pgf@layerbox@#1\endcsname\begingroup}
+  {\begingroup}
+  {}{\fail}
+
+\xpatchcmd\endpgfonlayerreversed
+  {\endgroup}
+  {\endgroup\expandafter\box\csname pgf@layerbox@\pgfonlayer@name\endcsname}
+  {}{\fail}
+
+\tikzset{
+  on background layer reversed/.style={%
+    execute at begin scope={%
+      \pgfonlayerreversed{background}%
+      \let\tikz@options=\pgfutil@empty
+      \tikzset{every on background layer/.try,#1}%
+      \tikz@options
+    },
+    execute at end scope={\endpgfonlayerreversed}
+  }
+}
+
+\def\StartDrawOnBottomOfLayerStack{%
+  \scope\relax
+  % patch \path variants to auto insert "\scoped[on lowest layer]"
+  % currently \node, \pic, \coordinate, and \matrix are patched
+  \let\tikz@path@overlay\tikz@path@overlay@autoscoped
+  \let\tikz@path@overlayed\tikz@path@overlayed@autoscoped
+}
+
+\def\EndDrawOnTopOfLayerStack{%
+  \endscope
+}
+
+\def\tikz@path@overlay@autoscoped#1{%
+  \let\tikz@signal@path=\tikz@signal@path% for detection at begin of matrix cell
+  \pgfutil@ifnextchar<%
+    {\tikz@path@overlayed{#1}}
+    {\scoped[on background layer reversed] \path #1}}%
+\def\tikz@path@overlayed@autoscoped#1<#2>{%
+  \scoped[on background layer reversed] \path<#2> #1}%
+
+\ExplSyntaxOn

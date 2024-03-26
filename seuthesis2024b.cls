@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/02/24} {0.7.0}
+\ProvidesExplClass {seuthesis2024b} {2024/03/12} {0.9.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -20,70 +20,91 @@
 \keys_define:nn { seuthesis2024b }
   {
     % page setup
-    , two side       .bool_set:N = \l__seuthesis_twoside_bool
-    , two side       .initial:n  = { false }
-    , two~side       .bool_set:N = \l__seuthesis_twoside_bool
-    , two-side       .bool_set:N = \l__seuthesis_twoside_bool
-    , two sides      .bool_set:N = \l__seuthesis_twoside_bool
-    , two~sides      .bool_set:N = \l__seuthesis_twoside_bool
-    , two-sides      .bool_set:N = \l__seuthesis_twoside_bool
-    , one side       .meta:n     = { two side = false }
-    , one~side       .meta:n     = { two side = false }
-    , show frame     .bool_set:N = \l__seuthesis_show_frame_bool
-    , show frame     .initial:n  = { false }
-    , show~frame     .bool_set:N = \l__seuthesis_show_frame_bool
-    , show-frame     .bool_set:N = \l__seuthesis_show_frame_bool
+    , two side        .bool_set:N = \l__seuthesis_twoside_bool
+    , two side        .initial:n  = { false }
+    , two~side        .bool_set:N = \l__seuthesis_twoside_bool
+    , two-side        .bool_set:N = \l__seuthesis_twoside_bool
+    , two sides       .bool_set:N = \l__seuthesis_twoside_bool
+    , two~sides       .bool_set:N = \l__seuthesis_twoside_bool
+    , two-sides       .bool_set:N = \l__seuthesis_twoside_bool
+    , one side        .meta:n     = { two side = false }
+    , one~side        .meta:n     = { two side = false }
+    , show frame      .bool_set:N = \l__seuthesis_show_frame_bool
+    , show frame      .initial:n  = { false }
+    , show~frame      .bool_set:N = \l__seuthesis_show_frame_bool
+    , show-frame      .bool_set:N = \l__seuthesis_show_frame_bool
     % font options
-    , fontset        .tl_set:N   = \l__seuthesis_fontset_tl
-    , fontset        .initial:n  = { files }
-    , use tex font   .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , use tex font   .initial:n  = { false }
-    , use~tex~font   .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , use-tex-font   .bool_set:N = \l__seuthesis_use_tex_font_bool
-    , font dir       .tl_set:N   = \l__seuthesis_font_dir_tl
-    , font dir       .initial:n  = { fonts/ }
-    , font~dir       .meta:n     = { font dir = #1 }
-    , font-dir       .meta:n     = { font dir = #1 }
+    , fontset         .tl_set:N   = \l__seuthesis_fontset_tl
+    , fontset         .initial:n  = { files }
+    , use tex font    .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , use tex font    .initial:n  = { false }
+    , use~tex~font    .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , use-tex-font    .bool_set:N = \l__seuthesis_use_tex_font_bool
+    , font dir        .tl_set:N   = \l__seuthesis_font_dir_tl
+    , font dir        .initial:n  = { fonts/ }
+    , font~dir        .meta:n     = { font dir = #1 }
+    , font-dir        .meta:n     = { font dir = #1 }
     % maths options
-    , no maths       .bool_set:N = \l__seuthesis_no_maths_bool
-    , no maths       .initial:n  = { false }
-    , no~maths       .bool_set:N = \l__seuthesis_no_maths_bool
-    , no-maths       .bool_set:N = \l__seuthesis_no_maths_bool
+    , no maths        .bool_set:N = \l__seuthesis_no_maths_bool
+    , no maths        .initial:n  = { false }
+    , no~maths        .bool_set:N = \l__seuthesis_no_maths_bool
+    , no-maths        .bool_set:N = \l__seuthesis_no_maths_bool
     % bibliography
-    , bib title case .bool_set:N = \l__seuthesis_bib_title_case_bool
-    , bib title case .initial:n  = { false }
-    , bib~title case .bool_set:N = \l__seuthesis_bib_title_case_bool
-    , bib-title case .bool_set:N = \l__seuthesis_bib_title_case_bool
-    , bib~title~case .bool_set:N = \l__seuthesis_bib_title_case_bool
-    , bib-title-case .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib title case  .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib title case  .initial:n  = { false }
+    , bib~title case  .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib-title case  .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib~title~case  .bool_set:N = \l__seuthesis_bib_title_case_bool
+    , bib-title-case  .bool_set:N = \l__seuthesis_bib_title_case_bool
+    % section
+    , bookmarks depth .tl_set:N   = \l__seuthesis_bookmarks_depth_tl
+    , bookmarks depth .initial:n  = { 2 }
+    , bookmarks~depth .tl_set:N   = \l__seuthesis_bookmarks_depth_tl
+    , bookmarks-depth .tl_set:N   = \l__seuthesis_bookmarks_depth_tl
+    , toc depth       .tl_set:N   = \l__seuthesis_toc_depth_tl
+    , toc depth       .initial:n  = { 2 }
+    , toc~depth       .tl_set:N   = \l__seuthesis_toc_depth_tl
+    , toc-depth       .tl_set:N   = \l__seuthesis_toc_depth_tl
     % counters
-    , continuous cnt .bool_set:N = \l__seuthesis_continuous_cnt_bool
-    , continuous cnt .initial:n  = { false }
-    , continuous~cnt .bool_set:N = \l__seuthesis_continuous_cnt_bool
-    , continuous-cnt .bool_set:N = \l__seuthesis_continuous_cnt_bool
-    , cnt in doc     .bool_set:N = \l__seuthesis_continuous_cnt_bool
-    , cnt~in~doc     .bool_set:N = \l__seuthesis_continuous_cnt_bool
-    , cnt-in-doc     .bool_set:N = \l__seuthesis_continuous_cnt_bool
-    , cnt in chapter .meta:n     = { continuous cnt = false }
-    , cnt~in~chapter .meta:n     = { continuous cnt = false }
-    , cnt-in-chapter .meta:n     = { continuous cnt = false }
+    , continuous cnt  .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , continuous cnt  .initial:n  = { false }
+    , continuous~cnt  .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , continuous-cnt  .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , cnt in doc      .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , cnt~in~doc      .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , cnt-in-doc      .bool_set:N = \l__seuthesis_continuous_cnt_bool
+    , cnt in chapter  .meta:n     = { continuous cnt = false }
+    , cnt~in~chapter  .meta:n     = { continuous cnt = false }
+    , cnt-in-chapter  .meta:n     = { continuous cnt = false }
     % my colors
-    , my colors      .bool_set:N = \l__seuthesis_my_colors_bool
-    , my colors      .initial:n  = { true }
-    , my~colors      .bool_set:N = \l__seuthesis_my_colors_bool
-    , my-colors      .bool_set:N = \l__seuthesis_my_colors_bool
-    , my color       .bool_set:N = \l__seuthesis_my_colors_bool
-    , my~color       .bool_set:N = \l__seuthesis_my_colors_bool
-    , my-color       .bool_set:N = \l__seuthesis_my_colors_bool
+    , my colors       .bool_set:N = \l__seuthesis_my_colors_bool
+    , my colors       .initial:n  = { true }
+    , my~colors       .bool_set:N = \l__seuthesis_my_colors_bool
+    , my-colors       .bool_set:N = \l__seuthesis_my_colors_bool
+    , my color        .bool_set:N = \l__seuthesis_my_colors_bool
+    , my~color        .bool_set:N = \l__seuthesis_my_colors_bool
+    , my-color        .bool_set:N = \l__seuthesis_my_colors_bool
     % accessibility
-    , accessibility  .bool_set:N = \l__seuthesis_accessibility_bool
-    , accessibility  .initial:n  = { false }
+    , accessibility   .bool_set:N = \l__seuthesis_accessibility_bool
+    , accessibility   .initial:n  = { false }
     % anonymous option
-    , anonymous      .bool_set:N = \l__seuthesis_anonymous_bool
-    , anonymous      .initial:n  = { false }
-    , anony          .bool_set:N = \l__seuthesis_anonymous_bool
+    , anonymous       .bool_set:N = \l__seuthesis_anonymous_bool
+    , anonymous       .initial:n  = { false }
+    , anony           .bool_set:N = \l__seuthesis_anonymous_bool
+    % standalone mode
+    , standalone      .bool_set:N = \l__seuthesis_standalone_bool
+    , standalone      .initial:n  = { false }
+    , stand~alone     .bool_set:N = \l__seuthesis_standalone_bool
+    , stand-alone     .bool_set:N = \l__seuthesis_standalone_bool
+    , tikz            .bool_set:N = \l__sehtiesis_standalone_bool
+    , draw            .bool_set:N = \l__seuthesis_standalone_bool
+    , drawing         .bool_set:N = \l__seuthesis_standalone_bool
+    , input prefix    .tl_set:N   = \l__seuthesis_input_prefix_tl
+    , input prefix    .initial:n  = {  }
+    , input~prefix    .tl_set:N   = \l__seuthesis_input_prefix_tl
+    , input-prefix    .tl_set:N   = \l__seuthesis_input_prefix_tl
     % others
-    , unknown        .code:n     =
+    , unknown         .code:n     =
       {
         \PassOptionsToClass { \CurrentOption } { \c__seuthesis_base_class_str }
       }
@@ -103,6 +124,12 @@
 %% ==========================
 \RequirePackage { xpatch }
 % \RequirePackage { etoolbox }
+
+%% ==========================
+%% Silence Warnings
+%% ==========================
+\RequirePackage { silence }
+\WarningFilter { caption } { Unused \captionsetup[subalgorithm] }
 
 %% ==========================
 %% Font Settings
@@ -282,7 +309,7 @@
 \titlespacing* { \section } { \z@ } { 3.6pt } { 3.6pt }
 % --- \subsection ---
 \titleformat { \subsection }
-  { \zihao{-4}\heiti } { \thesubsection } { \widthof{~} } { }
+  { \zihao{-4}\songti\bfseries } { \normalfont\thesubsection } { \widthof{~} } { }
 \titlespacing* { \subsection } { \z@ } { \z@ } { \z@ }
 % --- \subsubsection ---
 \titleformat { \subsubsection }
@@ -298,7 +325,7 @@
 %% ==========================
 \RequirePackage { graphicx }
 \RequirePackage [ caption = false, font = small, subrefformat = parens ] { subfig }
-\RequirePackage [ dvipsnames ] { xcolor }
+\RequirePackage [ dvipsnames] { xcolor }
 \RequirePackage { tikz }
 \RequirePackage { pgfplots }
 \RequirePackage [ export ] { adjustbox }
@@ -323,6 +350,7 @@
         , { gray    , thick, mark = +       , mark~size = 3   }
       }
   }
+\input { \l__seuthesis_input_prefix_tl assets/tikz_extra }
 
 %% ==========================
 %% Tables
@@ -391,11 +419,44 @@
 \AtBeginEnvironment { xltabular } { \setcounter { colcntr } { 1 } }
 
 %% ==========================
+%% Algorithm
+%% ==========================
+\RequirePackage
+  [
+    , italicComments = false
+    , commentColor = darkgray
+    , noEnd = false
+  ] { algpseudocodex }
+% \RequirePackage { algpseudocode }
+\bool_if:NTF \l__seuthesis_continuous_cnt_bool
+  {
+    \newfloat { algorithm } { h } { alg }
+  }
+  {
+    \newfloat { algorithm } { h } { alg } [ chapter ]
+  }
+\newcommand \AlgAboveRule
+  {
+    \vspace*{-.25\baselineskip}
+    \rule{\textwidth}{1pt}%
+    \vspace*{-.25\baselineskip}
+    % \begin{algorithmic}[1]
+  }
+\newcommand \AlgBelowRule
+  {
+    % \end{algorithmic}
+    \vspace*{-.50\baselineskip}
+    \rule{\textwidth}{1pt}%
+    \vspace*{-.25\baselineskip}
+  }
+
+%% ==========================
 %% Captions
 %% ==========================
 % set font size as \zihao{5} as well as center contents
-\floatsetup [ figure ] { font = small }
-\floatsetup [ table  ] { font = small, capposition = top }
+\floatsetup [ figure    ] { font = small }
+\floatsetup [ table     ] { font = small, capposition = top }
+\floatsetup [ algorithm ] { font = small, capposition = top }
 \RequirePackage { caption }
 \DeclareCaptionLabelFormat { seuthesislabel } { #1 #2 \hspace{.5\ccwd} }
 \bool_if:NTF \l__seuthesis_continuous_cnt_bool
@@ -416,13 +477,14 @@
     , labelformat = seuthesislabel
     , labelsep = none
   }
+\floatname { algorithm } { 算法 }
 
 %% ==========================
 %% Maths
 %% ==========================
+\RequirePackage { mathtools } % <-- this is required
 \bool_if:NF \l__seuthesis_no_maths_bool
   {
-    \RequirePackage { mathtools }
     \RequirePackage { amssymb }
     \RequirePackage { amsthm }
     \RequirePackage { bm }
@@ -453,6 +515,21 @@
       {
         \popQED\endtrivlist\@endpefalse
       }
+  }
+% Use Chinese parenthesis instead of English one
+\def \eqref@tagform@ #1
+  {
+    \maketag@@@{ \mbox{（\ignorespaces#1\unskip\@@italiccorr）} }
+  }
+\renewcommand { \eqref } [ 1 ]
+  {
+    \textup { ~ \eqref@tagform@ { \ref { #1 } } }
+  }
+\NewDocumentCommand { \Eqref } { s m }
+  {
+    \bool_if:nF #1 { \unskip }
+    公式~\eqref { #2 }
+    \ignorespaces
   }
 
 %% ==========================
@@ -551,63 +628,66 @@
 %% ==========================
 %% Bibliography
 %% ==========================
-\RequirePackage
-  [
-    , backend = biber
-    , style = gb7714-2015
-    , gbalign = left
-  ]
-  { biblatex }
-\AtBeginBibliography { \zihao{5} }
-\input { assets/bib_custom } % a bunch of settings here
+\bool_if:NF \l__seuthesis_standalone_bool
+  {
+    \RequirePackage
+      [
+        , backend = biber
+        , style = gb7714-2015
+        , gbalign = left
+      ]
+      { biblatex }
+    \AtBeginBibliography { \zihao{5} }
+    \input { \l__seuthesis_input_prefix_tl assets/bib_custom } % a bunch of settings here
 
-\DeclareNameFormat { CNauthor }
-  {
-    \namepartfamily
-  }
-\DeclareNameFormat { CNauthorEtAl }
-  {
-    \ifthenelse { \value{liststop} = 1 } { } { 等 }
-  }
-\DeclareCiteCommand* { \CNciteauthor }
-  {
-    \boolfalse{citetracker}
-    \boolfalse{pagetracker}
-    \usebibmacro{prenote}}
-  {
-    \ifciteindex
-     {\indexnames{labelname}}
-     {}
-      \printnames[CNauthor    ][1-1]{labelname}
-      \printnames[CNauthorEtAl][2-2]{labelname}
-    }
-  { \multicitedelim }
-  { \usebibmacro{postnote} }
-
-\NewDocumentCommand \seuthesis@LciteSingle { O{文献} m }
-  {
-    \CNciteauthor* { #2 } 在 #1 \cite { #2 }
-  }
-\NewDocumentCommand \Lcite { O{文献} m O{中} }
-  {
-    \Lcite_expressed_in:nn { #1 } { #2 } #3
-  }
-\clist_new:N \l__seuthesis_Lcite_clist
-\cs_new_protected:Npn \Lcite_expressed_in:nn #1 #2
-  {
-    \clist_clear:N \l__seuthesis_Lcite_clist
-    \clist_map_inline:nn { #2 }
+    \DeclareNameFormat { CNauthor }
       {
-        \clist_put_right:Nx \l__seuthesis_Lcite_clist
-          {
-            \seuthesis@LciteSingle [ #1 ] { ##1 }
-          }
+        \namepartfamily
       }
-  \clist_use:Nnnn { \l__seuthesis_Lcite_clist } { 和 } { 、 } { 和 }
-}
-\NewDocumentCommand \YLcite { O{文献} m O{中} }
-  {
-    \citeyear { #2 } 年 \Lcite [ #1 ] { #2 } [ #3 ]
+    \DeclareNameFormat { CNauthorEtAl }
+      {
+        \ifthenelse { \value{liststop} = 1 } { } { 等 }
+      }
+    \DeclareCiteCommand* { \CNciteauthor }
+      {
+        \boolfalse{citetracker}
+        \boolfalse{pagetracker}
+        \usebibmacro{prenote}}
+      {
+        \ifciteindex
+        {\indexnames{labelname}}
+        {}
+          \printnames[CNauthor    ][1-1]{labelname}
+          \printnames[CNauthorEtAl][2-2]{labelname}
+        }
+      { \multicitedelim }
+      { \usebibmacro{postnote} }
+
+    \NewDocumentCommand \seuthesis@LciteSingle { O{文献} m }
+      {
+        \CNciteauthor* { #2 } 在 #1 \cite { #2 }
+      }
+    \NewDocumentCommand \Lcite { O{文献} m O{中} }
+      {
+        \Lcite_expressed_in:nn { #1 } { #2 } #3
+      }
+    \clist_new:N \l__seuthesis_Lcite_clist
+    \cs_new_protected:Npn \Lcite_expressed_in:nn #1 #2
+      {
+        \clist_clear:N \l__seuthesis_Lcite_clist
+        \clist_map_inline:nn { #2 }
+          {
+            \clist_put_right:Nx \l__seuthesis_Lcite_clist
+              {
+                \seuthesis@LciteSingle [ #1 ] { ##1 }
+              }
+          }
+      \clist_use:Nnnn { \l__seuthesis_Lcite_clist } { 和 } { 、 } { 和 }
+    }
+    \NewDocumentCommand \YLcite { O{文献} m O{中} }
+      {
+        \citeyear { #2 } 年 \Lcite [ #1 ] { #2 } [ #3 ]
+      }
   }
 
 %% ==========================
@@ -646,256 +726,276 @@
 %% ==========================
 %% Title Pages
 %% ==========================
-% --- hyperref settings ---
-\RequirePackage { hyperref }
-\hypersetup
+\bool_if:NTF \l__seuthesis_standalone_bool
   {
-    , hidelinks
-    , pdfsubject = { \c__seuthesis_institute_str 本科毕业设计（论文）报告 }
-    , pdfcreator = { LaTeX~with~\c__seuthesis_name_str }
-    , bookmarksdepth = 2 % PDF bookmarks up to \subsection
-    , bookmarksnumbered = true
+    \pagestyle { empty }
   }
-% --- \title ---
-\bool_new:N \l__seuthesis_title_cont_bool
-\RenewDocumentCommand \title { m O{} O{2} }
   {
-    \gdef \@title { #1 }
-    \tl_if_blank:nTF { #2 }
+    % --- hyperref settings ---
+    \RequirePackage { hyperref }
+    \hypersetup
       {
-        \bool_set_false:N \l__seuthesis_title_cont_bool
-        \hypersetup { pdftitle = { #1 } }
+        , hidelinks
+        , pdfsubject = { \c__seuthesis_institute_str 本科毕业设计（论文）报告 }
+        , pdfcreator = { LaTeX~with~\c__seuthesis_name_str }
+        , bookmarksdepth = \l__seuthesis_bookmarks_depth_tl % 2 for \subsection, 3 for \subsubsection
+        , bookmarksnumbered = true
       }
+    % --- \title ---
+    \bool_new:N \l__seuthesis_title_cont_bool
+    \RenewDocumentCommand \title { m O{} O{2} }
       {
-        \bool_set_true:N \l__seuthesis_title_cont_bool
-        \gdef \@titleCont { #2 }
-        \hypersetup { pdftitle = { #1 #2 } }
-      }
-    \gdef \seuthesis@title@fontsize { #3 } % default title size is \zihao{2}
-  }
-% --- \studentID ---
-\NewDocumentCommand \studentID { m }
-  {
-    \gdef \@studentID { #1 }
-  }
-\newcommand \@studentID
-  {
-    \@latex@warning@no@line { No~\noexpand\studentID~given }
-  }
-% --- \author ---
-\RenewDocumentCommand \author { m }
-  {
-    \gdef \@author { #1 }
-    \hypersetup { pdfauthor = { #1 } }
-  }
-% --- \department ---
-\NewDocumentCommand \department { m }
-  {
-    \gdef \@department { #1 }
-  }
-\newcommand \@department
-  {
-    \@latex@warning@no@line { No~\noexpand\department~given }
-  }
-% --- \major ---
-\NewDocumentCommand \major { m }
-  {
-    \gdef \@major { #1 }
-  }
-\newcommand \@major
-  {
-    \@latex@warning@no@line { No~\noexpand\major~given }
-  }
-% --- \supervisor ---
-\NewDocumentCommand \supervisor { m }
-  {
-    \gdef \@supervisor { #1 }
-  }
-\newcommand \@supervisor
-  {
-    \@latex@warning@no@line { No~\noexpand\supervisor~given }
-  }
-% --- \seuthesis@titlepage ---
-\bool_if:NT \l__seuthesis_accessibility_bool
-  {
-    \RequirePackage { pdfcomment }
-  }
-\newcommand \seuthesis@titlepage
-  {
-    \pagestyle{empty}
-    \renewcommand \thepage { 封面 }
-
-    \null\par % one empty line at top
-
-    \begin{center}
-      \bool_if:NTF \l__seuthesis_accessibility_bool
-        {
-          \pdftooltip
-            {
-              \includegraphics[width=85mm]{assets/logo.png}
-            }
-            {
-              \c__seuthesis_institute_str % alt text for accessibility
-            }
-        }
-        {
-          \includegraphics[width=85mm]{assets/logo.png}
-        }
-      \par
-      \vspace{8mm}
-      {
-        \Huge\heiti\bfseries
-        本科毕业设计（论文）报告
-      }
-      \par
-      \vspace{20mm}
-      {
-        \renewcommand \tabcolsep { 18pt }
-        \renewcommand \arraystretch { 1.1 }
-        \LARGE\heiti
-        \bool_if:NTF { \l__seuthesis_title_cont_bool }
+        \gdef \@title { #1 }
+        \tl_if_blank:nTF { #2 }
           {
-            \begin{tabularx}{\linewidth-9pt}{cY}
-              题\hspace{.5\ccwd}目： &
-                { \zihao { \seuthesis@title@fontsize } \@title }
-                \\[-4pt] \cmidrule[.5pt]{2-2}
-              \vphantom{泰迪熊} &
-                { \zihao { \seuthesis@title@fontsize } \@titleCont }
-                \\[-4pt] \cmidrule[.5pt]{2-2}
-            \end{tabularx}
+            \bool_set_false:N \l__seuthesis_title_cont_bool
+            \hypersetup { pdftitle = { #1 } }
           }
           {
-            \begin{tabularx}{\linewidth-9pt}{cY}
-              题\hspace{.5\ccwd}目： &
-                { \zihao { \seuthesis@title@fontsize } \@title }
-                \\[-4pt] \cmidrule[.5pt]{2-2}
-              % the second line is then hidden
-              \vphantom{泰迪熊} & \\[\dimexpr-4pt+0.5pt+\cmidrulekern]
-            \end{tabularx}
+            \bool_set_true:N \l__seuthesis_title_cont_bool
+            \gdef \@titleCont { #2 }
+            \hypersetup { pdftitle = { #1 #2 } }
           }
+        \gdef \seuthesis@title@fontsize { #3 } % default title size is \zihao{2}
       }
-      \par
-      \vspace{18mm}
+    % --- \studentID ---
+    \NewDocumentCommand \studentID { m }
       {
-        \Large
-        \renewcommand \tabcolsep { 18pt }
-        \renewcommand \arraystretch { 1.3 }
-        \begin{tabular}{c P{8cm}}
-          学\hspace{2\ccwd}号：& \@studentID  \\[-6pt] \cmidrule[.5pt]{2-2}
-          姓\hspace{2\ccwd}名：& \@author     \\[-6pt] \cmidrule[.5pt]{2-2}
-          学\hspace{2\ccwd}院：& \@department \\[-6pt] \cmidrule[.5pt]{2-2}
-          专\hspace{2\ccwd}业：& \@major      \\[-6pt] \cmidrule[.5pt]{2-2}
-          指导教师：& \@supervisor \\[-6pt] \cmidrule[.5pt]{2-2}
-          起止日期：& \@date       \\[-6pt] \cmidrule[.5pt]{2-2}
-        \end{tabular}
+        \gdef \@studentID { #1 }
       }
-    \end{center}
-    \ClearDoublePage
-  }
-% --- \seuthesis@declaration ---
-\newcommand \seuthesis@declaration
-  {
-    \renewcommand \thepage { 声明 }
-    \input { assets/declaration.tex }
-    \ClearDoublePage
-  }
-% --- \CNabstract ---
-\NewDocumentCommand \CNabstract { +m m }
-  {
-    \gdef \@CNabstract { #1 }
-    \gdef \@CNkeywords { #2 }
-    \tl_new:N \l__seuthesis_keywords_tl
-    \tl_set:Nn \l__seuthesis_keywords_tl { #2 }
-    \tl_replace_all:Nnn \l__seuthesis_keywords_tl { ， } { ,~ }
-    \hypersetup { pdfkeywords = { \l__seuthesis_keywords_tl } }
-  }
-\newcommand \@CNabstract
-  {
-    \@latex@warning@no@line { No~\noexpand\CNabstract~given }
-  }
-\newcommand \@CNkeywords { }
-\newcommand \seuthesis@CNabstract
-  {
-    \chapter* { 摘\hspace{2\ccwd}要 }
-    \addcontentsline { toc } { chapter }
+    \newcommand \@studentID
       {
-        \texorpdfstring { 摘\hspace{2\ccwd}要 } { 摘要 }
+        \@latex@warning@no@line { No~\noexpand\studentID~given }
       }
-    \@CNabstract \par
-    \null\par
-    \noindent 关键词：\@CNkeywords
-    \ClearDoublePage
-  }
-% --- \ENabstract ---
-\NewDocumentCommand \ENabstract { +m m }
-  {
-    \gdef \@ENabstract { #1 }
-    \gdef \@ENkeywords { #2 }
-  }
-\newcommand \@ENabstract
-  {
-    \@latex@warning@no@line { No~\noexpand\ENabstract~given }
-  }
-\newcommand \@ENkeywords { }
-\newcommand \seuthesis@ENabstract
-  {
-    \chapter* { ABSTRACT }
-    \addcontentsline { toc } { chapter } { ABSTRACT }
-    \@ENabstract \par
-    \null\par
-    KEY~WORDS:~ \@ENkeywords
-    \ClearDoublePage
-  }
-% --- \seuthesis@toc ---
-\RequirePackage { titletoc }
-\setcounter { tocdepth } { 1 }
-\renewcommand { \contentsname } { 目\hspace{2\ccwd}录 }
-\titlecontents { chapter } [ \z@ ]
-  { \filright }
-  { \contentspush { \seuthesis@chapter@name { \thecontentslabel } \hspace{.5\ccwd} } }
-  { } { \titlerule*[3pt]{.}\contentspage }
-\titlecontents { section } [ 2\ccwd ]
-  { }
-  { \contentspush { \thecontentslabel \hspace{.5\ccwd} } }
-  { } { \titlerule*[3pt]{.}\contentspage }
-\newcommand \seuthesis@toc
-  {
-    \tableofcontents
-    \addcontentsline { toc } { chapter }
+    % --- \author ---
+    \RenewDocumentCommand \author { m }
       {
-        \texorpdfstring { 目\hspace{2\ccwd}录 } { 目录 }
+        \gdef \@author { #1 }
+        \hypersetup { pdfauthor = { #1 } }
       }
-    \ClearDoublePage
-  }
-% --- \maketitle ---
-\RenewDocumentCommand \maketitle { }
-  {
-    \seuthesis@titlepage
-    \seuthesis@declaration
-    \pagestyle { frontmatter }
-    \setcounter { page } { 1 }
-    \seuthesis@CNabstract
-    \seuthesis@ENabstract
-    \seuthesis@toc
-    \pagestyle { mainmatter }
-    \setcounter { page } { 1 }
+    % --- \department ---
+    \NewDocumentCommand \department { m }
+      {
+        \gdef \@department { #1 }
+      }
+    \newcommand \@department
+      {
+        \@latex@warning@no@line { No~\noexpand\department~given }
+      }
+    % --- \major ---
+    \NewDocumentCommand \major { m }
+      {
+        \gdef \@major { #1 }
+      }
+    \newcommand \@major
+      {
+        \@latex@warning@no@line { No~\noexpand\major~given }
+      }
+    % --- \supervisor ---
+    \NewDocumentCommand \supervisor { m }
+      {
+        \gdef \@supervisor { #1 }
+      }
+    \newcommand \@supervisor
+      {
+        \@latex@warning@no@line { No~\noexpand\supervisor~given }
+      }
+    % --- \seuthesis@titlepage ---
+    \bool_if:NT \l__seuthesis_accessibility_bool
+      {
+        \RequirePackage { pdfcomment }
+      }
+    \newcommand \seuthesis@titlepage
+      {
+        \pagestyle{empty}
+        \renewcommand \thepage { 封面 }
+
+        \null\par % one empty line at top
+
+        \begin{center}
+          \bool_if:NTF \l__seuthesis_accessibility_bool
+            {
+              \pdftooltip
+                {
+                  \includegraphics[width=85mm]{\l__seuthesis_input_prefix_tl assets/logo.png}
+                }
+                {
+                  \c__seuthesis_institute_str % alt text for accessibility
+                }
+            }
+            {
+              \includegraphics[width=85mm]{\l__seuthesis_input_prefix_tl assets/logo.png}
+            }
+          \par
+          \vspace{8mm}
+          {
+            \Huge\heiti\bfseries
+            本科毕业设计（论文）报告
+          }
+          \par
+          \vspace{20mm}
+          {
+            \renewcommand \tabcolsep { 18pt }
+            \renewcommand \arraystretch { 1.1 }
+            \LARGE\heiti
+            \bool_if:NTF { \l__seuthesis_title_cont_bool }
+              {
+                \begin{tabularx}{\linewidth-9pt}{cY}
+                  题\hspace{.5\ccwd}目： &
+                    { \zihao { \seuthesis@title@fontsize } \@title }
+                    \\[-4pt] \cmidrule[.5pt]{2-2}
+                  \vphantom{泰迪熊} &
+                    { \zihao { \seuthesis@title@fontsize } \@titleCont }
+                    \\[-4pt] \cmidrule[.5pt]{2-2}
+                \end{tabularx}
+              }
+              {
+                \begin{tabularx}{\linewidth-9pt}{cY}
+                  题\hspace{.5\ccwd}目： &
+                    { \zihao { \seuthesis@title@fontsize } \@title }
+                    \\[-4pt] \cmidrule[.5pt]{2-2}
+                  % the second line is then hidden
+                  \vphantom{泰迪熊} & \\[\dimexpr-4pt+0.5pt+\cmidrulekern]
+                \end{tabularx}
+              }
+          }
+          \par
+          \vspace{18mm}
+          {
+            \Large
+            \renewcommand \tabcolsep { 18pt }
+            \renewcommand \arraystretch { 1.3 }
+            \begin{tabular}{c P{8cm}}
+              学\hspace{2\ccwd}号：& \@studentID  \\[-6pt] \cmidrule[.5pt]{2-2}
+              姓\hspace{2\ccwd}名：& \@author     \\[-6pt] \cmidrule[.5pt]{2-2}
+              学\hspace{2\ccwd}院：& \@department \\[-6pt] \cmidrule[.5pt]{2-2}
+              专\hspace{2\ccwd}业：& \@major      \\[-6pt] \cmidrule[.5pt]{2-2}
+              指导教师：& \@supervisor \\[-6pt] \cmidrule[.5pt]{2-2}
+              起止日期：& \@date       \\[-6pt] \cmidrule[.5pt]{2-2}
+            \end{tabular}
+          }
+        \end{center}
+        \ClearDoublePage
+      }
+    % --- \seuthesis@declaration ---
+    \newcommand \seuthesis@declaration
+      {
+        \renewcommand \thepage { 声明 }
+        \input { \l__seuthesis_input_prefix_tl assets/declaration.tex }
+        \ClearDoublePage
+      }
+    % --- \CNabstract ---
+    \NewDocumentCommand \CNabstract { +m m }
+      {
+        \gdef \@CNabstract { #1 }
+        \gdef \@CNkeywords { #2 }
+        \tl_new:N \l__seuthesis_keywords_tl
+        \tl_set:Nn \l__seuthesis_keywords_tl { #2 }
+        \tl_replace_all:Nnn \l__seuthesis_keywords_tl { ， } { ,~ }
+        \hypersetup { pdfkeywords = { \l__seuthesis_keywords_tl } }
+      }
+    \newcommand \@CNabstract
+      {
+        \@latex@warning@no@line { No~\noexpand\CNabstract~given }
+      }
+    \newcommand \@CNkeywords { }
+    \newcommand \seuthesis@CNabstract
+      {
+        \chapter* { 摘\hspace{2\ccwd}要 }
+        \addcontentsline { toc } { chapter }
+          {
+            \texorpdfstring { 摘\hspace{2\ccwd}要 } { 摘要 }
+          }
+        \@CNabstract \par
+        \null\par
+        \noindent 关键词：\@CNkeywords
+        \ClearDoublePage
+      }
+    % --- \ENabstract ---
+    \NewDocumentCommand \ENabstract { +m m }
+      {
+        \gdef \@ENabstract { #1 }
+        \gdef \@ENkeywords { #2 }
+      }
+    \newcommand \@ENabstract
+      {
+        \@latex@warning@no@line { No~\noexpand\ENabstract~given }
+      }
+    \newcommand \@ENkeywords { }
+    \newcommand \seuthesis@ENabstract
+      {
+        \chapter* { ABSTRACT }
+        \addcontentsline { toc } { chapter } { ABSTRACT }
+        \@ENabstract \par
+        \null\par
+        KEY~WORDS:~ \@ENkeywords
+        \ClearDoublePage
+      }
+    % --- \seuthesis@toc ---
+    \RequirePackage { titletoc }
+    \setcounter { tocdepth } { \l__seuthesis_toc_depth_tl }
+    \renewcommand { \contentsname } { 目\hspace{2\ccwd}录 }
+    \titlecontents { chapter } [ \z@ ]
+      { \filright }
+      { \contentspush { \seuthesis@chapter@name { \thecontentslabel } \hspace{.5\ccwd} } }
+      { } { \titlerule*[3pt]{.}\contentspage }
+    \titlecontents { section } [ 2\ccwd ]
+      { }
+      { \contentspush { \thecontentslabel \hspace{.5\ccwd} } }
+      { } { \titlerule*[3pt]{.}\contentspage }
+    \titlecontents { subsection } [ 4\ccwd ]
+      { }
+      { \contentspush { \thecontentslabel \hspace{.5\ccwd} } }
+      { } { \titlerule*[3pt]{.}\contentspage }
+    \titlecontents { subsubsection } [ 6\ccwd ]
+      { }
+      { \contentspush { \thecontentslabel \hspace{.5\ccwd} } }
+      { } { \titlerule*[3pt]{.}\contentspage }
+    \newcommand \seuthesis@toc
+      {
+        \tableofcontents
+        \addcontentsline { toc } { chapter }
+          {
+            \texorpdfstring { 目\hspace{2\ccwd}录 } { 目录 }
+          }
+        \ClearDoublePage
+      }
+    % --- \maketitle ---
+    \RenewDocumentCommand \maketitle { }
+      {
+        \seuthesis@titlepage
+        \seuthesis@declaration
+        \pagestyle { frontmatter }
+        \setcounter { page } { 1 }
+        \seuthesis@CNabstract
+        \seuthesis@ENabstract
+        \seuthesis@toc
+        \pagestyle { mainmatter }
+        \setcounter { page } { 1 }
+      }
   }
 
 %% ==========================
 %% Special Chapters
 %% ==========================
-% --- bibliography ---
-\NewDocumentCommand \chapterBib { }
+\bool_if:NF \l__seuthesis_standalone_bool
   {
-    \printbibliography [ heading = bibintoc ]
-  }
-% --- acknowledgments ---
-\NewDocumentCommand \chapterAck { }
-  {
-    \chapter* { 致\hspace{2\ccwd}谢 }
-    \addcontentsline { toc } { chapter }
+    % --- bibliography ---
+    \NewDocumentCommand \chapterBib { }
       {
-        \texorpdfstring { 致\hspace{2\ccwd}谢 } { 致谢 }
+        \printbibliography [ heading = bibintoc ]
+      }
+    % --- acknowledgments ---
+    \NewDocumentCommand \chapterAck { }
+      {
+        % In Acknowledgments and later chapters (if any),
+        % the TOC depth should be set to 0 (therefore no \section will be shown in ToC).
+        \addtocontents { toc } { \protect \setcounter { tocdepth } { 0 } }
+        \chapter* { 致\hspace{2\ccwd}谢 }
+        \addcontentsline { toc } { chapter }
+          {
+            \texorpdfstring { 致\hspace{2\ccwd}谢 } { 致谢 }
+          }
       }
   }
 
@@ -911,6 +1011,10 @@
 \NewDocumentCommand \name { }
   {
     \anony { \@author } { XXX }
+  }
+\newcommand \notsotiny
+  {
+    \@setfontsize\notsotiny\@vipt\@viipt
   }
 
 \endinput
