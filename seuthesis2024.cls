@@ -1,6 +1,6 @@
-%% seuthesis2024b.cls
+%% seuthesis2024.cls
 %% ------------------
-%% LaTeX Template of Southeast University Thesis for Class of 2024 Bachelors
+%% LaTeX Template of Southeast University Thesis for Class of 2024
 %% GitHub Repo: https://github.com/Teddy-van-Jerry/seuthesis2024b
 %%
 %% Author: Teddy van Jerry (Wuqiong Zhao)
@@ -8,17 +8,21 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/03/12} {0.9.0}
-  {Southeast University Thesis for Class of 2024 Bachelors}
+\ProvidesExplClass {seuthesis2024} {2024/04/07} {0.10.0}
+  {Southeast University Thesis for Class of 2024}
 
-\str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
+\str_const:Nn \c__seuthesis_name_str { seuthesis2024 }
 \str_const:Nn \c__seuthesis_base_class_str { report }
 \str_const:Nn \c__seuthesis_pagesize_str { a4paper }
 \str_const:Nn \c__seuthesis_font_pt_str { 12pt }
 \str_const:Nn \c__seuthesis_institute_str { 东南大学 }
 
-\keys_define:nn { seuthesis2024b }
+\keys_define:nn { seuthesis2024 }
   {
+    % degree level ('b' for bachelor, 'm' for master, 'd' for doctor)
+    , degree          .tl_set:N   = \l__seuthesis_level_tl
+    , degree          .initial:n  = { b }
+    , degree          .choices:nn = { b, m, d } { \tl_set:Nn \l__seuthesis_level_tl { #1 } }
     % page setup
     , two side        .bool_set:N = \l__seuthesis_twoside_bool
     , two side        .initial:n  = { false }
@@ -109,7 +113,29 @@
         \PassOptionsToClass { \CurrentOption } { \c__seuthesis_base_class_str }
       }
   }
-\ProcessKeyOptions [ seuthesis2024b ]
+\ProcessKeyOptions [ seuthesis2024 ]
+% create boolean expression
+\bool_new:N \l__is_degree_b_bool
+\bool_new:N \l__is_degree_m_bool
+\bool_new:N \l__is_degree_d_bool
+\bool_if:nTF { \str_if_eq_p:Vn \l__seuthesis_level_tl { d } }
+  {
+    \bool_set_true:N \l__is_degree_d_bool
+  }
+  {
+    \bool_if:nTF { \str_if_eq_p:Vn \l__seuthesis_level_tl { m } }
+      {
+        \bool_set_true:N \l__is_degree_m_bool
+      }
+      {
+        \bool_set_true:N \l__is_degree_b_bool
+      }
+  }
+% force twoside for master and doctor
+\bool_if:nF { \bool_if_p:N \l__is_degree_b_bool }
+  {
+    \bool_set_true:N \l__seuthesis_twoside_bool
+  }
 \PassOptionsToClass
   {
     , \c__seuthesis_pagesize_str

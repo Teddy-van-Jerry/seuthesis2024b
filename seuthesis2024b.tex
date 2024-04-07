@@ -1,7 +1,7 @@
-\documentclass[fontset = mac ms]{seuthesis2024b} % 使用 macOS 上的 MS Word 字体
-% \documentclass{seuthesis2024b} % 使用 fonts 文件夹字体
-% \documentclass[twoside]{seuthesis2024b} % 使用双页模式
-% 更多自定义选项见 seuthesis2024b.cls 文件的定义
+\documentclass[degree = b, fontset = mac ms]{seuthesis2024} % 使用 macOS 上的 MS Word 字体
+% \documentclass[degree = b]{seuthesis2024} % 使用 fonts 文件夹字体
+% \documentclass[degree = b, twoside]{seuthesis2024} % 使用双页模式
+% 更多自定义选项见 seuthesis2024.cls 文件的定义
 % 注意选项可以合并使用
 
 \title{东南大学本科毕设 \LaTeX{} 模版}
@@ -62,13 +62,13 @@
   \maketitle
 
   \chapter{绪论}\label{chap:introduction}
-  \input{chapters/introduction}
+  \input{chapters_b/introduction}
     
   \chapter{正文}\label{chap:body}
-  \input{chapters/body}
+  \input{chapters_b/body}
 
   \chapter{模板使用}\label{chap:usage}
-  \input{chapters/usage}
+  \input{chapters_b/usage}
 
   % 此处可以插入更多的章节
 
@@ -78,10 +78,10 @@
   % 附录
   \appendix
   \chapter{附录名称}\label{chap:appendix}
-  \input{chapters/appendix}
+  \input{chapters_b/appendix}
   
   % 致谢
   \chapterAck
-  \input{chapters/acknowledgment}
+  \input{chapters_b/acknowledgment}
 
 \end{document}
