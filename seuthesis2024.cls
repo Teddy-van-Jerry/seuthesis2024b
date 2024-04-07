@@ -37,6 +37,10 @@
     , show frame      .initial:n  = { false }
     , show~frame      .bool_set:N = \l__seuthesis_show_frame_bool
     , show-frame      .bool_set:N = \l__seuthesis_show_frame_bool
+    , wider margin    .bool_set:N = \l__seuthesis_wider_margin_bool
+    , wider margin    .initial:n  = { false }
+    , wider~margin    .bool_set:N = \l__seuthesis_wider_margin_bool
+    , wider-margin    .bool_set:N = \l__seuthesis_wider_margin_bool
     % font options
     , fontset         .tl_set:N   = \l__seuthesis_fontset_tl
     , fontset         .initial:n  = { files }
@@ -69,6 +73,10 @@
     , toc depth       .initial:n  = { 2 }
     , toc~depth       .tl_set:N   = \l__seuthesis_toc_depth_tl
     , toc-depth       .tl_set:N   = \l__seuthesis_toc_depth_tl
+    , hdr on chapter  .bool_set:N = \l__seuthesis_hdr_on_chapter_bool
+    , hdr on chapter  .initial:n  = { false }
+    , hdr~on~chapter  .bool_set:N = \l__seuthesis_hdr_on_chapter_bool
+    , hdr-on-chapter  .bool_set:N = \l__seuthesis_hdr_on_chapter_bool
     % counters
     , continuous cnt  .bool_set:N = \l__seuthesis_continuous_cnt_bool
     , continuous cnt  .initial:n  = { false }
@@ -115,24 +123,28 @@
   }
 \ProcessKeyOptions [ seuthesis2024 ]
 % create boolean expression
-\bool_new:N \l__is_degree_b_bool
-\bool_new:N \l__is_degree_m_bool
-\bool_new:N \l__is_degree_d_bool
+\bool_new:N \l__seuthesis_is_degree_b_bool
+\bool_new:N \l__seuthesis_is_degree_m_bool
+\bool_new:N \l__seuthesis_is_degree_d_bool
 \bool_if:nTF { \str_if_eq_p:Vn \l__seuthesis_level_tl { d } }
   {
-    \bool_set_true:N \l__is_degree_d_bool
+    \bool_set_true:N \l__seuthesis_is_degree_d_bool
   }
   {
     \bool_if:nTF { \str_if_eq_p:Vn \l__seuthesis_level_tl { m } }
       {
-        \bool_set_true:N \l__is_degree_m_bool
+        \bool_set_true:N \l__seuthesis_is_degree_m_bool
       }
       {
-        \bool_set_true:N \l__is_degree_b_bool
+        \bool_set_true:N \l__seuthesis_is_degree_b_bool
       }
   }
 % force twoside for master and doctor
-\bool_if:nF { \bool_if_p:N \l__is_degree_b_bool }
+% force hdr on chapter for bachelor
+\bool_if:nTF { \bool_if_p:N \l__seuthesis_is_degree_b_bool }
+  {
+    \bool_set_true:N \l__seuthesis_hdr_on_chapter_bool
+  }
   {
     \bool_set_true:N \l__seuthesis_twoside_bool
   }
@@ -176,7 +188,7 @@
     , "3251->"32BF % ㉑–㊿
     , "24FF        % ⓿
     , "2776->"277F % ❶–❿
-    , "24EB->"24F4  % ⓫–⓴
+    , "24EB->"24F4 % ⓫–⓴
   }
 
 \NewDocumentCommand \seuthesis@SetFont { m }
@@ -272,16 +284,32 @@
 %% Page Setup
 %% ==========================
 \RequirePackage { geometry }
-% the official top/bottom margin is not accurate, as footer and header squeeze the text area.
-\geometry
+\bool_if:NTF \l__seuthesis_is_degree_b_bool
   {
-    , margin = 2cm
-    , top = 2.3cm
-    , bottom = 3.3cm
-    , bindingoffset = 5mm
-    , headsep = 4.8pt
-    , headheight = 22pt
-    , footskip = 22pt
+    % the official top/bottom margin is not accurate,
+    % as footer and header squeeze the text area.
+    \geometry
+      {
+        , margin = 2cm
+        , top = 2.3cm
+        , bottom = 3.3cm
+        , bindingoffset = 5mm
+        , headsep = 4.8pt
+        , headheight = 22pt
+        , footskip = 22pt
+      }
+  }
+  {
+    \geometry
+      {
+        , margin = \bool_if:NTF \l__seuthesis_wider_margin_bool { 2.5cm } { 2cm }
+        , top = 2.3cm
+        , bottom = 3.3cm
+        , bindingoffset = 0mm
+        , headsep = 4.8pt
+        , headheight = 22pt
+        , footskip = 22pt
+      }
   }
 \bool_if:NTF \l__seuthesis_show_frame_bool
   {
@@ -291,11 +319,31 @@
     \geometry { showframe = false }
   }
 \RequirePackage { fancyhdr }
+\RequirePackage { xstring }
+% use Chinese numberings
+\RequirePackage { zhnumber }
+\NewDocumentCommand \seuthesis@chapter@name { m }
+  {
+    \IfInteger { #1 } { 第 \zhnumber { #1 } 章 } { 附录 #1 }
+  }
+\renewcommand { \chaptermark } [ 1 ] { \markboth { \seuthesis@chapter@name { \thechapter } \hspace{\ccwd} #1 } { } }
 \fancypagestyle { mainmatter }
   {
     \pagenumbering{ arabic }
     \fancyhf { }
-    \fancyhead [ C ] { \zihao{-5} \c__seuthesis_institute_str 本科毕业设计（论文）\vspace{2pt} }
+    \bool_if:NTF { \l__seuthesis_is_degree_b_bool }
+      {
+        \fancyhead [ C ] { \zihao{-5} \c__seuthesis_institute_str 本科毕业设计（论文）\vspace{2pt} }
+      }
+      {
+        \fancyhead [ CE ]
+        {
+          \zihao{-5} \c__seuthesis_institute_str
+          \bool_if:NTF { \l__seuthesis_is_degree_m_bool } { 硕 } { 博 }
+          士学位论文 \vspace{2pt}
+        }
+        \fancyhead [ CO ] { \zihao{-5} \leftmark \vspace{2pt} }
+      }
     \fancyfoot [ C ] { \zihao{-5} \thepage }
     \renewcommand { \headrulewidth } { 0.4pt }
   }
@@ -316,17 +364,13 @@
 %% ==========================
 % show the \subsubsection numbering
 \setcounter { secnumdepth } { 3 }
-% use Chinese numberings
-\RequirePackage { zhnumber }
 \RequirePackage { titlesec }
 % --- \chapter ---
-\RequirePackage { xstring }
-\newcommand \seuthesis@chapter@name [ 1 ]
-  {
-    \IfInteger { #1 } { 第 \zhnumber { #1 } 章 } { 附录 #1 }
-  }
 \titleformat { \chapter }
-  { \centering\zihao{3}\bfseries\heiti\thispagestyle{fancy} }
+  {
+    \centering\zihao{3}\bfseries\heiti
+    \bool_if:NT \l__seuthesis_hdr_on_chapter_bool { \thispagestyle{fancy} }
+  }
   { \seuthesis@chapter@name { \thechapter } } { .5\ccwd } { }
 \titlespacing* { \chapter } { \z@ } { -24pt } { 3.6pt }
 % --- \section ---
@@ -541,6 +585,11 @@
       {
         \popQED\endtrivlist\@endpefalse
       }
+  }
+\bool_if:NF \l__seuthesis_is_degree_b_bool
+  {
+    % left align equations with 4\ccwd margin
+    \@fleqntrue \@mathmargin 4\ccwd
   }
 % Use Chinese parenthesis instead of English one
 \def \eqref@tagform@ #1
@@ -962,8 +1011,21 @@
     \setcounter { tocdepth } { \l__seuthesis_toc_depth_tl }
     \renewcommand { \contentsname } { 目\hspace{2\ccwd}录 }
     \titlecontents { chapter } [ \z@ ]
-      { \filright }
-      { \contentspush { \seuthesis@chapter@name { \thecontentslabel } \hspace{.5\ccwd} } }
+      { \bool_if:NF { \l__seuthesis_is_degree_b_bool } { \heiti } \filright }
+      {
+        \contentspush
+          {
+            % \bool_if:NTF { \l__seuthesis_is_degree_b_bool }
+            %   {
+            %     \seuthesis@chapter@name { \thecontentslabel }
+            %   }
+            %   {
+            %     \makebox [ 4\ccwd ] [ s ] { \seuthesis@chapter@name { \thecontentslabel } }
+            %   }
+            \seuthesis@chapter@name { \thecontentslabel }
+            \hspace{.5\ccwd}
+          }
+      }
       { } { \titlerule*[3pt]{.}\contentspage }
     \titlecontents { section } [ 2\ccwd ]
       { }
@@ -1021,6 +1083,15 @@
         \addcontentsline { toc } { chapter }
           {
             \texorpdfstring { 致\hspace{2\ccwd}谢 } { 致谢 }
+          }
+      }
+    %
+    \NewDocumentCommand \chapterBio { }
+      {
+        \chapter* { 作者介绍（包括论文和成果清单） }
+        \addcontentsline { toc } { chapter }
+          {
+            作者介绍（包括论文和成果清单）
           }
       }
   }
