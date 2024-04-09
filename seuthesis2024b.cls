@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/03/12} {0.9.0}
+\ProvidesExplClass {seuthesis2024b} {2024/04/09} {0.10.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -150,7 +150,7 @@
     , "3251->"32BF % ㉑–㊿
     , "24FF        % ⓿
     , "2776->"277F % ❶–❿
-    , "24EB->"24F4  % ⓫–⓴
+    , "24EB->"24F4 % ⓫–⓴
   }
 
 \NewDocumentCommand \seuthesis@SetFont { m }

@@ -121,7 +121,7 @@ latexmk -pdfxe seuthesis2024b.tex
 \subsubsection{带圈数字}
 使用 \texttt{\string\circNo} 可以获得带圈数字（从 \circNo{1}\ 到 \circNo{10}），
 例如 \verb|\circNo{2}| 可以获得 \circNo{2}。
-理论来说，可以使用 \texttt{\string\circNo} 生成从 0 到 50 到数字，但是只有 1 到 10 的数字有对应的中易宋体 Unicode 字符，
+理论来说，可以使用 \texttt{\string\circNo} 生成从 0 到 50 的数字，但是只有 1 到 10 的数字有对应的中易宋体 Unicode 字符，
 因此，其他任何输入均使用 \href{https://ctan.org/pkg/circledsteps}{\texttt{circledsteps}} 宏包的 \texttt{\string\CircleText} 基础上调整大小位置，效果不统一，
 例如 \circNo{0}、\circNo{11}。
 如果使用带星版本（\texttt{\string\circNo*}）可以获得反白（实心带圈）数字，
