@@ -88,10 +88,12 @@
   公式及文字中的一般变量（或一般函数）（如坐标$X$、$Y$，电压$V$，频率$f$）宜用斜体，矢量用粗斜体如$\bm{S}$或白斜体上加单箭头，
   常用函数（如三角函数$\cos$、对数函数$\log$等）、数字运算符、化学元素符号及分子式、单位符号、产品代号、人名地名的外文字母等用正体。
 
-  公式排版直接使用 \texttt{equation} 环境，如公式~\eqref{eq:einstein}。
+  公式排版直接使用 \texttt{equation} 环境，如公式~\eqref{eq:einstein}。%
+  \footnote{此处 \texttt{\string\eqref} 使用中文括号以保持统一。}
   \begin{equation}\label{eq:einstein}
-    E=mc^2.
+    E=mc^2,
   \end{equation}
+  其中 $E$ 为能量，$m$ 为质量，$c$ 为光速。
 
 \section{注释}
 
@@ -188,3 +190,10 @@
     \subsubsection{四级标题}
     四级标题内容
       \paragraph{段落。}内容。
+
+  \subsection{交叉引用}
+    使用 \texttt{\string\ref} 引用一节，
+    例如 \texttt{\string\S\string\ref\{sec:draw\_color\}}
+    可以获得 \S\ref{sec:draw_color}。
+    由于章节数字为中文，可以使用宏 \texttt{\string\ChapRef}，
+    例如\ChapRef{chap:body}（请注意前后空格）。

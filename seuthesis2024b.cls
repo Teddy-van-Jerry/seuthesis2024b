@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/04/09} {0.10.0}
+\ProvidesExplClass {seuthesis2024b} {2024/05/08} {0.10.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -1002,6 +1002,11 @@
 %% ==========================
 %% Other Macros
 %% ==========================
+\RequirePackage { refcount }
+\NewDocumentCommand \ChapRef { m }
+  {
+    第 \hyperref [ #1 ] { \zhnumber { \getrefnumber { #1 } } } 章
+  }
 \NewDocumentCommand \anony { +m +m }
   {
     \bool_if:NTF \l__seuthesis_anonymous_bool
