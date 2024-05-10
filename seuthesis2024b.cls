@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/05/08} {0.10.0}
+\ProvidesExplClass {seuthesis2024b} {2024/05/10} {0.11.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -535,6 +535,7 @@
 %% ==========================
 %% Footnote
 %% ==========================
+\RequirePackage [ perpage ] { footmisc }
 \RequirePackage { circledsteps }
 \bool_new:N \c__seuthesis_circled_text_limited_bool
 \bool_set_true:N \c__seuthesis_circled_text_limited_bool
@@ -1006,6 +1007,14 @@
 \NewDocumentCommand \ChapRef { m }
   {
     第 \hyperref [ #1 ] { \zhnumber { \getrefnumber { #1 } } } 章
+  }
+\NewDocumentCommand \NextChapRef { m }
+  {
+    \hyperref [ #1 ] { 下一章 }
+  }
+\NewDocumentCommand \LastChapRef { m }
+  {
+    \hyperref [ #1 ] { 上一章 }
   }
 \NewDocumentCommand \anony { +m +m }
   {
