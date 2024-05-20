@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/05/10} {0.11.0}
+\ProvidesExplClass {seuthesis2024b} {2024/05/20} {0.12.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -954,11 +954,11 @@
       { } { \titlerule*[3pt]{.}\contentspage }
     \newcommand \seuthesis@toc
       {
-        \tableofcontents
         \addcontentsline { toc } { chapter }
           {
             \texorpdfstring { 目\hspace{2\ccwd}录 } { 目录 }
           }
+        \tableofcontents
         \ClearDoublePage
       }
     % --- \maketitle ---
