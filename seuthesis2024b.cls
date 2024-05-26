@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/05/20} {0.12.0}
+\ProvidesExplClass {seuthesis2024b} {2024/05/26} {0.14.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -954,6 +954,7 @@
       { } { \titlerule*[3pt]{.}\contentspage }
     \newcommand \seuthesis@toc
       {
+        \phantomsection
         \addcontentsline { toc } { chapter }
           {
             \texorpdfstring { 目\hspace{2\ccwd}录 } { 目录 }
@@ -1004,6 +1005,11 @@
 %% Other Macros
 %% ==========================
 \RequirePackage { refcount }
+\NewDocumentCommand \StrongItem { m }
+  {  
+    \noindent\strong { $\blacksquare$ \hspace{.5\ccwd} #1： }
+    \par
+  }
 \NewDocumentCommand \ChapRef { m }
   {
     第 \hyperref [ #1 ] { \zhnumber { \getrefnumber { #1 } } } 章
