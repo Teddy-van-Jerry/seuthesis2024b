@@ -40,6 +40,7 @@ There are two options:
 - [LaTeX v.s. Typst: What is TeX Community's Future Plan?](https://tex.stackexchange.com/q/705199/234654) (yes, my question on TeX.SX)
 - [在 LaTeX 中使用 OpenType 字体（二）](https://stone-zeng.site/2019-07-06-use-opentype-fonts-ii)
 - [CTeX 宏集手册](https://mirrors.ctan.org/language/chinese/ctex/ctex.pdf) (or `texdoc ctex` on your PC with local TeX installation)
+- [PDF2PPT](https://github.com/Teddy-van-Jerry/pdf2ppt) (convert PDF beamer to MS PPTX presentations)
 - [Wuqiong Zhao's Publications](https://wqzhao.org/publications)
 
 ## License
