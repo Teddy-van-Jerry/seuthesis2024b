@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat {LaTeX2e}
 \RequirePackage {l3keys2e}
-\ProvidesExplClass {seuthesis2024b} {2024/05/26} {0.14.0}
+\ProvidesExplClass {seuthesis2024b} {2024/06/01} {0.15.0}
   {Southeast University Thesis for Class of 2024 Bachelors}
 
 \str_const:Nn \c__seuthesis_name_str { seuthesis2024b }
@@ -727,6 +727,7 @@
 %% ==========================
 %% Title Pages
 %% ==========================
+\RequirePackage { pdfpages } % for signature inclusion
 \bool_if:NTF \l__seuthesis_standalone_bool
   {
     \pagestyle { empty }
@@ -801,6 +802,12 @@
       {
         \@latex@warning@no@line { No~\noexpand\supervisor~given }
       }
+    % --- \signature ----
+    \NewDocumentCommand \signature { m }
+      {
+        \gdef \@signature { #1 }
+      }
+    \def \@signature { }
     % --- \seuthesis@titlepage ---
     \bool_if:NT \l__seuthesis_accessibility_bool
       {
@@ -882,7 +889,11 @@
     \newcommand \seuthesis@declaration
       {
         \renewcommand \thepage { 声明 }
-        \input { \l__seuthesis_input_prefix_tl assets/declaration.tex }
+        \ifx \@signature \@empty
+          \input { \l__seuthesis_input_prefix_tl assets/declaration.tex }
+        \else
+          \includepdf { \@signature }
+        \fi
         \ClearDoublePage
       }
     % --- \CNabstract ---
