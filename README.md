@@ -36,6 +36,11 @@ There are two options:
 > [!TIP]
 > 因东大已有 Microsoft Word 正版授权，SEUer 可以在[东大云盘](https://pan.seu.edu.cn:443/link/687E9269EFC00E2E6FCE197A311D7F03)下载字体压缩包。
 
+## Template for Graduate Students
+Check out the [`gradute` branch](https://github.com/Teddy-van-Jerry/seuthesis2024b/tree/graduate).
+It is not well finetuned. You may modify the `.cls` file if needed.
+[[Issue #3](https://github.com/Teddy-van-Jerry/seuthesis2024b/issues/3)]
+
 ## Recommended Readings
 - [LaTeX v.s. Typst: What is TeX Community's Future Plan?](https://tex.stackexchange.com/q/705199/234654) (yes, my question on TeX.SX)
 - [在 LaTeX 中使用 OpenType 字体（二）](https://stone-zeng.site/2019-07-06-use-opentype-fonts-ii)
